@@ -1,0 +1,551 @@
+% =====================================================================
+% P1 Appendix A.4 --- Theorem 3 (branch impossibility).
+%
+% Source of truth: drafts/proofs-props8-12.md v1.4, Sections 1--4
+% (FS-8, FS-9, FS-9.1).  This file is a fragment: it is meant to be
+% \input under \appendix \section{Proofs} after A.3.
+%
+% Theorem-like environments use the explicit paper numbering
+% (Theorems 3A--3C, Lemmas 1--2, Remark 1.1).  Equation tags
+% (1.1)--(1.4), (2.1)--(2.4), (3.1)--(3.2), (4.1)--(4.3) follow the
+% frozen source; do not renumber without updating the main text.
+% =====================================================================
+
+\newtheorem*{aIVthmA}{Theorem 3A}
+\newtheorem*{aIVthmB}{Theorem 3B}
+\newtheorem*{aIVthmC}{Theorem 3C}
+\newtheorem*{aIVlemA}{Lemma 1}
+\newtheorem*{aIVlemB}{Lemma 2}
+\newtheorem*{aIVremA}{Remark 1.1}
+
+% Fixed equation tags: keep the frozen printed numbers while giving
+% hyperref a unique destination for every display.
+\providecommand{\theHequation}{}
+\let\aIVtheHequation\theHequation
+\newcounter{aIVanchor}
+\renewcommand{\theHequation}{aIV.\arabic{aIVanchor}}
+\newcommand{\aIVfixedtag}[1]{\stepcounter{aIVanchor}\tag{#1}}
+
+\subsection{Branch impossibility (Theorem~3)}\label{app:a4}
+
+This appendix gives the finite-sample statements and proofs behind
+Theorem~3.  The population versions are the fixed-threshold statements
+summarized in Section~5.1; the statements below are stronger in that
+they allow an arbitrary finite sample and a data-dependent threshold.  Theorem~3A is the finite-sample branch lower bound,
+Theorem~3B the non-identification result, and Theorem~3C the sharp
+coupling bound together with its minimax consequence.  Theorem~3 in the
+main text is the union of 3A--3C.
+
+\paragraph{Setting.}
+Let $D_n=\{(X_i,Y_i)\}_{i=1}^n$ be a calibration sample and let
+$(X_{n+1},Y_{n+1},B_{n+1})$ be a test point, where $B\in\{0,1\}$ is a
+post-decision branch (for example, rebalance versus hold).  On the
+coverage side, the branch labels $B_i$ may be observed (branch-wise
+calibration) or unavailable (branch-blind rules).  A scalar conformity
+score is $s(x,y)$; for CQR one may take
+$s(x,y)=\max(\hat q_{\mathrm{lo}}(x)-y,\,y-\hat q_{\mathrm{hi}}(x))$.
+A \emph{branch-blind score rule} is
+\[
+C_n(x)=\{y:s(x,y)\le\hat q\},
+\]
+where $\hat q=\hat q(D_n)$ depends only on the calibration pairs
+$(X_i,Y_i)$ and on independent randomization, and not on any $B_i$.
+For a fixed rule (conditionally on $D_n$ and the randomization), let
+$F(x)=\{y:y\notin C_n(x)\}$ be the failure set.
+
+Define the conditional quantities
+\[
+\begin{aligned}
+\alpha(x)&=\Pr(Y\in F(x)\mid X=x), &
+\alpha&=\Pr(Y\in F(X))=\mathbb E[\alpha(X)],\\
+q_b(x)&=\Pr(B=b\mid X=x), &
+q_b&=\Pr(B=b)=\mathbb E[q_b(X)],\\
+f_b(x)&=\Pr(Y\in F(x),\,B=b\mid X=x).
+\end{aligned}
+\]
+Then the branch-$b$ coverage is
+\begin{equation}\label{eq:a4-1.1}
+\operatorname{cov}_b(C)
+=\Pr(Y\in C(X)\mid B=b)
+=1-\frac{\mathbb E[f_b(X)]}{q_b},
+\qquad q_b>0.
+\aIVfixedtag{1.1}
+\end{equation}
+When $q_b=0$ the conditioning event has probability zero and branch $b$
+is omitted; all statements below are for $q_b>0$.
+
+\subsubsection{Auxiliary lemmas}
+
+\begin{aIVlemA}[feasible interval]
+For every $x$,
+\begin{equation}\label{eq:a4-1.2}
+\max\bigl(0,\alpha(x)+q_b(x)-1\bigr)
+\le f_b(x)\le
+\min\bigl(\alpha(x),q_b(x)\bigr).
+\aIVfixedtag{1.2}
+\end{equation}
+Conversely, every value in this interval is realized by some joint law
+of $(X,Y,B)$ with the given law of $(X,Y)$ and the given $q_b(x)$.
+When $0<\alpha(x)<1$ and $0<q_b(x)<1$ the interval has nonempty
+interior; its length is
+$\min(\alpha,q_b)-\max(0,\alpha+q_b-1)>0$.  If
+$\alpha(x)\in\{0,1\}$ or $q_b(x)\in\{0,1\}$ the interval may degenerate
+to a point; such cases are handled by continuity and do not change the
+coverage lower bounds.
+\end{aIVlemA}
+
+\begin{proof}
+For the upper bound, $f_b(x)\le\Pr(F(x)\mid X=x)=\alpha(x)$ and
+$f_b(x)\le\Pr(B=b\mid X=x)=q_b(x)$.  For the lower bound, $f_b(x)\ge0$
+and
+\[
+\Pr(F(x)^c,B=b\mid X=x)=q_b(x)-f_b(x)
+\le\Pr(F(x)^c\mid X=x)=1-\alpha(x),
+\]
+hence $f_b(x)\ge\alpha(x)+q_b(x)-1$.
+
+For the converse, put mass $f_b(x)$ of $B=b$ on $F(x)$ and mass
+$q_b(x)-f_b(x)$ on $F(x)^c$.  The two nonnegativity conditions are
+exactly the two sides of \eqref{eq:a4-1.2}.  The length claim follows by
+considering $\alpha+q_b\le1$ and $\alpha+q_b>1$ separately.
+\end{proof}
+
+\begin{aIVlemB}[tail-function coupling]
+Fix $x$.  Let $S=s(X,Y)$ and $\alpha_x(q)=\Pr(S>q\mid X=x)$.  Define
+the nonincreasing functions
+\begin{equation}\label{eq:a4-1.3}
+F_b(q)=\min\bigl(\alpha_x(q),q_b(x)\bigr),
+\qquad
+F'_b(q)=\max\bigl(0,\alpha_x(q)+q_b(x)-1\bigr).
+\aIVfixedtag{1.3}
+\end{equation}
+Then there exist conditional laws $P_x$ and $P'_x$ of $B\mid(X=x,S)$
+such that
+\begin{equation}\label{eq:a4-1.4}
+\begin{aligned}
+P_x(B=b,\,S>q\mid X=x)&=F_b(q),\\
+P'_x(B=b,\,S>q\mid X=x)&=F'_b(q),
+\end{aligned}
+\aIVfixedtag{1.4}
+\end{equation}
+and $P_x(B=b\mid X=x)=P'_x(B=b\mid X=x)=q_b(x)$.  Moreover
+$F'_b(q)\le F_b(q)$, and the inequality is strict whenever
+$0<\alpha_x(q)<1$ and $0<q_b(x)<1$.
+\end{aIVlemB}
+
+\begin{proof}
+Both $F_b$ and $F'_b$ are right-continuous and nonincreasing in $q$,
+with limits
+\[
+F_b(-\infty)=F'_b(-\infty)=q_b(x),
+\qquad
+F_b(\infty)=F'_b(\infty)=0,
+\]
+and $0\le F'_b(q)\le F_b(q)\le\alpha_x(q)$.
+
+By the Stieltjes measure theorem, there is a unique finite Borel measure
+$\mu_b$ on $\mathbb R$.  It satisfies
+$\mu_b((q,\infty))=F_b(q)$ for every $q$.  Similarly,
+\[
+G_b(q):=\alpha_x(q)-F_b(q)=\max\bigl(\alpha_x(q)-q_b(x),0\bigr)
+\]
+is right-continuous and nonincreasing, with
+$G_b(-\infty)=1-q_b(x)$ and $G_b(\infty)=0$, and
+$0\le G_b\le\alpha_x$; let $\mu_{1-b}$ be the associated finite measure.
+For every half-open interval $(a,b]$ with
+$-\infty\le a<b\le\infty$,
+\[
+\mu_b((a,b])+\mu_{1-b}((a,b])
+=F_b(a)-F_b(b)+G_b(a)-G_b(b)
+=\alpha_x(a)-\alpha_x(b)
+=\mu_S((a,b]).
+\]
+The finite disjoint unions of such intervals form an algebra that
+generates the Borel $\sigma$-field, and the total masses agree:
+\[
+\mu_b(\mathbb R)+\mu_{1-b}(\mathbb R)
+=q_b(x)+(1-q_b(x))=1=\mu_S(\mathbb R).
+\]
+Dynkin's uniqueness theorem therefore gives
+$\mu_b+\mu_{1-b}=\mu_S$ on all Borel sets.  In particular
+$0\le\mu_b\le\mu_S$, so the Radon--Nikodym derivative
+$d\mu_b/d\mu_S$ takes values in $[0,1]$.  Setting
+\[
+\Pr(B=b\mid X=x,S=s)=\frac{d\mu_b}{d\mu_S}(s)
+\]
+defines the kernel $P_x$, and
+$P_x(B=b,S>q\mid X=x)=\mu_b((q,\infty))=F_b(q)$.
+The same construction with $F'_b$, whose complement
+$\alpha_x-F'_b=\min(\alpha_x,1-q_b(x))$ is also nonincreasing, gives
+$P'_x$.  Measurability in $x$ follows by defining the tail functions on
+rational $q$ and extending by right-continuity.
+
+Finally, $F'_b\le F_b$ because
+$\alpha+q_b-1\le\min(\alpha,q_b)$ and $0\le\min(\alpha,q_b)$.  If
+$0<\alpha_x(q)<1$ and $0<q_b(x)<1$, then $F'_b<F_b$: when
+$\alpha_x+q_b\le1$ we have $F'_b=0<F_b$, and when
+$\alpha_x+q_b>1$ we have
+$F'_b=\alpha_x+q_b-1<\min(\alpha_x,q_b)=F_b$ because $\alpha_x<1$ and
+$q_b<1$.
+\end{proof}
+
+\begin{aIVremA}[data-dependent thresholds]
+Lemma~2 defines the conditional law of $B\mid(X,S)$ simultaneously for
+all thresholds $q$.  Consequently, if $\hat q$ is a function of the
+calibration sample and the rule is branch-blind, the law of $\hat q$ is
+the same under the two couplings of Lemma~2; one simply conditions on
+$D_n$ and evaluates the construction at $q=\hat q$.  This is the point
+that lets Theorem~3B cover data-dependent thresholds.
+\end{aIVremA}
+
+\subsubsection{Finite-sample branch lower bound (Theorem~3A)}
+
+\begin{aIVthmA}
+Let $C$ be any prediction set, possibly depending on the calibration
+sample (including its branch labels), and suppose its marginal
+miscoverage satisfies $\Pr(Y\notin C(X))\le\alpha$.  Then for every
+branch $b$ with $q_b>0$,
+\begin{equation}\label{eq:a4-2.1}
+\operatorname{cov}_b(C)
+=\Pr(Y\in C(X)\mid B=b)
+\ge1-\frac{\alpha}{q_b}.
+\aIVfixedtag{2.1}
+\end{equation}
+If in addition $C$ is branch-blind, then under calibration--test
+independence (in particular under i.i.d.\ sampling), conditionally on
+$D_n$ and the randomization,
+\begin{equation}\label{eq:a4-2.2}
+\operatorname{cov}_b(C\mid D_n)
+\ge1-\frac{\mathbb E[\min(\alpha(X),q_b(X))\mid D_n]}{q_b}
+\ge1-\frac{\alpha(D_n)}{q_b},
+\aIVfixedtag{2.2}
+\end{equation}
+where $\alpha(D_n)=\mathbb E[\alpha(X)\mid D_n]$.  Taking expectations
+over $D_n$ and using $\alpha=\mathbb E[\alpha(D_n)]$ recovers
+\eqref{eq:a4-2.1}.  If $q_b=0$, the conditioning event is undefined and
+the branch is omitted.
+\end{aIVthmA}
+
+\begin{proof}
+The law of total probability gives
+\begin{equation}\label{eq:a4-2.3}
+\begin{aligned}
+\Pr(Y\notin C(X))
+&=q_b\Pr(Y\notin C(X)\mid B=b)
+ +(1-q_b)\Pr(Y\notin C(X)\mid B=1-b)\\
+&\ge q_b\Pr(Y\notin C(X)\mid B=b).
+\end{aligned}
+\aIVfixedtag{2.3}
+\end{equation}
+The left side is at most $\alpha$, so
+$\Pr(Y\notin C(X)\mid B=b)\le\alpha/q_b$, which is
+\eqref{eq:a4-2.1}.
+
+For branch-blind $C$, condition on $D_n$ and the independent
+randomization.  Then $C$ is fixed, and Lemma~1 applied to $f_b(X)$ gives
+$f_b(X)\le\min(\alpha(X),q_b(X))$.  Hence
+\begin{equation}\label{eq:a4-2.4}
+\operatorname{cov}_b(C\mid D_n)
+=1-\frac{\mathbb E[f_b(X)\mid D_n]}{q_b}
+\ge1-\frac{\mathbb E[\min(\alpha(X),q_b(X))\mid D_n]}{q_b}.
+\aIVfixedtag{2.4}
+\end{equation}
+Since $\min(\alpha,q_b)\le\alpha$, the right side is at least
+$1-\alpha(D_n)/q_b$.  Taking expectations over $D_n$ and using
+$\mathbb E[\alpha(D_n)]=\alpha$ gives
+$\operatorname{cov}_b(C)\ge1-\alpha/q_b$, which is again
+\eqref{eq:a4-2.1}.
+\end{proof}
+
+\paragraph{Equality and tightness.}
+\begin{itemize}
+\item Equality in \eqref{eq:a4-2.1} holds if and only if all marginal
+failure mass falls in branch $b$, that is, $f_b(X)=\alpha(X)$ almost
+surely (for $q_b>0$).
+\item Equality in \eqref{eq:a4-2.4} holds if and only if
+$f_b(X)=\min(\alpha(X),q_b(X))$ almost surely, that is, branch $b$ takes
+the full feasible upper mass.
+\item If $\alpha(X)\le q_b(X)$ almost surely, the two bounds in
+\eqref{eq:a4-2.2} coincide, and a coupling that places all failures in
+branch $b$ attains $\operatorname{cov}_b=1-\alpha/q_b$.
+\item If $q_b(X)<\alpha(X)$ on a set of positive probability, then
+$\mathbb E[\min(\alpha(X),q_b(X))]<\mathbb E[\alpha(X)]=\alpha$, so the
+sharp bound in \eqref{eq:a4-2.2} is strictly larger than
+$1-\alpha/q_b$.  Branch $b$ is too small to absorb all failures, and the
+marginal bound is loose.  This observation is the starting point of
+Theorem~3C.
+\end{itemize}
+
+\paragraph{Where branch-blindness enters.}
+The pointwise inequality
+\[
+f_b(x)\le\min(\alpha(x),q_b(x))
+\]
+from Lemma~1 holds for every rule, including rules that use calibration or
+test-time branch labels.  Branch-blindness is used only to make the
+conditional allocation $B\mid(X,S)$ invariant to the rule, so that the
+right side of \eqref{eq:a4-2.2} can serve as a sharp bound common to all
+compatible couplings and can be used in the attainability construction of
+Theorem~3C.  Without branch-blindness, two cases arise.  A rule that uses
+only calibration branch labels still satisfies \eqref{eq:a4-2.2}, but its
+right side is no longer a common sharp bound, because the threshold law
+changes with the coupling.  A rule that uses the test-time branch label
+also satisfies the pointwise inequality and \eqref{eq:a4-2.2}, but its
+allocation may change with the coupling, so the same common sharpness and
+attainability conclusions are not asserted.
+
+\subsubsection{Non-identification from pre-decision data (Theorem~3B)}
+
+\begin{aIVthmB}
+Fix the marginal law of $X$, the joint law of $(X,Y)$ (hence the score
+law), and branch probabilities $q_b(x)\in(0,1)$.  Let $C_n$ be any
+branch-blind score rule, with threshold $\hat q=\hat q(D_n)$ possibly
+data-dependent.  Then there exist two joint laws $P$ and $P'$ on
+$(X,Y,B)$ such that:
+\begin{enumerate}
+\item[(i)] $(X,Y)$ has the same law under $P$ and $P'$; consequently the
+law of the calibration sample's $(X,Y)$ part, the law of $\hat q$, and
+the output law of $C_n$ are the same under $P$ and $P'$;
+\item[(ii)] $P(B=b\mid X=x)=P'(B=b\mid X=x)=q_b(x)$ for every $x$;
+\item[(iii)] for every $n\ge1$, if
+\[
+\Pr_{D_n}\Bigl(\Pr_X\bigl(0<\alpha_{D_n}(X)<1\bigr)>0\Bigr)>0,
+\]
+then the branch-$b$ coverages are strictly different:
+\begin{equation}\label{eq:a4-3.1}
+\begin{aligned}
+&\bigl|\operatorname{cov}_b^P(C_n)
+-\operatorname{cov}_b^{P'}(C_n)\bigr|\\
+&\qquad
+=\frac{\mathbb E\bigl[\min(\alpha(X),q_b(X))
+-\max(0,\alpha(X)+q_b(X)-1)\bigr]}{q_b}
+>0.
+\end{aligned}
+\aIVfixedtag{3.1}
+\end{equation}
+\end{enumerate}
+Here $\alpha_{D_n}(x)=\Pr(Y\notin C_n(x)\mid X=x,D_n)$; $\Pr_X$ is over
+$X$, $\Pr_{D_n}$ is over $D_n$, and the expectation in
+\eqref{eq:a4-3.1} is over $(X,D_n)$.  If
+$\alpha_{D_n}(X)\in\{0,1\}$ almost surely, the two couplings may give
+the same coverage; see the degenerate case below.
+\end{aIVthmB}
+
+\paragraph{Construction.}
+For each $x$, apply Lemma~2 with $S=s(X,Y)$ and
+$\alpha_x(q)=\Pr(S>q\mid X=x)$ to define $B\mid(X=x,S)$ by
+\begin{equation}\label{eq:a4-3.2}
+\begin{aligned}
+P:\quad & \Pr(B=b,\,S>q\mid X=x)
+=\min\bigl(\alpha_x(q),q_b(x)\bigr),\\
+P':\quad & \Pr(B=b,\,S>q\mid X=x)
+=\max\bigl(0,\alpha_x(q)+q_b(x)-1\bigr).
+\end{aligned}
+\aIVfixedtag{3.2}
+\end{equation}
+Combining these conditional laws with the fixed marginal law of
+$(X,Y)$ gives $P$ and $P'$.  The construction is simultaneous in $q$
+and therefore does not depend on $\hat q$.
+
+\paragraph{Verification.}
+\begin{enumerate}
+\item \emph{The $(X,Y)$ law is unchanged.}  The construction changes
+only $B\mid(X,Y)$, not $(X,Y)$.  Hence the calibration sample's
+$(X,Y)$ part has the same law, $\hat q$ has the same law, and, since
+$C_n$ does not read $B$, the output of $C_n$ is pointwise the same under
+$P$ and $P'$.
+
+\item \emph{The branch probabilities are unchanged.}  Let
+$q\to-\infty$ in \eqref{eq:a4-3.2}.  Then $\alpha_x(q)\to1$, so both
+$\min(1,q_b(x))$ and $\max(0,1+q_b(x)-1)$ equal $q_b(x)$.  Hence
+$P(B=b\mid X=x)=P'(B=b\mid X=x)=q_b(x)$.
+
+\item \emph{The coverage gap.}  Condition on $D_n$, so that $\hat q$ is
+fixed, and write $\alpha(x)=\alpha_x(\hat q)$.  Under $P$, the failure
+mass of branch $b$ is $\min(\alpha(x),q_b(x))$; under $P'$, it is
+$\max(0,\alpha(x)+q_b(x)-1)$.  By \eqref{eq:a4-1.1}, the absolute
+coverage gap is \eqref{eq:a4-3.1}.  Lemma~2 gives nonnegativity; the
+integrand is strictly positive on
+$\{0<\alpha(x)<1,\;0<q_b(x)<1\}$, so the expectation is strictly
+positive whenever that set has positive measure.  The $P$ side has the
+larger failure mass and therefore the lower coverage; the $P'$ side has
+the smaller failure mass and the higher coverage.
+
+\item \emph{Every $n$ is covered.}  The construction is a single i.i.d.\
+joint law, so it holds for every sample size; the rule may use any finite
+$D_n$, whose distribution is the same under the two laws.
+\end{enumerate}
+
+\paragraph{Degenerate rules.}
+If $\alpha(X)\in\{0,1\}$ almost surely, the failure set is determined by
+$X$, and $f_b$ is uniquely determined by $q_b$ and the failure
+indicator.  The two couplings then give the same coverage.  In that case
+branch coverage is identifiable from the $(X,Y)$ law, but the rule is
+degenerate: at each $x$ it either covers or fails with probability one,
+which is not the typical split-conformal rule at level $1-\alpha$.
+Nondegenerate continuous scores, whose conditional support covers the
+threshold $\hat q$, normally give $\alpha(X)\in(0,1)$ almost surely.  The
+main text states the nondegenerate version; to include degenerate rules,
+add independent randomization that flips coverage with arbitrarily small
+probability, so that $\alpha(X)\in(0,1)$ and the conclusion is unchanged.
+
+\paragraph{Relation to the population statement.}
+The population proposition fixes a threshold $q$ and a cell-wise
+$\alpha$, and constructs $P,P'$ piecewise.  Theorem~3B writes the same
+idea as a tail-function coupling that holds simultaneously for all $q$;
+hence no simplification ``$\hat q$ is a fixed $q$'' is needed, no
+expectation over $\hat q$ has to be taken separately, and the conclusion
+holds for every $n$ with the explicit gap \eqref{eq:a4-3.1}.  The
+piecewise formula is recovered by setting
+$D=\min(\alpha,q_b)-\max(0,\alpha+q_b-1)$ and splitting into four cells:
+\[
+\begin{array}{ll}
+\alpha+q_b\le1,\ q_b\le\alpha: & D/q_b=1,\\
+\alpha+q_b\le1,\ q_b>\alpha: & D/q_b=\alpha/q_b,\\
+\alpha+q_b>1,\ q_b\ge\alpha: & D/q_b=(1-q_b)/q_b,\\
+\alpha+q_b>1,\ q_b<\alpha: & D/q_b=(1-\alpha)/q_b.
+\end{array}
+\]
+The boundary between the last two cells is $q_b=\alpha$, not
+$q_b=1-\alpha$.  When $\alpha>1/2$, every
+$q_b\in(1-\alpha,\alpha)$ satisfies $\alpha+q_b>1$ and $q_b<\alpha$, so
+it belongs to the fourth cell; classifying only by $q_b>1-\alpha$ would
+put these points in the third cell.
+
+\subsubsection{Sharp coupling bound and minimax (Theorem~3C)}
+
+\begin{aIVthmC}
+Fix the law of $(X,Y)$, the branch probabilities $q_b(x)$, and a
+branch-blind score rule $C_n$.  Let $\mathcal P$ be the class of all
+joint laws of $(X,Y,B)$ with the given $(X,Y)$ law and the given
+$q_b(x)$.  Then, for $q_b>0$,
+\begin{equation}\label{eq:a4-4.1}
+\inf_{P\in\mathcal P}\operatorname{cov}_b^P(C_n)
+=1-\frac{\mathbb E[\min(\alpha(X),q_b(X))]}{q_b},
+\aIVfixedtag{4.1}
+\end{equation}
+where $\alpha(x)=\Pr(Y\notin C_n(x)\mid X=x,D_n)$ is first defined
+conditionally on $D_n$ and then averaged over $D_n$ and $X$.  This
+quantity is the same under every $P\in\mathcal P$, because the $(X,Y)$
+law is fixed and the rule is branch-blind.  The infimum is attained by
+the $P$ side of \eqref{eq:a4-3.2}; the $P'$ side gives the other
+endpoint, namely the supremum
+$1-\mathbb E[\max(0,\alpha(X)+q_b(X)-1)]/q_b$.
+\end{aIVthmC}
+
+\begin{proof}
+Theorem~3A, inequality \eqref{eq:a4-2.4}, after averaging over $D_n$,
+yields the lower bound in \eqref{eq:a4-4.1} for every
+$P\in\mathcal P$; hence the infimum is at least the right side of
+\eqref{eq:a4-4.1}.  Conversely, the $P$ side of Lemma~2 defines
+$B\mid(X,S)$ for all $q$ simultaneously and attains
+$f_b=\min(\alpha,q_b)$ at $q=\hat q$ for every realization of $D_n$.
+It is therefore a fixed i.i.d.\ law in $\mathcal P$ whose coverage equals
+the right side of \eqref{eq:a4-4.1}; hence the infimum is at most that
+value.  This proves \eqref{eq:a4-4.1}.  The statement about the $P'$
+side follows from the same lemma with $F'_b$ in place of $F_b$.
+\end{proof}
+
+\paragraph{The constant case.}
+In the population constant case, $\alpha(x)\equiv\alpha$ and
+$q_b(x)\equiv q_b$ (for example, a fixed threshold rule),
+\eqref{eq:a4-4.1} becomes
+\begin{equation}\label{eq:a4-4.2}
+\inf_{P\in\mathcal P}\operatorname{cov}_b^P
+=1-\frac{\min(\alpha,q_b)}{q_b}
+=\max\Bigl(1-\frac{\alpha}{q_b},0\Bigr).
+\aIVfixedtag{4.2}
+\end{equation}
+If $q_b\ge\alpha$, the value is $1-\alpha/q_b$ and is attained by the
+$P$ side; if $q_b<\alpha$, the value is $0$ and is attained by the $P$
+side as well (branch $b$ fails on all of its mass).  Combined with
+\eqref{eq:a4-2.1}, for a fixed rule the infimum over compatible
+couplings is exactly $\max(1-\alpha/q_b,0)$.
+
+If one further takes the supremum over rules in the constant class
+(choose the rule, then let the coupling be worst), every rule in the
+class has the same worst-case value, so the minimax value in
+Theorem~3(c) is exactly the trivial bound in this class, provided the
+class is nonempty.  The next paragraph shows the same for the larger
+class $\alpha(X)\le q_b(X)$ almost surely.
+
+\paragraph{Cell-wise covariates.}
+If $\alpha(x)$ varies with $x$, \eqref{eq:a4-4.1} is the sharp fixed-rule
+bound, while the population bound $1-\alpha/q_b$ remains valid but is
+generally not tight:
+\begin{equation}\label{eq:a4-4.3}
+1-\frac{\mathbb E[\min(\alpha(X),q_b(X))]}{q_b}
+\ge1-\frac{\min(\alpha,q_b)}{q_b}
+=\max\Bigl(1-\frac{\alpha}{q_b},0\Bigr).
+\aIVfixedtag{4.3}
+\end{equation}
+The inequality uses
+$\mathbb E[\min(\alpha(X),q_b(X))]\le\min(\mathbb E\alpha,\mathbb E q_b)$,
+which follows from concavity of the minimum.  Equality holds, for
+example, if $\alpha(X)\le q_b(X)$ almost surely or if
+$q_b(X)\le\alpha(X)$ almost surely, since then the minimum is linear on
+the support; other cancellations can also produce equality, so these
+conditions are sufficient but not necessary.  In particular, if
+$\alpha(X)\le q_b(X)$ almost surely, then
+$\min(\alpha(X),q_b(X))=\alpha(X)$ and the sharp value is still
+$1-\alpha/q_b$ even when $\alpha(x)$ varies.  This is why the class
+$\alpha(X)\le q_b(X)$ almost surely in Theorem~3(c) is more general than
+the constant class.  When both orderings occur on sets of positive
+measure, the inequality in \eqref{eq:a4-4.3} is strict.
+
+Assume the non-atomic conditional-law condition: $Y\mid X=x$ is non-atomic
+for almost every $x$.  The larger class is nonempty whenever $q_b\ge\alpha$
+and $q_b>0$.  Put $a(x)=(\alpha/q_b)q_b(x)$, so $0\le a(x)\le q_b(x)$ and
+$\mathbb E[a(X)]=\alpha$.  For $a(x)<1$, let $F_x(y)=\Pr(Y\le y\mid X=x)$
+and define the branch-blind score
+\[
+s(x,y)=\frac{F_x(y)}{1-a(x)},
+\]
+with the fixed threshold $\hat q=1$; for $a(x)=1$, set
+$s(x,y)=+\infty$.  The failure event is
+$\{s(x,Y)>1\}=\{F_x(Y)>1-a(x)\}$.  Because $Y\mid X=x$ is non-atomic,
+$F_x(Y)\sim\mathrm{Unif}[0,1]$, so this event has probability $a(x)$.
+The construction is an oracle existence witness: it uses the population
+law $F_x$ and $q_b$, and is not proposed as an estimator from $D_n$.
+The rule uses no branch label, so it belongs to the score-rule class of
+Theorem~3(c).  Conversely, if $q_b<\alpha$, every
+$\alpha(X)\le q_b(X)$ a.s.\ satisfies
+$\mathbb E[\alpha(X)]\le q_b<\alpha$, so the class is empty.  Hence, under
+the non-atomic conditional-law condition, the nonemptiness qualifier in
+Theorem~3(c) is equivalent to $q_b\ge\alpha$.  For atomic $Y\mid X$ this
+particular construction need not attain $a(x)$; no atomic-case claim is
+made.
+
+The bound $1-\alpha/q_b$ should therefore be read as a valid marginal
+lower bound, not as a claim that the minimax value is always the trivial
+one.  If $q_b(x)$ is small on a region that carries non-negligible
+failure mass, branch $b$ cannot absorb all failures and the sharp bound
+exceeds the trivial one.  When only the marginal bound is reported, it
+should be described as potentially loose, especially for small empirical
+branches.
+
+\subsubsection{Scope of Theorem~3}
+
+\begin{itemize}
+\item Theorem~3 is an information limit, not an algorithmic defect.
+Marginal coverage is a mixture over branches: a branch with small $q_b$
+can have a large conditional failure rate while the marginal rate stays
+$\alpha$.  Pre-decision Mondrian calibration cannot isolate a
+post-decision branch whose label is unavailable at prediction time.
+\item Branch-blindness is used for sharpness and reachability, not for
+the validity of the basic bound.  The pointwise inequality
+$f_b\le\min(\alpha,q_b)$ holds for every rule.  If the rule uses
+calibration branch labels, \eqref{eq:a4-2.2} remains true but is not a
+common sharp bound over compatible couplings.  If it uses the test-time
+label, \eqref{eq:a4-2.2} also remains true, but the allocation may vary
+across couplings, so the same common sharpness and reachability
+conclusions do not follow.
+\item The nondegenerate version is the paper's statement.  Degenerate
+rules can be handled by independent randomization, as described above.
+\item The theorem does not claim that the branch-union construction is
+optimal, nor that the trivial bound is sharp for every covariate
+distribution.  The sharp fixed-rule value is \eqref{eq:a4-4.1}; the
+minimax equality is asserted only inside the stated rule class.
+\end{itemize}
+
+\let\theHequation\aIVtheHequation

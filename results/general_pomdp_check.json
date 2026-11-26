@@ -1,0 +1,645 @@
+{
+  "config": {
+    "n_steps": 48,
+    "burn_in": 8,
+    "cal_seeds": [
+      3000,
+      3127
+    ],
+    "eval_seeds": [
+      4000,
+      4127
+    ],
+    "reps": 64,
+    "alpha": 0.1,
+    "regimes": [
+      "normal",
+      "degraded",
+      "outage"
+    ],
+    "regime_schedule": {
+      "degraded": [
+        16,
+        31
+      ],
+      "outage": [
+        32,
+        39
+      ],
+      "normal": "all other steps"
+    },
+    "target_action_policy": "clip(-0.70 * identified belief mean, -1, 1); the same target-action rule and identified-belief filter are used by truth and both predictive models, but action realizations follow their respective observation histories",
+    "naive_dynamics_estimator": "per-path least-squares AR(1) and residual sigma from burn-in observations/actions, used only for the fitted-transition rollout; naive is retained as the internal JSON key",
+    "comparison_scope": "shared identified-belief target-action rule/filter and known B=0.35; only the autonomous rollout coefficient and residual scale differ (known A/SIGMA versus fitted AR(1)/residual scale), not the observation filter or target policy",
+    "predecision_rule": "three groups from sign and magnitude of the last burn-in observation: y<0, 0<=y<1, y>=1",
+    "stream_keys": {
+      "burn_in": "[seed,101]",
+      "truth": "[seed,202]",
+      "identified_mc": "[seed,303]",
+      "naive_mc": "[seed,404]"
+    },
+    "parameters": {
+      "A": 0.97,
+      "B": 0.35,
+      "sigma": 0.2,
+      "action_gain": 0.7,
+      "action_cost": 0.05,
+      "logging_gain": 0.15,
+      "obs_sd": 0.1,
+      "degraded_phi": 0.85,
+      "degraded_sd": 0.35,
+      "outage_phi": 0.9,
+      "outage_sd": 0.05,
+      "branch_threshold": 0.65
+    }
+  },
+  "models": {
+    "identified": {
+      "mean_absolute_return_error": 4.804908122221947,
+      "plugin_normal": {
+        "n_test": 128,
+        "coverage": 0.90625,
+        "coverage_se": 0.025763488199751796,
+        "mean_width": 19.17832765858197,
+        "median_width": 18.80807394937677
+      },
+      "scores": {
+        "raw": {
+          "within_regime": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.9375,
+              "coverage_se": 0.02139541240254555,
+              "mean_width": 4.573869966350459,
+              "median_width": 4.57386996635046,
+              "mean_q": 2.28693498317523,
+              "min_q": 2.28693498317523,
+              "max_q": 2.28693498317523
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.859375,
+              "coverage_se": 0.03072682172373491,
+              "mean_width": 6.492381378984262,
+              "median_width": 6.492381378984259,
+              "mean_q": 3.2461906894921295,
+              "min_q": 3.2461906894921295,
+              "max_q": 3.2461906894921295
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.859375,
+              "coverage_se": 0.03072682172373491,
+              "mean_width": 9.160897773721022,
+              "median_width": 9.160897773721025,
+              "mean_q": 4.580448886860513,
+              "min_q": 4.580448886860513,
+              "max_q": 4.580448886860513
+            }
+          },
+          "leave_one_regime_out": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.953125,
+              "coverage_se": 0.018682740693075187,
+              "mean_width": 6.439877013699572,
+              "median_width": 6.439877013699572,
+              "mean_q": 3.219938506849786,
+              "min_q": 3.219938506849786,
+              "max_q": 3.219938506849786
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.8046875,
+              "coverage_se": 0.035040771714861634,
+              "mean_width": 5.509707658967229,
+              "median_width": 5.509707658967227,
+              "mean_q": 2.7548538294836136,
+              "min_q": 2.7548538294836136,
+              "max_q": 2.7548538294836136
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.7578125,
+              "coverage_se": 0.03786620306707284,
+              "mean_width": 5.409709520506728,
+              "median_width": 5.40970952050673,
+              "mean_q": 2.704854760253365,
+              "min_q": 2.704854760253365,
+              "max_q": 2.704854760253365
+            }
+          },
+          "full_window": {
+            "n_test": 128,
+            "coverage": 0.8828125,
+            "coverage_se": 0.02842954419533132,
+            "mean_width": 14.85073865881438,
+            "median_width": 14.850738658814382,
+            "mean_q": 7.425369329407191,
+            "min_q": 7.425369329407191,
+            "max_q": 7.425369329407191
+          }
+        },
+        "studentized": {
+          "within_regime": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.9375,
+              "coverage_se": 0.02139541240254555,
+              "mean_width": 4.2466432286726885,
+              "median_width": 4.007141182230235,
+              "mean_q": 1.5978032024221094,
+              "min_q": 1.5978032024221094,
+              "max_q": 1.5978032024221094
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.875,
+              "coverage_se": 0.029231698334171417,
+              "mean_width": 6.820855099161346,
+              "median_width": 6.790726479314415,
+              "mean_q": 1.117498988768741,
+              "min_q": 1.117498988768741,
+              "max_q": 1.117498988768741
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.84375,
+              "coverage_se": 0.032093118603818326,
+              "mean_width": 9.143798599042023,
+              "median_width": 8.991061316235486,
+              "mean_q": 1.359462086142101,
+              "min_q": 1.359462086142101,
+              "max_q": 1.359462086142101
+            }
+          },
+          "leave_one_regime_out": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.8359375,
+              "coverage_se": 0.03273305812909057,
+              "mean_width": 2.9700901253104686,
+              "median_width": 2.8025830791975523,
+              "mean_q": 1.117498988768741,
+              "min_q": 1.117498988768741,
+              "max_q": 1.117498988768741
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.90625,
+              "coverage_se": 0.025763488199751796,
+              "mean_width": 9.030012220406144,
+              "median_width": 8.990125461129406,
+              "mean_q": 1.479437603961705,
+              "min_q": 1.479437603961705,
+              "max_q": 1.479437603961705
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.84375,
+              "coverage_se": 0.032093118603818326,
+              "mean_width": 8.858195764070604,
+              "median_width": 8.710229168249663,
+              "mean_q": 1.316999840103674,
+              "min_q": 1.316999840103674,
+              "max_q": 1.316999840103674
+            }
+          },
+          "full_window": {
+            "n_test": 128,
+            "coverage": 0.828125,
+            "coverage_se": 0.033346427888601315,
+            "mean_width": 14.35747293732793,
+            "median_width": 14.080289874002794,
+            "mean_q": 1.2313868995899508,
+            "min_q": 1.2313868995899508,
+            "max_q": 1.2313868995899508
+          }
+        },
+        "cqr": {
+          "within_regime": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.890625,
+              "coverage_se": 0.027586810335596748,
+              "mean_width": 4.048989510885049,
+              "median_width": 3.863911205260315,
+              "mean_q": 0.08209556213651148,
+              "min_q": 0.08209556213651148,
+              "max_q": 0.08209556213651148
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.8984375,
+              "coverage_se": 0.026699654520492805,
+              "mean_width": 8.54532454701139,
+              "median_width": 8.499386267868331,
+              "mean_q": 0.05757177743736652,
+              "min_q": 0.05757177743736652,
+              "max_q": 0.05757177743736652
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.84375,
+              "coverage_se": 0.032093118603818326,
+              "mean_width": 8.937666831733555,
+              "median_width": 8.708641297889068,
+              "mean_q": 0.04112749143014316,
+              "min_q": 0.04112749143014316,
+              "max_q": 0.04112749143014316
+            }
+          },
+          "leave_one_regime_out": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.890625,
+              "coverage_se": 0.027586810335596748,
+              "mean_width": 3.9505166860443217,
+              "median_width": 3.765438380419588,
+              "mean_q": 0.03285914971614787,
+              "min_q": 0.03285914971614787,
+              "max_q": 0.03285914971614787
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.9140625,
+              "coverage_se": 0.024772755652276997,
+              "mean_width": 8.576222764950181,
+              "median_width": 8.530284485807124,
+              "mean_q": 0.0730208864067623,
+              "min_q": 0.0730208864067623,
+              "max_q": 0.0730208864067623
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.8515625,
+              "coverage_se": 0.031424986151765796,
+              "mean_width": 9.001453621686792,
+              "median_width": 8.772428087842307,
+              "mean_q": 0.0730208864067623,
+              "min_q": 0.0730208864067623,
+              "max_q": 0.0730208864067623
+            }
+          },
+          "full_window": {
+            "n_test": 128,
+            "coverage": 0.8984375,
+            "coverage_se": 0.026699654520492805,
+            "mean_width": 17.46234928975978,
+            "median_width": 17.207762714988,
+            "mean_q": 0.48589830251079813,
+            "min_q": 0.48589830251079813,
+            "max_q": 0.48589830251079813
+          }
+        }
+      }
+    },
+    "naive": {
+      "mean_absolute_return_error": 5.84982478170499,
+      "plugin_normal": {
+        "n_test": 128,
+        "coverage": 0.7265625,
+        "coverage_se": 0.03939676319129748,
+        "mean_width": 16.607773843065996,
+        "median_width": 12.006579939431429
+      },
+      "scores": {
+        "raw": {
+          "within_regime": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.90625,
+              "coverage_se": 0.025763488199751796,
+              "mean_width": 7.311732753937903,
+              "median_width": 7.311732753937903,
+              "mean_q": 3.6558663769689517,
+              "min_q": 3.6558663769689517,
+              "max_q": 3.6558663769689517
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.8984375,
+              "coverage_se": 0.026699654520492805,
+              "mean_width": 12.03343983595199,
+              "median_width": 12.033439835951992,
+              "mean_q": 6.016719917975996,
+              "min_q": 6.016719917975996,
+              "max_q": 6.016719917975996
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.90625,
+              "coverage_se": 0.025763488199751796,
+              "mean_width": 13.311449650090195,
+              "median_width": 13.311449650090193,
+              "mean_q": 6.655724825045096,
+              "min_q": 6.655724825045096,
+              "max_q": 6.655724825045096
+            }
+          },
+          "leave_one_regime_out": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.9921875,
+              "coverage_se": 0.007781922583256459,
+              "mean_width": 12.486715164618007,
+              "median_width": 12.486715164618008,
+              "mean_q": 6.243357582309004,
+              "min_q": 6.243357582309004,
+              "max_q": 6.243357582309004
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.8359375,
+              "coverage_se": 0.03273305812909057,
+              "mean_width": 9.443991358044304,
+              "median_width": 9.443991358044304,
+              "mean_q": 4.721995679022152,
+              "min_q": 4.721995679022152,
+              "max_q": 4.721995679022152
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.8125,
+              "coverage_se": 0.034499065884093155,
+              "mean_width": 8.801983270730974,
+              "median_width": 8.801983270730975,
+              "mean_q": 4.400991635365488,
+              "min_q": 4.400991635365488,
+              "max_q": 4.400991635365488
+            }
+          },
+          "full_window": {
+            "n_test": 128,
+            "coverage": 0.9140625,
+            "coverage_se": 0.024772755652276997,
+            "mean_width": 28.946159536865306,
+            "median_width": 28.946159536865295,
+            "mean_q": 14.473079768432648,
+            "min_q": 14.473079768432648,
+            "max_q": 14.473079768432648
+          }
+        },
+        "studentized": {
+          "within_regime": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.9375,
+              "coverage_se": 0.02139541240254555,
+              "mean_width": 11.034500241057682,
+              "median_width": 7.349747351657201,
+              "mean_q": 3.8910185002290656,
+              "min_q": 3.8910185002290656,
+              "max_q": 3.8910185002290656
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.9140625,
+              "coverage_se": 0.024772755652276997,
+              "mean_width": 18.284643418614316,
+              "median_width": 14.518236727479813,
+              "mean_q": 3.5472160135129167,
+              "min_q": 3.5472160135129167,
+              "max_q": 3.5472160135129167
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.9375,
+              "coverage_se": 0.02139541240254555,
+              "mean_width": 25.17762556710078,
+              "median_width": 17.139921629970416,
+              "mean_q": 4.465468694112538,
+              "min_q": 4.465468694112538,
+              "max_q": 4.465468694112538
+            }
+          },
+          "leave_one_regime_out": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.9296875,
+              "coverage_se": 0.022598508721496356,
+              "mean_width": 10.059514225873677,
+              "median_width": 6.700338613023237,
+              "mean_q": 3.5472160135129167,
+              "min_q": 3.5472160135129167,
+              "max_q": 3.5472160135129167
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.9296875,
+              "coverage_se": 0.022598508721496356,
+              "mean_width": 20.05682358810226,
+              "median_width": 15.925370059824619,
+              "mean_q": 3.8910185002290656,
+              "min_q": 3.8910185002290656,
+              "max_q": 3.8910185002290656
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.9140625,
+              "coverage_se": 0.024772755652276997,
+              "mean_width": 20.000246941962175,
+              "median_width": 13.615369100302381,
+              "mean_q": 3.5472160135129167,
+              "min_q": 3.5472160135129167,
+              "max_q": 3.5472160135129167
+            }
+          },
+          "full_window": {
+            "n_test": 128,
+            "coverage": 0.9453125,
+            "coverage_se": 0.02009679260474285,
+            "mean_width": 68.3054169100889,
+            "median_width": 49.38135936681148,
+            "mean_q": 6.765049536840908,
+            "min_q": 6.765049536840908,
+            "max_q": 6.765049536840908
+          }
+        },
+        "cqr": {
+          "within_regime": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.9140625,
+              "coverage_se": 0.024772755652276997,
+              "mean_width": 5.943822042493487,
+              "median_width": 4.86136168370679,
+              "mean_q": 0.9888454159465025,
+              "min_q": 0.9888454159465025,
+              "max_q": 0.9888454159465025
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.8984375,
+              "coverage_se": 0.026699654520492805,
+              "mean_width": 10.58720613806452,
+              "median_width": 9.02003199015046,
+              "mean_q": 1.7003217534072266,
+              "min_q": 1.7003217534072266,
+              "max_q": 1.7003217534072266
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.921875,
+              "coverage_se": 0.02372062070603734,
+              "mean_width": 15.263932125871504,
+              "median_width": 13.10233305740465,
+              "mean_q": 3.7887037055703106,
+              "min_q": 3.7887037055703106,
+              "max_q": 3.7887037055703106
+            }
+          },
+          "leave_one_regime_out": {
+            "normal": {
+              "n_test": 128,
+              "coverage": 0.9375,
+              "coverage_se": 0.02139541240254555,
+              "mean_width": 6.452280708865768,
+              "median_width": 5.36982035007907,
+              "mean_q": 1.2430747491326428,
+              "min_q": 1.2430747491326428,
+              "max_q": 1.2430747491326428
+            },
+            "degraded": {
+              "n_test": 128,
+              "coverage": 0.8828125,
+              "coverage_se": 0.02842954419533132,
+              "mean_width": 9.614348344577973,
+              "median_width": 8.04717419666391,
+              "mean_q": 1.2138928566639517,
+              "min_q": 1.2138928566639517,
+              "max_q": 1.2138928566639517
+            },
+            "outage": {
+              "n_test": 128,
+              "coverage": 0.8671875,
+              "coverage_se": 0.029996528424624355,
+              "mean_width": 9.752397325211996,
+              "median_width": 7.590798256745142,
+              "mean_q": 1.0329363052405562,
+              "min_q": 1.0329363052405562,
+              "max_q": 1.0329363052405562
+            }
+          },
+          "full_window": {
+            "n_test": 128,
+            "coverage": 0.9375,
+            "coverage_se": 0.02139541240254555,
+            "mean_width": 30.822534207853796,
+            "median_width": 27.180292165001433,
+            "mean_q": 8.336578498369754,
+            "min_q": 8.336578498369754,
+            "max_q": 8.336578498369754
+          }
+        }
+      }
+    }
+  },
+  "branch": {
+    "score": "identified_raw",
+    "cal_branch_count": 43,
+    "test_branch_count": 39,
+    "cal_branch_fraction": 0.3359375,
+    "test_branch_fraction": 0.3046875,
+    "thresholds": {
+      "marginal": 7.425369329407191,
+      "predecision": {
+        "0": 7.5625144119689285,
+        "1": 8.83516098070977,
+        "2": 7.626907350654655
+      },
+      "branch": {
+        "0": 5.910563342478119,
+        "1": 14.028491889790006
+      },
+      "union": 14.028491889790006
+    },
+    "rules": {
+      "marginal": {
+        "n_test": 128,
+        "coverage": 0.8828125,
+        "coverage_se": 0.02842954419533132,
+        "mean_width": 14.85073865881438,
+        "median_width": 14.850738658814382,
+        "per_branch": {
+          "0": {
+            "n_test": 89,
+            "coverage": 0.9662921348314607,
+            "coverage_se": 0.01913043489474324,
+            "mean_width": 14.850738658814382,
+            "median_width": 14.850738658814382
+          },
+          "1": {
+            "n_test": 39,
+            "coverage": 0.6923076923076923,
+            "coverage_se": 0.07390530175619406,
+            "mean_width": 14.850738658814388,
+            "median_width": 14.850738658814382
+          }
+        }
+      },
+      "predecision": {
+        "n_test": 128,
+        "coverage": 0.890625,
+        "coverage_se": 0.027586810335596748,
+        "mean_width": 16.288426173528894,
+        "median_width": 15.25381470130931,
+        "per_branch": {
+          "0": {
+            "n_test": 89,
+            "coverage": 0.9775280898876404,
+            "coverage_se": 0.01571048578778941,
+            "mean_width": 16.47351348791262,
+            "median_width": 17.67032196141954
+          },
+          "1": {
+            "n_test": 39,
+            "coverage": 0.6923076923076923,
+            "coverage_se": 0.07390530175619406,
+            "mean_width": 15.866047430448088,
+            "median_width": 15.125028823937857
+          }
+        }
+      },
+      "branch_union": {
+        "n_test": 128,
+        "coverage": 0.953125,
+        "coverage_se": 0.018682740693075187,
+        "mean_width": 28.056983779580023,
+        "median_width": 28.056983779580012,
+        "per_branch": {
+          "0": {
+            "n_test": 89,
+            "coverage": 0.9775280898876404,
+            "coverage_se": 0.01571048578778941,
+            "mean_width": 28.05698377958002,
+            "median_width": 28.056983779580012
+          },
+          "1": {
+            "n_test": 39,
+            "coverage": 0.8974358974358975,
+            "coverage_se": 0.04858107350929958,
+            "mean_width": 28.056983779580012,
+            "median_width": 28.056983779580012
+          }
+        }
+      }
+    }
+  },
+  "invariants": {
+    "disjoint_seed_sets": true,
+    "latent_start_usage": "history x_start is passed only to the truth rollout; predictive starts are sampled from the shared identified-belief prior",
+    "estimator_inputs": "identified uses known A/B/SIGMA and observation-model parameters; fitted-transition knows B and fits only the autonomous rollout coefficient and residual scale from burn-in observations/actions",
+    "branch_label_used_for": "calibration-side branch thresholds and test evaluation only",
+    "n_cal_paths": 128,
+    "n_eval_paths": 128,
+    "valid_coverage_and_width": true
+  },
+  "limits": [
+    "Both predictors know B=0.35; identified-transition also uses known A/SIGMA and observation-model parameters, while fitted-transition estimates only the autonomous rollout coefficient and residual scale from burn-in data.",
+    "Both predictive models share the identified-belief target-action rule and filter; this is not an observation-filter or alternative-policy comparison.",
+    "Return prediction MAE is a descriptive point estimate without paired uncertainty; no uniform model ranking is claimed.",
+    "Coverage is marginal over independent simulated paths; finite cells are reported with their counts and standard errors.",
+    "The branch-union rule is sufficient, not optimal; its width is reported alongside coverage."
+  ]
+}

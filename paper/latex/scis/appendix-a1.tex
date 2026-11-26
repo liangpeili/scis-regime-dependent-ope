@@ -1,0 +1,661 @@
+% =====================================================================
+% P1 Appendix A.1 --- Theorem 1 (identification under regime-dependent
+% observation).
+%
+% Source of truth: paper/theorems.md v0.4 frozen (2026-10-21).
+% This file is a fragment: it is meant to be \input under
+%   \appendix \section{Proofs}
+% before A.2 and A.3.  The standalone driver main-a12.tex sets the
+% subsection counter to 0, so this fragment becomes A.1.
+%
+% Requirements: amsmath, amssymb, amsthm, array, longtable, and
+% hyperref (optional, but the fixed-tag mechanism below keeps
+% destinations unique when it is loaded).  Equation tags (4.1)--(4.2)
+% follow the frozen source; do not renumber without updating the main
+% text.
+% =====================================================================
+
+\allowdisplaybreaks
+
+\providecommand{\TV}{\mathrm{TV}}
+
+\newtheorem*{aITthm}{Theorem 1}
+\newtheorem*{aIlemA}{Lemma 1}
+\newtheorem*{aIlemB}{Lemma 2}
+\newtheorem*{aIlemC}{Lemma 3}
+\newtheorem*{aIlemD}{Lemma 4}
+
+% Fixed equation tags do not advance the equation counter, so hyperref
+% would give every display the same destination.  A dedicated counter
+% keeps the destinations unique without changing the printed (frozen)
+% tag numbers.  The original \theHequation is restored at the end.
+\providecommand{\theHequation}{}
+\let\aItheHequation\theHequation
+\newcounter{aIKanchor}
+\renewcommand{\theHequation}{aI.\arabic{aIKanchor}}
+\newcommand{\aIfixedtag}[1]{\stepcounter{aIKanchor}\tag{#1}}
+
+\subsection{Identification under regime-dependent observation (Theorem~1)}\label{app:a1}
+
+This appendix gives the population identification proof of Theorem~1 and the
+consistency argument for the model-based plug-in.  It is \emph{not} a
+finite-sample rate result and \emph{not} a nonparametric identification theorem.
+The proof chain is Lemma~1 (anchor and short-range dynamics), Lemma~2 (freeze
+bridge; needed only in the non-Markov branch), Lemma~3 (remaining POMDP
+components), and Lemma~4 (value and plug-in).  In the experimental Markov
+environment, Lemma~2 is not used.
+
+\paragraph{Scope and notation.}
+We use the notation of \S2.  Time is discrete, $t=0,\dots,H$; the latent state is
+$X_t=(S_t,Z_t)$, with $S_t>0$ the latent reference price and $Z_t$ the bias
+state, stale anchor, position, and cash.  The calendar regime is
+$r_t\in\mathcal R=\{\mathrm{OPEN},\mathrm{EXTENDED},\mathrm{WEEKEND},
+\mathrm{HOLIDAY},\mathrm{HALT}\}$, known at $t$ and exogenous under A5.  The
+transition is $X_{t+1}\sim T_{r_t}(\cdot\mid X_t,a_t)$, the observation is
+$P_t\sim h_{r_t}(\cdot\mid X_t)$, the reward is
+\[
+R_t=\rho(X_t,a_t,X_{t+1})
+=\frac{\text{fees}_t+\Delta\mathrm{IL}^{\mathrm{true}}_t-\text{cost}_t}{V_0},
+\]
+and the initial law is $X_0\sim\nu$.  The observable history is
+$H_t^o=(P_{0:t},r_{0:t},a_{0:t-1},\text{position/cash})$, the belief is
+$b_t(\cdot)=\mathbb P(X_t\in\cdot\mid H_t^o)$, and the target policy
+$\pi(a_t\mid H_t^o)$ is known.  For an evaluation set
+$R_{\mathrm{eval}}\subseteq\mathcal R$ fixed by the calendar,
+\[
+V^\pi(R_{\mathrm{eval}})
+=\mathbb E_{\theta,\pi}\!\left[
+\sum_{t:\,r_t\in R_{\mathrm{eval}}}\gamma^t\,\rho(X_t,A_t,X_{t+1})
+\right],
+\qquad \theta=(T,h,\nu,\rho).
+\]
+The full-window value takes $R_{\mathrm{eval}}=\mathcal R$.
+
+For $\Delta=1,2$, let
+$\mathcal A_{\mathrm{OPEN},\Delta}=\{t:r_t=r_{t+\Delta}=\mathrm{OPEN},\ t,t+\Delta
+\text{ in the same day}\}$ be the calendar-adjacent OPEN pairs.  OPEN
+observations are not contiguous in calendar time (overnight, weekend, and
+holiday gaps), so all OPEN time-series moments below use only
+$\mathcal A_{\mathrm{OPEN},1}\cup\mathcal A_{\mathrm{OPEN},2}$; a gap of
+$\Delta$ calendar hours inside a day contributes $\phi^\Delta$, and no moment
+is taken across a closed regime.
+
+For a freeze event $e$ with pre- and post-anchors $t_e^-,t_e^+$, length
+$\tau_e=t_e^+-t_e^-$, and pre-freeze volatility $\sigma_e$, write
+\[
+Q^{\mathrm{end}}_{\tau,\sigma}(ds^+\mid s^-)
+=\mathcal L(S_{t_e^+}\in ds^+\mid S_{t_e^-}=s^-,\tau_e=\tau,\sigma_e=\sigma)
+\]
+for the endpoint conditional law, and
+$Q^{\mathrm{path}}_{\tau,\sigma}(\cdot\mid s^-)$ for the full path law.  These
+are different objects: I5 identifies only the former, while the latter requires
+I5$'$ or a Markov $T$.
+
+The observation kernels are those of \S2.2: OPEN is
+$P_t=S_t e^{\varepsilon_t}$ with i.i.d.\
+$\varepsilon_t\sim N(0,\sigma_o^2)$; EXTENDED is $P_t=S_t e^{\eta_t}$ with a
+zero-started block AR(1) bias; WEEKEND and HOLIDAY use
+$P_t=S_{\mathrm{last\,open},t}e^{\eta_t}$; and HALT is $P_t=P_{t-1}$.  The bias
+is reset to zero at every OPEN step and is not stationary inside a window.
+
+\paragraph{Assumptions.}
+The main assumptions I1$'$ (shared latent dynamics and cost structure), I2
+(anchored OPEN observations), I3 (parametric observation family with exogenous
+AR(1) bias innovations), and, only in part (c)(ii), I5 (cross-event variation)
+and I5$'$ (bridge condition) are stated in \S3.1.  Table~\ref{tab:a1-assumptions}
+records the auxiliary and technical conditions used below.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.07\linewidth}>{\raggedright\arraybackslash}p{0.89\linewidth}@{}}
+\caption{Auxiliary and technical assumptions for Theorem~1.}\label{tab:a1-assumptions}\\
+\hline
+ID & Condition \\
+\hline
+\endfirsthead
+\hline
+ID & Condition \\
+\hline
+\endhead
+\hline
+\endfoot
+A1 & \textbf{Bounded reward.} $|\rho|\le R_{\max}$ a.s.  Otherwise the
+integrability of $V^\pi$ must be assumed separately; a heavy-tailed $\rho$ can
+make $\mathbb E[\rho]$ undefined, which is a failure of the estimand, not of the
+bound. \\
+A2 & \textbf{Known policy.} The target policy $\pi$ is known; the logging policy
+$\mu$ is known or estimable. \\
+A3$'$ & \textbf{Model-based support.} For every $(x,a)$ reachable by $\pi$, the
+transition $T(\cdot\mid x,a)$ is identified from data (requires
+$\mu(a\mid x)>0$, or structural knowledge).  The experimental environment
+satisfies this automatically by A7 and deterministic position transitions. \\
+A4 & \textbf{TV kernel topology.} $\sup_{x,a}\TV(T_n(\cdot\mid x,a),
+T(\cdot\mid x,a))\to0$, $\sup_x\TV(h_n(\cdot\mid x),h(\cdot\mid x))\to0$,
+$\TV(\nu_n,\nu)\to0$, and $\rho_n\to\rho$ bounded uniformly; then $V^\pi$ is
+continuous.  Pointwise weak convergence is not enough.  Within the parametric
+family, $\hat\theta\to\theta$ plus regularity implies this TV convergence;
+general nonparametric estimators need not attain sup-TV, so A4 must not be read
+as a nonparametric consistency assumption. \\
+A5 & \textbf{Calendar-exogenous regimes.} $r_t$ is determined by the calendar
+and does not depend on $S_t$ or on the action.  A price-triggered halt violates
+A5; it must be restricted to scheduled holidays/weekends or handled by a
+sensitivity analysis. \\
+A6 & \textbf{Initial distribution.} $\nu$ is known or identified from initial
+observations.  This appendix treats A6 as a pure assumption: if the initial
+window starts in WEEKEND/HOLIDAY, deconvolving
+$y_0=\log S_{\mathrm{last\,open}}+\eta_1$ identifies the pre-window anchor law,
+not $\nu=\mathcal L(X_0)$; obtaining $\nu$ requires propagating through the
+pre-window gap using the identified $T$ and the I1$'$ extrapolation.  The
+experimental $\nu$ is a point mass, so this is not a numerical issue, but the
+theorem does not claim the propagation. \\
+A7 & \textbf{No market impact.} Actions do not change the pool price, volume, or
+other traders' behavior; the $S$-component of $T$ is independent of $a$. \\
+T1 & \textbf{Anchored-parameter identifiability.} Given $\nu$ from A6,
+$(\psi,\sigma_o)\mapsto\mathcal L(y_{0:n}\mid\mathrm{OPEN})$ is injective for
+$n$ large, where $\psi$ parametrizes $T$.  In the linear-Gaussian AR(1) case the
+known-start moment profile in Lemma~1 gives a constructive proof (requires
+$|\phi|<1$ and $\phi\ne0$).  For the jump family used in the experiments, T1 is
+an identification condition, not a proved result; the numerical check reported
+in the experiments is a check, not a proof. \\
+T2 & \textbf{Joint endpoint characteristic function.} The \emph{joint}
+characteristic function $\varphi_e(\xi,\zeta)$ of the endpoint measurement
+errors $(\varepsilon^-,\varepsilon^+)$ is nonzero for every $(\xi,\zeta)$.
+Independence of the two endpoint errors plus Gaussian marginals is sufficient;
+marginal Gaussianity alone is not.  Used only in branch (ii). \\
+T3 & \textbf{Support transfer.} The evaluation anchor law is absolutely
+continuous with respect to the training anchor law $\Pi$; $(\tau,\sigma)$ lies
+in the sample support, and in the continuous case the support contains a
+neighborhood of the target value.  Values outside the support are extrapolation,
+not identification.  Used only in branch (ii). \\
+T4 & \textbf{Reward observability.} Fees, volume, and cost are observable;
+$\Delta\mathrm{IL}^{\mathrm{true}}$ is a deterministic function of the $S$ path
+and the position; $\rho$ is a known function once the identified components are
+fixed.  The law of volume and fees under $\pi$ is invariant by A7, not by T4;
+T4 gives observability only. \\
+\hline
+\end{longtable}
+
+\begin{aITthm}[Identification under regime-dependent observation]
+Assume I1$'$, I2, I3, A1, A2, A4--A7, T1, T4, and A3$'$ whenever $T$ depends on
+actions and $\pi$ selects actions with no logging support.  In part (c)(ii)
+additionally assume I5, I5$'$, T2, T3.  Then:
+
+\emph{(a) Anchor observation.} $h_{\mathrm{OPEN}}$ is identified: $\sigma_o$ and
+the conditional law $\mathcal L(S_t\mid H_t^o)$ on OPEN histories are identified;
+$P_t$ is a noisy measurement of $S_t$, and $S_t$ is not pointwise identified.
+
+\emph{(b) Short-range dynamics.} The $S$ component and the EXTENDED bias
+component of the one-step transition $T$ are identified from calendar-adjacent
+OPEN and EXTENDED observations.  The remaining regime-specific bias components
+are completed in (d); the full joint kernel is not claimed before (d).
+
+\emph{(c) Freeze-period bridge.} Two branches:
+
+\emph{(i) Markov branch (the experimental environment).} If $T$ is Markov on the
+freeze horizon and its $S$-component is identified as in (b), then for every
+freeze length $\tau$, the path law
+$Q^{\mathrm{path}}_{\tau,\sigma}(\cdot\mid s^-)$ is the $\tau$-step composition
+of the identified $S$-component of $T$ started at $s^-$.  No I5/I5$'$, T2, T3, or
+support restriction is needed in this branch; $\sigma$ enters only if the
+identified $S$ component explicitly depends on it (it does not in the
+experimental family).
+
+\emph{(ii) Non-Markov branch.} If $T$ is not Markov on the freeze horizon, then
+under I5 (together with T2 and T3) the endpoint law
+$Q^{\mathrm{end}}_{\tau,\sigma}(\cdot\mid s^-)$ is identified for $\Pi$-a.e.\
+$s^-$, with errors-in-variables and regime-specific endpoint noise
+$h_{r(t_e^-)}$, $h_{r(t_e^+)}$.  The full path law $Q^{\mathrm{path}}$ is
+identified only under the additional I5$'$ (parametric bridge, or direct path
+identification as an assumption); endpoint identification alone is not enough
+for path-dependent rewards.
+
+\emph{(d) POMDP components.} The remaining regime-specific bias components of
+$T$, the observation kernels $h_r$ for all $r\in\mathcal R$, the initial
+distribution $\nu$, and the reward function $\rho$ are identified (for $\rho$,
+using T4 and A7); consequently the belief process
+$b_t(\cdot)=\mathbb P(X_t\in\cdot\mid H_t^o)$ is identified for every observable
+history.
+
+\emph{(e) Value and plug-in.} For any known target policy $\pi$ satisfying A2
+and A3$'$, the value $V^\pi(R_{\mathrm{eval}})$ is identified.  Moreover, if
+$\hat\theta\to\theta$ in the TV kernel topology of A4, then the model-based
+plug-in $\hat V^\pi=V^\pi(\hat\theta)$ is consistent:
+$\hat V^\pi\to V^\pi(\theta)$ in probability (or a.s., according to the mode of
+$\hat\theta\to\theta$).
+\end{aITthm}
+
+\paragraph{Proof chain.}
+Lemma~1 gives (a)--(b).  Lemma~2 gives (c)(ii); in branch (i), (c) follows from
+Lemma~1 and the Markov composition.  Lemma~3 gives (d).  Lemma~4 gives (e).
+
+\paragraph{What the theorem does not say.}
+\begin{itemize}
+\item It does not identify $S_t$ pointwise: each time has one noisy observation;
+what is identified is the measurement model and the conditional law.
+\item It is not a nonparametric result: I3 and T1 are premises.  A nonparametric
+version needs stronger deconvolution and support conditions and is not claimed.
+\item It does not identify the full non-Markov freeze path: branch (ii)
+identifies the endpoint law; the path law requires I5$'$, whose ``direct path
+identification'' option is an assumption, not a conclusion.
+\item It is not a finite-sample guarantee: Theorem~1 is population-level;
+finite-sample coverage is Theorem~2.
+\item It does not claim necessity of I5: I5/I5$'$ appear only in (c)(ii); the
+experimental Markov environment is branch (i), where I5 is redundant.
+Theorem~4 gives a within-class non-identification example, not a general
+necessity claim; the stress variant probes the role of cross-event variation
+separately.
+\item It is not a real-data conclusion: the empirical work is synthetic and the
+regimes are calendar-exogenous; a price-triggered halt violates A5.
+\item It does not make pure IPS/DR available: $\Delta\mathrm{IL}^{\mathrm{true}}$
+is latent, so model-based evaluation is required by the estimand.
+\item It does not claim that errors-in-variables correction is numerically
+necessary in the current environment (reliability is approximately one); it
+identifies the measurement-error model.
+\end{itemize}
+
+\begin{aIlemA}[Anchor observation and short-range transition]
+Assume I1$'$, I2, I3, A6, and T1.  Then:
+\begin{enumerate}
+\item[(i)] $h_{\mathrm{OPEN}}$ (i.e.\ $\sigma_o$) and
+$\mathcal L(S_t\mid H_t^o)$ on OPEN histories are identified (the
+cross-regime belief is completed in Lemma~3);
+\item[(ii)] the $S$ component of the one-step transition $T$, and the EXTENDED
+bias component, are identified from calendar-adjacent OPEN and EXTENDED
+observations.  The remaining regime-specific bias components are identified in
+Lemma~3.
+\end{enumerate}
+\end{aIlemA}
+
+\begin{proof}
+\begin{enumerate}
+\item On OPEN, $y_t:=\log P_t=\log S_t+\varepsilon_t$ with
+$\varepsilon_t\sim N(0,\sigma_o^2)$ i.i.d.  Under I1$'$, $\log S_t$ is a
+parametric Markov process with transition $T_\psi$ and known initial law $\nu$
+(A6; the experiment has $\nu=\delta_{\mu_{\log}}$, so the process is not
+stationary on the window).  Hence $\{y_t\}$ on OPEN is a hidden Markov model
+with emission $N(0,\sigma_o^2)$, transition $T_\psi$, and known start.
+\item T1 says $(\psi,\sigma_o)\mapsto\mathcal L(y_{0:n})$ is injective for $n$
+large.  Therefore the observed OPEN law identifies $(\psi,\sigma_o)$.
+\item \emph{Constructive linear-Gaussian case (no jumps), known start.}  Let
+$X_t:=\log S_t-\mu_{\log}$ and
+$X_{t+1}=\phi X_t+\sigma\xi_t$ with $\phi=1-\kappa$, and let $X_0=x_0$ be given
+by $\nu$; the experiment has the point-mass start $x_0=0$
+($\log S_0=\mu_{\log}$).  Hence $\{X_t\}$ is not stationary on the window; the
+stationary ARMA(1,1) formulas are only the $t\to\infty$ limit.  Put
+$V_t:=\mathrm{Var}(X_t)$, known from A6; in the experiment
+\[
+V_t=\frac{\sigma_{\mathrm{eff}}^2(1-\phi^{2t})}{1-\phi^2},
+\qquad V_0=0.
+\]
+Then
+\[
+\mathrm{Cov}(y_t,y_{t+k})=\phi^k V_t\quad(k\ge1),
+\qquad
+\mathrm{Var}(y_t)=V_t+\sigma_o^2.
+\]
+\emph{Calendar caveat.}  OPEN is not contiguous in calendar time.  Use only
+pairs in $\mathcal A_{\mathrm{OPEN},1}\cup\mathcal A_{\mathrm{OPEN},2}$: within a
+day, $\Delta=1$ gives 51 pairs per path (8 complete OPEN days with 6 pairs each,
+plus 3 pairs on day 7, which HALT splits into $09{:}00$--$10{:}00$ and
+$13{:}00$--$15{:}00$), and $\Delta=2$ gives 41 pairs per path ($8\times5$, plus
+day 7's single $13{:}00$--$15{:}00$); no closed-regime gap is used.  For a pair
+separated by $\Delta$ calendar hours inside a day, replace $\phi$ by
+$\phi^\Delta$.
+
+\emph{Pair-aligned moments at the same start $t$} (any $t$ with
+$t,t+1,t+2\in\mathrm{OPEN}$ and $V_t>0$; the experiment's first OPEN is $t=9$,
+and under the point-mass start any $t\ge1$ works) identify the parameters
+exactly, without stationarity:
+\[
+\phi=\frac{\mathrm{Cov}(y_t,y_{t+2})}{\mathrm{Cov}(y_t,y_{t+1})},
+\qquad
+\sigma_o^2=\mathrm{Var}(y_t)-\frac{\mathrm{Cov}(y_t,y_{t+1})}{\phi},
+\]
+\[
+\sigma_{\mathrm{eff}}^2
+=\mathrm{Var}(y_{t+1})-\sigma_o^2
+-\phi^2\bigl(\mathrm{Var}(y_t)-\sigma_o^2\bigr).
+\]
+The $t$-profile $V_t=\mathrm{Cov}(y_t,y_{t+1})/\phi$ is over-identifying.  The
+conditions $|\phi|<1$ and $\phi\ne0$ remain necessary: if $\phi=0$, $\log S$ is
+i.i.d.\ from $t=1$ and only $\sigma_{\mathrm{eff}}^2+\sigma_o^2$ is identified;
+the theorem excludes this degenerate case (or treats it as a known-i.i.d.\
+model).  Invertibility is not needed for moment identification.
+
+\emph{Estimation caveat.}  Pooling variance levels across starts mixes the
+$V_t$ profile, and the ratio $\phi$ is exact only when the $\Delta=1$ and
+$\Delta=2$ pairs share the same start set; align by start time or include the
+$(1-\phi^{2t})$ profile.
+\item \emph{Jumps and random volatility.}  With the rare jump component
+$J_t\sim N(0,(3\sigma)^2)$ with probability $0.005$, the second moments identify
+only the total innovation variance
+\[
+\sigma_{\mathrm{eff}}^2=\sigma^2+0.005\cdot9\sigma^2=1.045\sigma^2;
+\]
+separating the jump and diffusion variances requires higher moments or full-law
+injectivity, which is exactly T1.  If $\sigma$ is drawn per path (lognormal in
+the experiment), the population formulas use
+$\mathbb E[\sigma_{\mathrm{eff}}^2]$ in place of $\sigma_{\mathrm{eff}}^2$.
+\item \emph{EXTENDED (zero-started blocks).}  $y_t=\log S_t+\eta_t$ with $\eta$
+independent of $S$ and of $\varepsilon$ at the innovation level (I3).  The
+experiment resets $\eta=0$ at every OPEN step; an EXTENDED block's recursion
+therefore starts from $\eta_0=0$ at the preceding OPEN, and its first EXTENDED
+step is $u=1$ with $\mathrm{Var}(\eta_1)=\sigma_{\mathrm{ext}}^2$.  Within a
+block $\eta$ is a zero-started AR(1), not a stationary one.  Let $u=1,2,\dots$
+count steps into the block; then
+\[
+\mathrm{Var}(\eta_u)
+=\frac{\sigma_{\mathrm{ext}}^2(1-\phi_{\mathrm{ext}}^{2u})}
+{1-\phi_{\mathrm{ext}}^2},
+\qquad
+\mathrm{Cov}(\eta_u,\eta_{u+k})
+=\phi_{\mathrm{ext}}^k\,\mathrm{Var}(\eta_u).
+\]
+Use only calendar-adjacent pairs inside an EXTENDED block (weekday blocks run
+16:00--next day 08:00, 17 hours; the pre-holiday Thursday block is truncated at
+24:00, 8 hours; no block starts Friday evening and no OPEN lies inside a block).
+Since $V_t$ and $\phi$ are identified from OPEN,
+\[
+\mathrm{Cov}(y_t,y_{t+1})=\phi V_t+\phi_{\mathrm{ext}}\mathrm{Var}(\eta_u),
+\qquad
+\mathrm{Var}(y_t)=V_t+\mathrm{Var}(\eta_u),
+\]
+which gives $\mathrm{Var}(\eta_u)$ and
+$\mathrm{Cov}(\eta_u,\eta_{u+1})$ for each $u$.  On the same $u$,
+\[
+\phi_{\mathrm{ext}}
+=\frac{\mathrm{Cov}(\eta_u,\eta_{u+1})}{\mathrm{Var}(\eta_u)},
+\qquad
+\sigma_{\mathrm{ext}}^2
+=\frac{\mathrm{Var}(\eta_u)(1-\phi_{\mathrm{ext}}^2)}
+{1-\phi_{\mathrm{ext}}^{2u}};
+\]
+the $u$-profile is over-identifying.  This uses independence of the innovations,
+not merely zero correlation, so that the joint transition factorizes as
+$T_S\otimes T_\eta$; I3 supplies it.  If $S$ and $\eta$ are correlated, the cross
+term does not vanish and joint state-space identification is required (open).
+The stationary formulas
+$\gamma_\eta(0)=\sigma_{\mathrm{ext}}^2/(1-\phi_{\mathrm{ext}}^2)$ and
+$\gamma_\eta(1)=\phi_{\mathrm{ext}}\sigma_{\mathrm{ext}}^2/
+(1-\phi_{\mathrm{ext}}^2)$ are only the $u\to\infty$ limit and must not be
+written as the block's moments.
+\item \emph{Conditional law (OPEN histories).}  Given the identified
+$(\psi,\sigma_o)$, the Kalman filter (linear-Gaussian case) or the Bayesian
+filter (general HMM) gives $\mathcal L(S_t\mid H_t^o)$ on OPEN histories as a
+deterministic functional of identified components; the cross-regime belief is
+completed in Lemma~3.
+\end{enumerate}
+
+\paragraph{Gap.}
+For nonparametric $T$, T1 must be replaced by a deconvolution condition on the
+pair $(y_t,y_{t+1})$; the inverse problem is ill-posed.  The paper restricts
+Theorem~1 to the parametric family and states the nonparametric version as an
+open extension.  For the jump family used in experiments, T1 is assumed rather
+than proved.  The constructive argument is a known-start moment proof: it uses
+the identified initial variance $V_0$ (A6) and the $(1-\phi^{2t})$ profile, not
+stationarity; pooled estimators that ignore the start-time profile are biased.
+The full joint $T$ also needs the stale-bias component from Lemma~3; Lemma~1
+only identifies the $S$ and EXTENDED components.
+\end{proof}
+
+\begin{aIlemB}[Endpoint and path laws]
+Assume the endpoint observation models from Lemma~1 (with regime-specific
+noise), T2, and the mutual independence of endpoint errors stated in I2/I3.
+\begin{enumerate}
+\item[(a)] \emph{Markov branch.}  If $T$ is Markov on the freeze horizon and its
+$S$-component is identified as in Lemma~1, then for each freeze length $\tau$,
+$Q^{\mathrm{path}}_{\tau,\sigma}(\cdot\mid s^-)$ is the $\tau$-step composition
+of the identified $S$-component of $T$ started at $s^-$.  No I5/I5$'$, T2, T3, or
+support condition is needed.
+\item[(b)] \emph{Non-Markov branch.}  Under I5 (and T2, T3), the endpoint law
+$Q^{\mathrm{end}}_{\tau,\sigma}(\cdot\mid s^-)$ is identified for $\Pi$-a.e.\
+$s^-$.  The path law $Q^{\mathrm{path}}_{\tau,\sigma}$ is identified only under
+I5$'$(a) (parametric bridge) or I5$'$(b) (direct path identification, an
+assumption).
+\end{enumerate}
+\end{aIlemB}
+
+\begin{proof}
+\emph{(a)} Immediate: under the Markov property, the conditional law of
+$(S_{t_e^-+1},\dots,S_{t_e^+})$ given $S_{t_e^-}=s^-$ is obtained by composing
+the identified $S$-component of $T$ exactly $\tau$ times; $\tau$ only selects
+the composition length ($\sigma$ enters only if the identified $S$ dynamics
+depends on it).  Endpoint deconvolution, T2, and the anchor-support condition
+are not needed in this branch.
+
+\emph{(b)} The population proof uses the joint characteristic function of the
+endpoint errors.  Let
+$Y_e^-=\log P_{t_e^-}$, $Y_e^+=\log P_{t_e^+}$, and let
+$\varphi_e(\xi,\zeta)=\mathbb E[e^{i\xi\varepsilon^-+i\zeta\varepsilon^+}]$ be
+the joint measurement-error characteristic function.  T2 and I2/I3 give
+$\varphi_e\ne0$ everywhere and independence from $(s^-,s^+)$, so
+\[
+\Phi_Y(\xi,\zeta)
+=\mathbb E[e^{i\xi\log s^-+i\zeta\log s^+}]\,\varphi_e(\xi,\zeta).
+\]
+Hence
+\[
+\Phi_s(\xi,\zeta):=\mathbb E[e^{i\xi\log s^-+i\zeta\log s^+}]
+=\Phi_Y(\xi,\zeta)/\varphi_e(\xi,\zeta)
+\]
+is determined by the observed law.  By uniqueness of characteristic functions,
+the joint law of $(\log s^-,\log s^+)$ is identified; by disintegration,
+$Q^{\mathrm{end}}_{\tau,\sigma}(\cdot\mid s^-)$ is identified for $\Pi$-a.e.\
+$s^-$.  Endpoint identification uses I5 (with T2 and T3); for the path law one
+must add I5$'$(a) or I5$'$(b), since I5 alone does not identify
+$Q^{\mathrm{path}}$.
+
+\paragraph{Caveats.}
+(i) Endpoint noise is regime-specific: $\tau=81$ has an EXTENDED pre-anchor with
+$\sigma_\eta\approx0.0033$, not $\sigma_o=0.0005$.  (ii) Identification is
+$\Pi$-a.e.\ and requires T3 for evaluation anchors, including a neighborhood in
+$(\tau,\sigma)$ when the conditioning value is continuous.  (iii) $\sigma_e$ is
+estimated, not known, and covariate measurement error in $\sigma_e$ is not
+covered by the population argument.  (iv) The Gaussian deconvolution is
+ill-posed in finite samples.  (v) T2 is a joint-CF condition, not a marginal one.
+(vi) In the experimental Markov environment only branch (a) is used.
+\end{proof}
+
+\begin{aIlemC}[POMDP components]
+Assume Lemma~1 (Lemma~2 is needed only for the non-Markov branch), I3 (exogenous
+bias innovations with known block starts), A5, A6, T4, and A7.  Then the
+remaining regime-specific bias components of $T$, the observation kernels $h_r$
+for all $r$, $\nu$, and $\rho$ are identified; hence $b_t$ is identified.
+\end{aIlemC}
+
+\begin{proof}
+\begin{enumerate}
+\item \emph{OPEN.}  Lemma~1.
+\item \emph{EXTENDED.}  $h_{\mathrm{EXT}}(P\mid S,\eta)=S\exp(\eta)$ with $\eta$
+an exogenous AR(1) that is zero-started at each block onset (I3).  Use the same
+block-$u$ profile as Lemma~1 step~5: after subtracting the identified $S$
+moments $V_t$, the observed within-block moments give $\mathrm{Var}(\eta_u)$ and
+$\mathrm{Cov}(\eta_u,\eta_{u+1})$, hence
+\[
+\phi_{\mathrm{ext}}
+=\frac{\mathrm{Cov}(\eta_u,\eta_{u+1})}{\mathrm{Var}(\eta_u)},
+\qquad
+\sigma_{\mathrm{ext}}^2
+=\frac{\mathrm{Var}(\eta_u)(1-\phi_{\mathrm{ext}}^2)}
+{1-\phi_{\mathrm{ext}}^{2u}};
+\]
+the $u$-profile is over-identifying.  For the general parametric
+$h_{\mathrm{EXT}}$ in I3, apply the same injectivity condition as T1 to the
+observed law conditional on the identified $S$ law.
+\item \emph{WEEKEND/HOLIDAY.}  $P=S_{\mathrm{last\,open}}\exp(\eta)$, so
+$y_t=\log P_t=\log S_{\mathrm{last\,open}}+\eta_u$.  The anchor is constant in
+$t$ within a path but random across paths, so the raw marginal moments contain
+$\mathrm{Var}(\log S_{\mathrm{last\,open}})$; they are not the moments of
+$\eta$.  The anchor cancels in first differences
+$d_t:=y_{t+1}-y_t=\eta_{u+1}-\eta_u$.  With
+$V_\eta(u):=\mathrm{Var}(\eta_u)$, $\phi:=\phi_{\mathrm{stale}}$,
+$\sigma^2:=\sigma_{\mathrm{stale}}^2$ (and $|\phi|<1$; the unit-root case
+$\phi=1$ is excluded),
+\[
+\mathrm{Var}(d_t)=(1-\phi)^2V_\eta(u)+\sigma^2,
+\]
+\[
+\mathrm{Cov}(d_t,d_{t+1})
+=(1-\phi)\bigl(\phi(1-\phi)V_\eta(u)-\sigma^2\bigr),
+\qquad
+\mathrm{Cov}(d_t,d_{t+2})=\phi\,\mathrm{Cov}(d_t,d_{t+1}).
+\]
+Hence, on the same $u$ (and provided
+$\mathrm{Cov}(d_t,d_{t+1})\ne0$; otherwise the $u$-profile is used jointly),
+\[
+\phi=\frac{\mathrm{Cov}(d_t,d_{t+2})}{\mathrm{Cov}(d_t,d_{t+1})},
+\qquad
+\sigma^2=\phi\,\mathrm{Var}(d_t)-\mathrm{Cov}(d_t,d_{t+1}),
+\]
+\[
+V_\eta(u)
+=\frac{\mathrm{Cov}(d_t,d_{t+1})+(1-\phi)\mathrm{Var}(d_t)}
+{(1-\phi)^2}.
+\]
+\emph{Estimation caveat.}  The $\sigma^2$ inverse is a difference of same-order
+terms; with a large carried $V_0$ the early-$u$ triples are ill-conditioned.
+Prefer larger-$u$ triples or a joint $u$-profile fit; population identification
+is unaffected.
+
+The block start is not stationary: a block that follows OPEN starts from
+$\eta=0$ (the experiment's day-11 Friday-evening block), while a block that
+follows EXTENDED carries the last EXTENDED state (the experiment's day-4
+holiday block, whose initial variance follows from the identified
+$(\phi_{\mathrm{ext}},\sigma_{\mathrm{ext}}^2)$ and the known block length).  In
+general
+\[
+V_\eta(u)=\phi^{2u}V_0+\frac{\sigma^2(1-\phi^{2u})}{1-\phi^2}
+\]
+with $V_0$ known from the model/calendar (or identified from the $u$-profile);
+the $u$-profile is over-identifying.  The cross-event decomposition (anchor law
+plus bias) is a supplementary consistency check, not the identification route.
+HOLIDAY uses the same stale channel with its own calendar anchor; in the
+experiment the day-4 HOLIDAY, the following weekend, and Monday
+00:00--08:00 form one continuous 81-hour stale block (same anchor and same
+$(\phi,\sigma^2)$), so the carried start is inherited from the last EXTENDED
+step.  The initial 9-hour block is zero-started by the model's initialization
+and its anchor is $S_0$; its anchor law is the pre-window object discussed under
+A6.
+\item \emph{HALT.}  $P=P_{\mathrm{prev}}$ is a degenerate kernel; identified by
+inspection.
+\item \emph{$\nu$.}  A6, treated as a pure assumption (known or identified).  If
+the initial regime is stale, deconvolving
+$y_0=\log S_{\mathrm{last\,open}}+\eta_1$ (the first stale step; $\eta_0=0$)
+identifies the pre-window anchor law, not $\nu=\mathcal L(X_0)$; getting $\nu$
+needs propagation through the pre-window gap using the identified $T$ and the
+I1$'$ extrapolation.  The experiment's $\nu$ is a point mass, so this is not a
+numerical issue, but the theorem does not claim the propagation.
+\item \emph{$\rho$.}  Fees, volume, and costs are observable (T4);
+$\Delta\mathrm{IL}^{\mathrm{true}}$ is a deterministic function of the $S$ path
+and position.  The $S$ process and the position dynamics (deterministic given
+actions) are identified.  The law of the exogenous volume/fee process under
+$\pi$ is invariant by A7 (no market impact); T4 alone gives observability, not
+invariance.  Hence $\rho$ is identified.
+\item \emph{Beliefs.}  The Bayesian filter with identified $\nu,T,h$ gives $b_t$
+as a deterministic functional of the observable history.  For general kernels
+this uses regular conditional probabilities and a domination condition; in the
+Gaussian/parametric family used here it is automatic.  A degenerate HALT
+observation performs no update.
+\end{enumerate}
+
+\paragraph{Gap.}
+The moment steps assume the observation bias is independent of $S$ and actions
+at the innovation level, with independent innovations across blocks (I3); the
+carried block-start state is a known function of past innovations, not a fresh
+independent draw, so the decomposition is applied block by block.  If the bias
+is correlated with $S$, the cross term $\gamma_{S\eta}$ does not vanish and
+joint identification requires a joint state-space argument; the synthetic
+environment satisfies independence.  The nonparametric $h_r$ version is open.
+A6 is an assumption, not a proved identification of $\nu$ for a stale initial
+window.  The stale within-block moments are computed from first differences
+(which cancel the random anchor) together with the zero-start/carried-start
+$u$-profile, not from raw variances or stationary autocovariances; ignoring the
+$u$-profile biases pooled estimates.
+\end{proof}
+
+\begin{aIlemD}[Value identification and plug-in consistency]
+Assume Lemma~3, A1, A2, A4, A7 (and A3$'$ if $T$ depends on actions and $\pi$
+uses unsupported actions).  Then:
+\begin{enumerate}
+\item $V^\pi(\theta)$ is uniquely determined by $\theta$ and the known $\pi$;
+\item if $\hat\theta\to\theta$ in the TV kernel topology of A4, then
+$\hat V^\pi=V^\pi(\hat\theta)\to V^\pi(\theta)$;
+\item pure IPS/DR is not available; A3 is neither an identification condition
+nor a substitute for the model.
+\end{enumerate}
+\end{aIlemD}
+
+\begin{proof}
+The proof has four steps.
+
+\begin{enumerate}
+\item \emph{Identification.}  $V^\pi(\theta)$ is a functional of $\theta$ and
+$\pi$: the belief recursion gives $b_t$; $\pi(a\mid H_t^o)$ is known; hence the
+joint law of $(X_t,A_t)$ is determined by $\nu,T,h,\pi$, and $\rho$ is given.
+$\Delta\mathrm{IL}^{\mathrm{true}}$ is a deterministic function of the $S$ path
+and position, so it does not need to be observed in the log.
+\item \emph{Continuity.}  Write
+$\mathcal L^t:=\mathcal L(X_0,P_0,A_0,\dots,X_t,P_t,A_t)$ (and similarly
+$\mathcal L_n^t$).  With
+\[
+\begin{aligned}
+\Delta_T(n)&=\sup_{x,a}\TV(T_n,T),\\
+\Delta_h(n)&=\sup_x\TV(h_n,h),\\
+\Delta_\nu(n)&=\TV(\nu_n,\nu),\\
+\Delta_\rho(n)&=\sup_z|\rho_n-\rho|,
+\end{aligned}
+\]
+induction gives
+\begin{equation}\label{eq:a1-4.1}
+\TV(\mathcal L_n^t,\mathcal L^t)
+\le \Delta_\nu(n)+(t+1)\bigl(\Delta_T(n)+\Delta_h(n)\bigr).
+\aIfixedtag{4.1}
+\end{equation}
+The $(t+1)$ counts $t$ transitions and $t+1$ emissions.  Since
+$|\rho|\le R_{\max}$,
+\[
+|\mathbb E_n[R_t]-\mathbb E[R_t]|
+\le 2R_{\max}\TV(\mathcal L_n^{t+1},\mathcal L^{t+1})+\Delta_\rho(n),
+\]
+because $R_t$ depends on $X_{t+1}$ and hence on $\mathcal L^{t+1}$; this is the
+source of the $(t+2)$ factor below.  Summing over $t=0,\dots,H$ gives
+\begin{equation}\label{eq:a1-4.2}
+|V_n^\pi-V^\pi|
+\le (H+1)\Delta_\rho(n)
++2R_{\max}\sum_{t=0}^{H}\bigl[\Delta_\nu(n)+(t+2)(\Delta_T(n)+\Delta_h(n))\bigr]
+\to0.
+\aIfixedtag{4.2}
+\end{equation}
+For the infinite-horizon $\gamma<1$ extension, truncate at $H_N$ with tail
+$2R_{\max}\gamma^{H_N+1}/(1-\gamma)$, apply \eqref{eq:a1-4.2}, then let
+$N\to\infty$.  The main text uses finite $H$ and does not need this truncation.
+\item \emph{Consistency.}  $\hat\theta\to\theta$ in the A4 topology plus the
+deterministic inequality \eqref{eq:a1-4.2} gives $\hat V^\pi\to V^\pi$.
+\item \emph{Why not IPS/DR.}  The IPS estimand requires observed $R_i$; here
+$R_t=(\text{fees}+\Delta\mathrm{IL}^{\mathrm{true}}-\text{cost})/V_0$ and
+$\Delta\mathrm{IL}^{\mathrm{true}}$ is latent.  Replacing it by a model
+prediction is already model-based (possibly with IPS as a hybrid), not pure OPE.
+\end{enumerate}
+
+\paragraph{Caveats.}
+(i) Identification is for the ideal $\theta$; plug-in with $\hat S$ adds an
+errors-in-variables error not covered by Lemma~4.  (ii) A4 is a strong TV
+topology; in the parametric family it follows from $\hat\theta\to\theta$ under
+regularity, but general nonparametric estimators do not attain sup-TV, so (e)
+should not be read nonparametrically.  (iii) A1 fails under heavy tails, in
+which case $V^\pi$ may not exist.  (iv) A3$'$ is needed if $T$ depends on
+actions without logging support.
+\end{proof}
+
+\paragraph{Proof status.}
+Lemma~1 (the known-start linear-Gaussian/no-jump case, with T1 assumed for the
+jump family) and Lemma~2(b) have derivations in Appendix A.1; Lemma~3 (exogenous
+bias innovations, known block starts) has a derivation here as well, while the
+nonparametric $h_r$ version and the correlated-bias case are open, and A6 is
+an assumption.  Lemma~4 has a complete
+population/consistency proof; it gives no rate, A4's sup-TV is attainable in the
+parametric family, and the errors-in-variables error from using $\hat S$ is not
+covered.  The logic chain is closed under the stated assumption set: the Markov branch is
+Lemma~1 $\to$ Lemma~3 $\to$ Lemma~4, and the non-Markov branch is
+Lemma~1 $\to$ Lemma~2 $\to$ Lemma~3 $\to$ Lemma~4.  The open items above are
+explicitly not covered by the theorem.
+
+\let\theHequation\aItheHequation

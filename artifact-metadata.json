@@ -1,0 +1,20 @@
+{
+  "package": "scis-regime-dependent-ope",
+  "created_utc": "2026-11-26T03:16:41.991292+00:00",
+  "python": "3.12.3",
+  "dependencies": [
+    "numpy==2.5.4",
+    "scipy==1.18.1",
+    "pandas==3.1.1",
+    "scikit-learn==1.9.1",
+    "matplotlib==3.11.2",
+    "requests==2.34.2",
+    "pymupdf==2.1"
+  ],
+  "file_count": 152,
+  "bytes": 11551723,
+  "main_pdf_sha256": "9623a4fb9bb58ba6e590b526b7ea5166d2830ab4ac79619ee64ce68ef6079acf",
+  "supp_pdf_sha256": "e93c6c1b6678153850b24a31a6fcd7afae0dd2dd4eaf3da38de985a6d7043901",
+  "real_data_redaction": "event-level rows and input paths removed",
+  "public_audit_expected": "checked 200 ok 200 bad 0"
+}

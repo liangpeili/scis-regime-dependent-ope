@@ -1,0 +1,540 @@
+% =====================================================================
+% P1 Appendix A.2 --- Proposition 1: value-error decomposition and
+% the limits of uniform W_1 / Le Cam bounds.
+%
+% Source of truth: drafts/proofs-P3-P5-P6.md v3.1, Sections 3.1--3.4.5
+% (including the F6 analysis and the three-term decomposition of 2026-10-20).
+% This file is a fragment: it is meant to be \input under
+%   \appendix \section{Proofs}
+% after A.1 and before A.3.  The standalone driver main-a12.tex sets
+% the subsection counter to 0, so this fragment becomes A.2.
+%
+% Requirements: amsmath, amssymb, amsthm, and hyperref (optional, but
+% the fixed-tag mechanism below keeps destinations unique when it is
+% loaded).  Equation tags (3.4.1)--(3.4.4) follow the supplementary development; do not
+% renumber without updating the main text.
+% =====================================================================
+
+\allowdisplaybreaks
+
+\providecommand{\TV}{\mathrm{TV}}
+
+\newtheorem*{aIIPropMain}{Proposition 1}
+\newtheorem*{aIIPropTV}{Proposition A.1}
+\newtheorem*{aIILemOneStep}{Lemma A.2}
+\newtheorem*{aIICorMixed}{Corollary A.3}
+\newtheorem*{aIIDefLeCam}{Definition A.4}
+\newtheorem*{aIILemLeCam}{Lemma A.5}
+\newtheorem*{aIIPropLeCam}{Proposition A.6}
+\newtheorem*{aIIPropWone}{Proposition A.7}
+\newtheorem*{aIIPropBoundary}{Proposition A.8}
+
+% Fixed equation tags do not advance the equation counter, so hyperref
+% would give every display the same destination.  A dedicated counter
+% keeps the destinations unique without changing the printed (frozen)
+% tag numbers.  The original \theHequation is restored at the end.
+\providecommand{\theHequation}{}
+\let\aIItheHequation\theHequation
+\newcounter{aIIKanchor}
+\renewcommand{\theHequation}{aII.\arabic{aIIKanchor}}
+\newcommand{\aIIfixedtag}[1]{\stepcounter{aIIKanchor}\tag{#1}}
+
+\subsection{Value-error decomposition and the limits of uniform bounds (Proposition~1)}\label{app:a2}
+
+This appendix formalizes Proposition~1 (three-term decomposition).  It is a negative result plus a
+conditional decomposition, not an identification theorem.  It explains why the
+paper does not report a single $W_1$ or Le Cam value-error bound for a fixed
+policy, and what it reports instead.  The formal guarantees of the paper remain
+Theorem~1 (population identification and plug-in consistency) and Theorem~2
+(finite-sample coverage).  The value-error track is an estimable sensitivity
+analysis, not a main guarantee.
+
+\paragraph{Setting and notation.}
+Consider two POMDPs that share $(X,A,T,\rho,\nu,\pi)$ and differ only in the
+observation kernel, $h$ versus $h'$.  Write $V_h^\pi$ for the value under
+kernel $h$.  For a belief $b$ and kernel $h$, define the predictive law and the
+posterior update
+\[
+p_h(\mathrm{d}y\mid b)=\int h(\mathrm{d}y\mid x)\,b(\mathrm{d}x),
+\qquad
+\Phi_h(b,y)(\mathrm{d}x)
+=\frac{h(\mathrm{d}y\mid x)\,b(\mathrm{d}x)}{p_h(\mathrm{d}y\mid b)}.
+\]
+The update $\Phi_{h'}(b,y)$ must be defined for $p_h$-a.e.\ $y$, i.e.\
+$p_h(\cdot\mid b)$ must be absolutely continuous with respect to
+$p_{h'}(\cdot\mid b)$ (and conversely for a symmetric comparison).  The Gaussian
+kernel families used in the paper satisfy this.  If a kernel is singular (for
+example the HALT atom), first decompose on the common support and treat the
+atomic part separately, or use the extended Le Cam deficiency; do not silently
+drop the a.e.\ qualifier.  Let $\TV$ and $W_1$ denote total variation and the
+$1$-Wasserstein distance, let $|\rho|\le R_{\max}$, and let $B$ bound the value
+function used in the one-step decomposition.
+
+\begin{aIIPropMain}
+(three-term decomposition: decomposition, not a uniform bound.)
+\begin{enumerate}
+\item[(a)] \emph{No single uniform bound.}  There is no universal function of a
+single $W_1$ distance, and no universal function of a single Le Cam
+deficiency, that bounds
+$|V_h^\pi-V_{h'}^\pi|$ uniformly over fixed policies $\pi$.  Proposition~A.6
+gives two experiments with zero symmetric Le Cam deficiency and a fixed policy
+whose value gap is positive; Proposition~A.7 gives two observation laws with
+$W_1=q\epsilon$ and a fixed threshold policy whose value gap is $qR_{\max}$, so
+no finite Lipschitz constant in $W_1$ exists.
+\item[(b)] \emph{Conditional positive decomposition.}  Under the regularity
+conditions (R1)--(R3) below, the one-step value gap splits into an estimation
+term and an information term (Lemma~A.2).  A fixed observable policy
+satisfies the mixed bound \eqref{eq:a2-3.4.2}.  The
+first term is controlled by a belief $W_1$ distance; the second by a predictive
+distribution TV distance.  The two terms are not interchangeable.
+\item[(c)] \emph{Boundary diagnostic.}  For a belief-threshold policy
+$\pi(b)$, the policy boundary/action-flip term is a necessary additional term;
+for the paper's observable rebalancing policies $\pi(y)$
+the TV information term already averages the action flips, so the boundary term
+is a diagnostic refinement, not a condition for the bound.  The state-level TV
+bound of Proposition~A.1 is a worst-case sensitivity; in the freeze regime it
+can be vacuous.
+\end{enumerate}
+\end{aIIPropMain}
+
+\begin{proof}
+Part (a) is proved by Proposition~A.6 and Proposition~A.7.  Part (b) is
+Lemma~A.2 and Corollary~A.3.  Part (c) is Proposition~A.8 together with the
+policy-class discussion after Corollary~A.3.
+\end{proof}
+
+\paragraph{State-level TV sensitivity.}
+The following state-level TV sensitivity is a worst-case bound, not the main
+guarantee, and it can be empty.
+
+\begin{aIIPropTV}
+Assume A1 and that two POMDPs share $(X,A,T,\rho,\nu,\pi)$ and differ only in
+the observation kernel, $h$ versus $h'$.  Let
+\[
+\kappa_{\mathrm{obs}}
+:=\sup_{r,x}\TV\bigl(h_r(\cdot\mid x),h'_r(\cdot\mid x)\bigr),
+\]
+where $x$ ranges over the full latent state.  Then, for finite horizon $H$,
+\[
+|V_h^\pi-V_{h'}^\pi|
+\le R_{\max}(H+1)(H+2)\,\kappa_{\mathrm{obs}}
+\le 2R_{\max}(H+1)^2\,\kappa_{\mathrm{obs}},
+\]
+and for $\gamma<1$,
+\[
+|V_h^\pi-V_{h'}^\pi|
+\le \frac{2R_{\max}\,\kappa_{\mathrm{obs}}}{(1-\gamma)^2}.
+\]
+\end{aIIPropTV}
+
+\begin{proof}
+Couple the two processes as follows.  Use the same initial state
+$X_0\sim\nu$ and the same transition random numbers, so that, as long as the
+actions agree, the states agree.  At step $t$, if the observation histories up
+to $t-1$ have not diverged, use a maximal coupling so that
+\[
+\Pr(P_t\ne P'_t\mid X_t,\text{ no divergence})
+=\TV\bigl(h(\cdot\mid X_t),h'(\cdot\mid X_t)\bigr)
+\le\kappa_{\mathrm{obs}}.
+\]
+If the histories have already diverged, let the processes evolve independently
+(or use any coupling).  The policy $\pi$ is the same.  Before divergence the
+actions, states, and rewards agree; after an observation differs, the histories
+diverge and the reward difference is at most $2R_{\max}$.
+
+Let $D_t=\mathbf{1}\{\text{the history through }t\text{ has diverged}\}$;
+$D_t$ covers the $t+1$ observations $P_0,\dots,P_t$.  By the union bound,
+\[
+\Pr(D_t)\le 1-(1-\kappa_{\mathrm{obs}})^{t+1}
+\le (t+1)\kappa_{\mathrm{obs}}.
+\]
+Therefore
+\[
+|\mathbb E[R_t]-\mathbb E[R'_t]|
+\le \mathbb E\bigl[|R_t-R'_t|\,D_t\bigr]
+\le 2R_{\max}\Pr(D_t)
+\le 2R_{\max}(t+1)\kappa_{\mathrm{obs}}.
+\]
+Summing over $t=0,\dots,H$ gives
+\[
+|V_h^\pi-V_{h'}^\pi|
+\le 2R_{\max}\kappa_{\mathrm{obs}}\sum_{t=0}^{H}(t+1)
+=R_{\max}(H+1)(H+2)\kappa_{\mathrm{obs}}.
+\]
+For the discounted case, use
+$\sum_{t\ge0}\gamma^t(t+1)=1/(1-\gamma)^2$.
+\end{proof}
+
+\paragraph{Caveats on the state-level bound.}
+\begin{enumerate}
+\item \emph{State-level TV is required.}  The coupling compares
+$h(\cdot\mid X_t)$ with $h'(\cdot\mid X_t)$ at the same latent state.  A
+belief-mixed quantity such as $\sup_b\TV(h(\cdot\mid b),h'(\cdot\mid b))$ does
+not control $\TV(h(\cdot\mid b_t),h'(\cdot\mid b'_t))$ when the beliefs
+$b_t,b'_t$ differ; reconnecting it needs an additional Lipschitz condition of
+$h$ in $b$.  The belief $W_1$ route is a different object and must not be mixed
+with state-level TV.
+\item \emph{Constants and filter stability.}  The union bound does not use
+filter forgetting or mixing.  Under a belief-mixing assumption (exponential
+decay of the initial-condition effect), the divergence probability can be
+summed to a constant and the discounted bound improves to
+$O(R_{\max}\kappa_{\mathrm{obs}}/(1-\gamma))$; without it,
+$1/(1-\gamma)^2$ is the natural constant of this argument.  A skeleton bound
+$R_{\max}\kappa_{\mathrm{obs}}/(1-\gamma)$ omits this factor and must not be
+quoted without the mixing hypothesis.
+\item \emph{The bound can be empty.}  In the synthetic environment the OPEN
+kernel concentrates on $S_t$ and the WEEKEND kernel on $S_{\mathrm{last\,open}}$;
+when $|S_t-S_{\mathrm{last\,open}}|$ is much larger than the kernel width,
+$\TV\approx1$ and the bound is $O(R_{\max}H^2)$, with no numerical force.  This
+is not conservatism but vacuity.  Proposition~A.1 is therefore a worst-case
+sensitivity, not a main coverage guarantee.
+\item \emph{The finite-horizon constant is large.}  At $H=336$,
+$2R_{\max}(H+1)^2\approx2.27\times10^5R_{\max}$, and the sharper
+$R_{\max}(H+1)(H+2)\approx1.14\times10^5R_{\max}$, both far above the trivial
+bound $2R_{\max}(H+1)\approx674R_{\max}$.  The bound is informative only when
+$\kappa_{\mathrm{obs}}\ll1$; report $\kappa_{\mathrm{obs}}$ together with the
+trivial bound.
+\item \emph{The role of A7.}  The coupling requires the same $T$ and no
+action effect on the $S$ transition.  With market impact, $T$ under $\pi$ differs
+from the logging transition and $V_h^\pi$ itself is not identified; the premise
+of Proposition~A.1 fails.  The synthetic environment satisfies A7; real data
+must be checked.
+\end{enumerate}
+
+\paragraph{One-step decomposition.}
+The following lemma is the algebraic core of three-term decomposition.
+
+\begin{aIILemOneStep}
+Let $V$ be bounded and measurable, $|V|\le B$.  Then
+\[
+\begin{aligned}
+&\mathbb E_{y\sim p_h(\cdot\mid b)}V(\Phi_h(b,y))
+-\mathbb E_{y\sim p_{h'}(\cdot\mid b)}V(\Phi_{h'}(b,y)) \\
+&\quad=
+\underbrace{\mathbb E_{y\sim p_h(\cdot\mid b)}
+\bigl[V(\Phi_h(b,y))-V(\Phi_{h'}(b,y))\bigr]}_{\text{estimation term}} \\
+&\qquad+
+\underbrace{\mathbb E_{y\sim p_h(\cdot\mid b)}V(\Phi_{h'}(b,y))
+-\mathbb E_{y\sim p_{h'}(\cdot\mid b)}V(\Phi_{h'}(b,y))}_{\text{information term}}.
+\end{aligned}
+\]
+If $V$ is $L_V$-Lipschitz in $W_1$, the estimation term is at most
+\[
+L_V\,\mathbb E_{y\sim p_h(\cdot\mid b)}
+W_1\bigl(\Phi_h(b,y),\Phi_{h'}(b,y)\bigr),
+\]
+and the information term is at most
+\[
+2B\,\TV\bigl(p_h(\cdot\mid b),p_{h'}(\cdot\mid b)\bigr).
+\]
+\end{aIILemOneStep}
+
+\begin{proof}
+Add and subtract
+\[
+\mathbb E_{y\sim p_h(\cdot\mid b)}V(\Phi_{h'}(b,y)).
+\]
+For the estimation term, use the Kantorovich--Rubinstein duality: the difference of integrals of an
+$L_V$-Lipschitz function against two probability measures is at most $L_V$ times
+their $W_1$ distance.  For the information term, two probability measures give
+expectations of the same bounded function $V(\Phi_{h'}(b,\cdot))$ that differ by
+at most $2B$ times their TV distance.
+\end{proof}
+
+\paragraph{Mixed bound for observable policies.}
+Let $T_a$ be the transition kernel under action $a$, and let $bT_a$ be its
+pushforward.  For a fixed policy $\pi(a\mid H^o)$ that depends only on the
+current observation $y$ (the paper's observable rebalancing rules; if the policy
+depends on a longer history, enlarge $b$ to include the policy memory), define
+\[
+(T_hV)(b)
+=\mathbb E_{y\sim p_h(\cdot\mid b)}
+\bigl[\rho(b,\pi(y))+\gamma V(\Phi_h(b,y)T_{\pi(y)})\bigr],
+\qquad
+\rho(b,a)=\mathbb E[\rho(X,a,X')\mid b,a],
+\]
+where $\rho(b,a)$ is the one-step expected reward given the belief and action
+(integrate the transition kernel when the reward depends on $X'$), and
+$\Phi_h(b,y)T_{\pi(y)}$ is the \emph{predictive belief}: the current posterior
+pushed forward through the transition, not the current posterior itself.
+
+\begin{aIICorMixed}
+Assume (R1)--(R3) below.  Then, for $\gamma<1$,
+\begin{equation}\label{eq:a2-3.4.1}
+\|V_h^\pi-V_{h'}^\pi\|_\infty
+\le\frac{1}{1-\gamma}
+\|T_hV_{h'}^\pi-T_{h'}V_{h'}^\pi\|_\infty.
+\aIIfixedtag{3.4.1}
+\end{equation}
+If $V_{h'}^\pi$ is $L_V$-Lipschitz in $W_1$ and $|V_{h'}^\pi|\le B$, and $T_a$
+is uniformly $L_T$-Lipschitz in $W_1$ for all actions $a$, then
+\begin{equation}\label{eq:a2-3.4.2}
+\begin{aligned}
+\|V_h^\pi-V_{h'}^\pi\|_\infty
+\le\frac{1}{1-\gamma}\Bigl[
+&\gamma L_VL_T\sup_b\mathbb E_{y\sim p_h(\cdot\mid b)}
+W_1\bigl(\Phi_h(b,y),\Phi_{h'}(b,y)\bigr) \\
+&+2(R_{\max}+\gamma B)\sup_b
+\TV\bigl(p_h(\cdot\mid b),p_{h'}(\cdot\mid b)\bigr)\Bigr].
+\end{aligned}
+\aIIfixedtag{3.4.2}
+\end{equation}
+For finite horizon, replace $1/(1-\gamma)$ by the horizon sum (order $H+1$ when
+$\gamma=1$).
+\end{aIICorMixed}
+
+\begin{proof}
+Write
+$V_h-V_{h'}=(T_hV_h-T_hV_{h'})+(T_hV_{h'}-T_{h'}V_{h'})$.  Taking the sup norm
+and using the $\gamma$-contraction of $T_h$ gives \eqref{eq:a2-3.4.1}.  For the
+second term, fix $b$ and write
+$\mathbb E_{p_h}[g_h(y)]-\mathbb E_{p_{h'}}[g_{h'}(y)]$ with
+\[
+g_h(y)=\rho(b,\pi(y))+\gamma V(\Phi_h(b,y)T_{\pi(y)}).
+\]
+Add and subtract $\mathbb E_{p_h}[g_{h'}(y)]$.  The first segment is
+$\gamma\mathbb E_{p_h}[V(\Phi_hT)-V(\Phi_{h'}T)]$, controlled by
+$L_VL_T$ and $W_1$.  The second segment is the difference of the expectations of
+the same bounded function $g_{h'}$ under two probability measures, with
+$|g_{h'}|\le R_{\max}+\gamma B$, hence controlled by
+$2(R_{\max}+\gamma B)\TV$.  Taking the supremum over $b$ gives
+\eqref{eq:a2-3.4.2}.
+\end{proof}
+
+\paragraph{Regularity conditions (R1)--(R3).}
+\begin{enumerate}
+\item[(R1)] $V_{h'}^\pi$ is $L_V$-Lipschitz in $W_1$ and $|V_{h'}^\pi|\le B$.
+\item[(R2)] $T_a$ is uniformly $L_T$-Lipschitz in $W_1$ over actions $a$.
+\item[(R3)] $\gamma L_\Phi L_T<1$, where $L_\Phi$ is a uniform $W_1$-Lipschitz
+constant of $b\mapsto\Phi_h(b,y)$ in $b$.  A sufficient set of conditions is:
+$\rho(b,a)$ is uniformly $L_\rho$-Lipschitz in $b$; $b\mapsto p_h(\cdot\mid b)$
+is $L_p$-Lipschitz in TV; $b\mapsto\Phi_h(b,y)$ is uniformly $L_\Phi$-Lipschitz
+in $W_1$; and $T_a$ is uniformly $L_T$-Lipschitz in $W_1$.  Then the Bellman
+operator maps an $L$-Lipschitz function to an $L'$-Lipschitz function with
+\[
+L'\le L_\rho+\gamma L L_\Phi L_T+2(R_{\max}+\gamma B)L_p.
+\]
+If $\gamma L_\Phi L_T<1$, a sufficiently large $L$ satisfies $L'\le L$ and the
+fixed point has finite $L_V$.  If $\gamma L_\Phi L_T\ge1$, this recursion does
+not guarantee a finite $L_V$; this is exactly the mixing/stability condition
+behind the improved discounted constant in the state-level bound, and it cannot
+be assumed for free.
+\end{enumerate}
+
+\paragraph{Policy classes.}
+The bound \eqref{eq:a2-3.4.2} applies to an \emph{observable} policy
+$\pi(y)$, even when $\pi$ is a threshold: the threshold discontinuity is in
+$y$, and $y$ is integrated out by $p_h(\cdot\mid b)$, so $b\mapsto V_h^\pi(b)$
+can still have a finite $L_V$ under kernel regularity.  If the policy is a
+\emph{belief} policy $\pi(b)$ (a threshold on the posterior mean or
+probability), then $b\mapsto\pi(b)$ is discontinuous, $V_h^\pi(b)$ jumps at the
+decision boundary, and $L_V=\infty$; \eqref{eq:a2-3.4.2} does not apply and the
+boundary term of Proposition~A.8 must be reported separately.  The two policy
+classes must not be conflated.
+
+\paragraph{Reading the two terms.}
+The $W_1$ estimation term measures how much the two kernels change the
+posterior under the same observation: an estimation effect.  The TV information
+term measures how much the two kernels change the predictive law of the next
+observation under the same belief: an information effect.  For an observable
+policy, the information term also averages out action flips, because the same
+$y$ gives the same action and the flip comes only from the change in the law of
+$y$.  The two objects are distinct: $W_1(b,b')=0$ can coexist with an
+information term of size $2(R_{\max}+\gamma B)$ (same belief, different future
+information), so a $W_1$-only bound must miss the information effect; conversely
+$\TV(h,h')\approx1$ can coexist with a small $W_1$ estimation term (the prior
+width in a freeze period is finite), so a TV-only bound can be vacuous.  These
+cases show why the estimation and information terms must be reported separately.
+
+\paragraph{Le Cam: optimal values, not fixed policies.}
+\begin{aIIDefLeCam}
+For two experiments $E=(P_\theta)$ and $F=(Q_\theta)$ with the same parameter
+space $\Theta$, define
+\[
+\delta(E,F):=\inf_{K}\sup_\theta\TV(KP_\theta,Q_\theta),
+\qquad
+\delta_{\mathrm{sym}}(E,F):=\max\bigl(\delta(E,F),\delta(F,E)\bigr),
+\]
+where $K$ ranges over Markov kernels $Y\to Y'$ (randomization is allowed; with
+deterministic maps the ``simulate by adding noise'' example fails).
+\end{aIIDefLeCam}
+
+\begin{aIILemLeCam}[Bayes optimal values]
+For the same prior and a loss $\ell(\theta,a)\in[0,1]$,
+\[
+V_E^*-V_F^*\le\delta(E,F),
+\qquad
+V_F^*-V_E^*\le\delta(F,E),
+\]
+hence $|V_E^*-V_F^*|\le\delta_{\mathrm{sym}}(E,F)$, where $V_E^*$ is the Bayes
+optimal value (the sign is irrelevant for the absolute bound).
+\end{aIILemLeCam}
+
+\begin{proof}
+For any decision rule $\varphi$ under $F$, $\varphi\circ K$ is a rule under
+$E$, and the pointwise risk difference is at most $\TV(KP_\theta,Q_\theta)$.
+Taking $\inf_\varphi$ and then $\inf_K$ gives the first inequality; exchanging
+$E$ and $F$ gives the second.
+\end{proof}
+
+For a finite-horizon POMDP, treat the whole observation history as the
+experiment output and the policy as the decision rule.  A1 gives
+$|R_t|\le R_{\max}$, so the total reward lies in an interval of length
+$2(H+1)R_{\max}$; normalize it linearly to $[0,1]$, apply Lemma~A.5, and scale
+back:
+\begin{equation}\label{eq:a2-3.4.3}
+|V_{E_h}^*-V_{E_{h'}}^*|
+\le 2(H+1)R_{\max}\,\delta_{\mathrm{sym}}(E_h,E_{h'}).
+\aIIfixedtag{3.4.3}
+\end{equation}
+This requires A7: otherwise actions change future observations, the experiment
+is not exogenous, and the Le Cam deficiency cannot be applied to the whole
+trajectory.  The position and cash are determined by the action history but can
+be reconstructed deterministically from the observation history; they are part
+of the decision rule, not additional experiment noise.
+
+The target $V^\pi$ is a fixed-policy value, not an optimal value.  A Le Cam-only
+route therefore needs a regret term:
+\begin{equation}\label{eq:a2-3.4.4}
+|V_h^\pi-V_{h'}^\pi|
+\le 2(H+1)R_{\max}\delta_{\mathrm{sym}}(E_h,E_{h'})
++\mathrm{Reg}_h(\pi)+\mathrm{Reg}_{h'}(\pi),
+\qquad
+\mathrm{Reg}_h(\pi):=V_h^*-V_h^\pi\ge0.
+\aIIfixedtag{3.4.4}
+\end{equation}
+
+\begin{aIIPropLeCam}[Relabeling counterexample]
+Take $\Theta=\{0,1\}$ with a uniform prior and the $0$--$1$ loss
+$\ell(\theta,a)=\mathbf{1}\{a\ne\theta\}$.  Experiment $E$: $Y=\theta$;
+experiment $F$: $Y=1-\theta$.  Then $\delta(E,F)=\delta(F,E)=0$ (the kernel
+$K(y)=1-y$ converts one experiment exactly into the other).  Take the fixed
+policy $\pi(y)=y$: its risk is $0$ under $E$ and $1$ under $F$.  The value gap
+is therefore $1$ (times $R_{\max}$), while $\delta=0$.  Hence no fixed-policy
+value-error bound can depend on $\delta$ alone; the regret term cannot be
+dropped.
+\end{aIIPropLeCam}
+
+\begin{proof}
+The kernel $K(y)=1-y$ is a deterministic Markov kernel and gives
+$KP_\theta=Q_\theta$ and $KQ_\theta=P_\theta$, so both deficiencies vanish.  The
+fixed policy $\pi(y)=y$ has risk $0$ under $E$ and risk $1$ under $F$, so the
+value gap is $1$ after scaling by $R_{\max}$.
+\end{proof}
+
+\paragraph{Le Cam asymmetry.}
+Le Cam deficiency is asymmetric.  For example, let $E$ be noiseless and let
+$F=E+\text{independent noise}$ (so $F$ is less informative).  Then
+$\delta(E,F)=0$ (one can simulate $F$ from $E$ by adding noise), but
+$\delta(F,E)=1$ (one cannot denoise).  The information value lies in the
+$\delta(F,E)$ direction, so the symmetric deficiency is $1$ and
+\eqref{eq:a2-3.4.4} is vacuous under information loss.  Le Cam gives a nonempty
+optimal-value bound only when the two experiments are mutually simulable
+(equal information, e.g.\ relabeling or two-way noise); it cannot rescue the
+freeze-period ``informative versus uninformative'' gap.
+
+\paragraph{Why observed $W_1$ cannot replace TV.}
+\begin{aIIPropWone}[Threshold counterexample]
+Take a one-dimensional observation $Y$ and two observation laws $p_h,p_{h'}$:
+$p_h$ has an atom of mass $q>0$ at $0$, and $p_{h'}$ moves that atom to
+$\epsilon>0$ (or the reverse), leaving the rest unchanged.  Then
+$W_1(p_h,p_{h'})=q\epsilon$ and $\TV(p_h,p_{h'})=q$.  The policy
+$\pi(y)=\mathbf{1}\{y>0\}$ flips its action with probability at least $q$.
+Choose rewards such that action $1$ in state $0$ is worse than action $0$ by
+$R_{\max}$.  Then
+\[
+|V_h^\pi-V_{h'}^\pi|\ge qR_{\max},
+\qquad
+W_1(p_h,p_{h'})=q\epsilon,
+\qquad
+\TV(p_h,p_{h'})=q.
+\]
+For any $L$, fix $q$ and take $\epsilon<R_{\max}/L$; this violates
+$|\Delta V|\le L\,W_1$.  Thus observed-law $W_1$ cannot give a finite Lipschitz
+bound for threshold policies, while TV charges the flip with probability $q$
+and is of the same order as $qR_{\max}$.
+\end{aIIPropWone}
+
+\begin{proof}
+The atom displacement gives $W_1=q\epsilon$ and $\TV=q$.  The threshold policy
+flips on the displaced atom, an event of probability at least $q$; the reward
+loss on that event is $R_{\max}$, so the value gap is at least $qR_{\max}$.  For
+fixed $q$, let $\epsilon\downarrow0$ with $L$ fixed; then
+$L\,W_1=Lq\epsilon<qR_{\max}$ for $\epsilon<R_{\max}/L$, contradicting the
+claimed Lipschitz bound.
+\end{proof}
+
+\paragraph{Relation to the mixed bound.}
+Proposition~A.7 is not a counterexample to \eqref{eq:a2-3.4.2}: the information
+term there uses TV, not $W_1$.  It shows two things.  First, if the information
+term is mistakenly written with observed $W_1$, threshold policies defeat any
+finite constant.  Second, for observable policies the action flips are already
+averaged by the TV term, so a boundary/margin term is a sharper diagnostic, not
+an independent bound.  Only for a belief-threshold policy $\pi(b)$ does the flip
+occur in the posterior, where the TV predictive term no longer contains it; then
+the boundary term must be reported separately (Proposition~A.8).
+
+\paragraph{HALT atoms.}
+The counterexample lands directly on the paper's thresholds
+($|p/\text{anchor}-1|=0.02$ or $0.01$): the HALT frozen price is an atom (the
+pool price does not move during a halt), giving a realistic $q>0$.
+In belief space, the same phenomenon is $b=\delta_0$ versus
+$b_q=(1-q)\delta_0+q\delta_1$ with $W_1=q$; for a threshold policy $\pi(b)$, the
+action flips at the boundary and $V^\pi(b)$ is discontinuous, so $L_V=\infty$.
+
+\begin{aIIPropBoundary}[Boundary-margin condition; sketch]
+For a belief policy $\pi(b)$ with decision boundary $\partial\pi$, define the
+margin $m(b)=\operatorname{dist}(b,\partial\pi)$ in $W_1$.  If $m(b)>\delta$,
+then any perturbation of $W_1$ radius at most $\delta$ leaves the action
+unchanged.  Hence the action-flip probability is at most
+$\Pr(m(b_t)\le\delta)$, and the value difference can be written as
+\[
+|V_h^\pi-V_{h'}^\pi|
+\le 2R_{\max}\sum_t\gamma^t\Pr\bigl(m(b_t)\le\delta\bigr)
++\text{(posterior-difference term outside the boundary)}.
+\]
+The probability $\Pr(m(b_t)\le\delta)$ can be estimated directly by simulation.
+This is a policy-aware, data-dependent sensitivity, not a prior uniform bound.
+For the paper's observable rebalancing policies, this term is not
+necessary for \eqref{eq:a2-3.4.2}, because the TV term already contains the
+action flips; the value-error track should still report the flip frequency and
+margin as a diagnostic refinement of the information term.
+\end{aIIPropBoundary}
+
+\begin{proofsketch}
+If $m(b)>\delta$, every belief within $W_1$ distance $\delta$ stays on the same
+side of the decision boundary, so the action is unchanged.  The only possible
+flips are therefore on the event $m(b_t)\le\delta$; on that event the reward
+difference is at most $2R_{\max}$, and away from it the remaining discrepancy is
+the posterior-difference term.  Summing over $t$ with the discount gives the
+displayed bound.  The probability is estimable because $b_t$ and the boundary
+are computable from the fitted filter and the known policy.
+\end{proofsketch}
+
+\paragraph{Implications for the paper.}
+\begin{enumerate}
+\item Report the three terms separately: a $W_1$ estimation term, a predictive
+TV information term, and a policy boundary/action-flip diagnostic.  Do not
+compress them into a single $\kappa_{\mathrm{obs}}$.
+\item Do not claim a uniform value-error bound for a fixed policy from
+TV, $W_1$, or Le Cam alone.  Proposition~A.1 is a state-level TV worst-case
+sensitivity; it is not a main guarantee.
+\item The main guarantees remain Theorem~1 (identification and plug-in
+consistency) and Theorem~2 (coverage).  The value-error track is an estimable
+sensitivity analysis.
+\item A conditional positive result exists when $L_V<\infty$ (observable policy
+plus kernel regularity and filter contraction) and $W_1$ is controlled: then
+\eqref{eq:a2-3.4.2} gives a finite bound.  The paper's observable
+rebalancing policies can enter this framework, but in the freeze
+regime $\TV\approx1$, so the bound has no numerical force.  Belief-threshold
+policies do not satisfy $L_V<\infty$ and need Proposition~A.8.
+\item In the freeze regime, the informative-versus-uninformative comparison is
+the worst case: OPEN versus WEEKEND has state-level $\TV\approx1$ when $S_t$ is
+far from the stale anchor; the belief $W_1$ is finite but the information term
+still sees $\TV\approx1$; and the Le Cam deficiency from the uninformative
+kernel to the informative one is $1$, so \eqref{eq:a2-3.4.4} is vacuous.  The only
+informative guarantee in that regime is the coverage track with
+$\kappa_{\mathrm{conf}}$, not a value-error bound.
+\end{enumerate}
+
+\let\theHequation\aIItheHequation

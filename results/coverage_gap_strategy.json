@@ -1,0 +1,402 @@
+{
+  "nominal": 0.9,
+  "heldout_regime_coverage": {
+    "0": 0.8980319330601093,
+    "1": 0.9075418307086615,
+    "2": 0.9319473140495868,
+    "3": 0.9440104166666666,
+    "4": 0.8326822916666666
+  },
+  "heldout_regime_width": {
+    "0": 0.004672479883209213,
+    "1": 0.004802774187096894,
+    "2": 0.006659269058131164,
+    "3": 0.006784172325543648,
+    "4": 0.006081628503302901
+  },
+  "heldout_regime_radius": {
+    "0": 0.0023362399416046063,
+    "1": 0.002401387093548447,
+    "2": 0.003329634529065582,
+    "3": 0.003392086162771824,
+    "4": 0.0030408142516514503
+  },
+  "heldout_strategy_coverage": {
+    "0": {
+      "Exit_Freeze_50": 0.8974129098360656,
+      "Passive_Narrow": 0.899077868852459,
+      "Passive_Wide": 0.9007428278688525,
+      "Periodic_24h": 0.8911372950819673,
+      "Stochastic_5pct": 0.9017674180327869,
+      "Threshold_2pct": 0.8980532786885246
+    },
+    "1": {
+      "Exit_Freeze_50": 0.9164616141732284,
+      "Passive_Narrow": 0.8995447834645669,
+      "Passive_Wide": 0.9038508858267716,
+      "Periodic_24h": 0.9108021653543307,
+      "Stochastic_5pct": 0.9108021653543307,
+      "Threshold_2pct": 0.9037893700787402
+    },
+    "2": {
+      "Exit_Freeze_50": 0.9877970041322314,
+      "Passive_Narrow": 0.9141270661157025,
+      "Passive_Wide": 0.9284607438016529,
+      "Periodic_24h": 0.9565470041322314,
+      "Stochastic_5pct": 0.9278796487603306,
+      "Threshold_2pct": 0.8768724173553719
+    },
+    "3": {
+      "Exit_Freeze_50": 0.9755859375,
+      "Passive_Narrow": 0.9049479166666666,
+      "Passive_Wide": 0.9485677083333334,
+      "Periodic_24h": 0.9801432291666666,
+      "Stochastic_5pct": 0.9388020833333334,
+      "Threshold_2pct": 0.916015625
+    },
+    "4": {
+      "Exit_Freeze_50": 0.4453125,
+      "Passive_Narrow": 0.91796875,
+      "Passive_Wide": 0.9375,
+      "Periodic_24h": 0.8671875,
+      "Stochastic_5pct": 0.83984375,
+      "Threshold_2pct": 0.98828125
+    }
+  },
+  "heldout_strategy_width": {
+    "0": {
+      "Exit_Freeze_50": 0.002582737482427023,
+      "Passive_Narrow": 0.011147001257362036,
+      "Passive_Wide": 0.0034480288944128555,
+      "Periodic_24h": 0.001467627541809305,
+      "Stochastic_5pct": 0.006727183544508909,
+      "Threshold_2pct": 0.002662300578735149
+    },
+    "1": {
+      "Exit_Freeze_50": 0.002740734011861202,
+      "Passive_Narrow": 0.011115165240580345,
+      "Passive_Wide": 0.0034537529792324894,
+      "Periodic_24h": 0.0016033864346757484,
+      "Stochastic_5pct": 0.007178063994589533,
+      "Threshold_2pct": 0.0027255424616420476
+    },
+    "2": {
+      "Exit_Freeze_50": 0.0003744586737410864,
+      "Passive_Narrow": 0.012199500301792567,
+      "Passive_Wide": 0.005139430723273586,
+      "Periodic_24h": 0.004575688358865953,
+      "Stochastic_5pct": 0.009790931110791646,
+      "Threshold_2pct": 0.007875605180322142
+    },
+    "3": {
+      "Exit_Freeze_50": 0.0006050831236099688,
+      "Passive_Narrow": 0.011700978236878686,
+      "Passive_Wide": 0.005149003517517542,
+      "Periodic_24h": 0.00458278993088157,
+      "Stochastic_5pct": 0.009783829538776032,
+      "Threshold_2pct": 0.008883349605598086
+    },
+    "4": {
+      "Exit_Freeze_50": 0.00013309672317681067,
+      "Passive_Narrow": 0.012173055306258172,
+      "Passive_Wide": 0.004806792197416606,
+      "Periodic_24h": 0.0026588942289180136,
+      "Stochastic_5pct": 0.007839499908814869,
+      "Threshold_2pct": 0.00887843265523293
+    }
+  },
+  "heldout_strategy_n_test": {
+    "0": {
+      "Exit_Freeze_50": 7808,
+      "Passive_Narrow": 7808,
+      "Passive_Wide": 7808,
+      "Periodic_24h": 7808,
+      "Stochastic_5pct": 7808,
+      "Threshold_2pct": 7808
+    },
+    "1": {
+      "Exit_Freeze_50": 16256,
+      "Passive_Narrow": 16256,
+      "Passive_Wide": 16256,
+      "Periodic_24h": 16256,
+      "Stochastic_5pct": 16256,
+      "Threshold_2pct": 16256
+    },
+    "2": {
+      "Exit_Freeze_50": 15488,
+      "Passive_Narrow": 15488,
+      "Passive_Wide": 15488,
+      "Periodic_24h": 15488,
+      "Stochastic_5pct": 15488,
+      "Threshold_2pct": 15488
+    },
+    "3": {
+      "Exit_Freeze_50": 3072,
+      "Passive_Narrow": 3072,
+      "Passive_Wide": 3072,
+      "Periodic_24h": 3072,
+      "Stochastic_5pct": 3072,
+      "Threshold_2pct": 3072
+    },
+    "4": {
+      "Exit_Freeze_50": 256,
+      "Passive_Narrow": 256,
+      "Passive_Wide": 256,
+      "Periodic_24h": 256,
+      "Stochastic_5pct": 256,
+      "Threshold_2pct": 256
+    }
+  },
+  "calibration_radii_per_regime": {
+    "0": {
+      "(4, 'Exit_Freeze_50')": 0.0002002554506904723,
+      "(4, 'Stochastic_5pct')": 0.004878735944619528,
+      "(4, 'Passive_Narrow')": 0.0058596022549719205,
+      "(3, 'Passive_Wide')": 0.0020701089071182544,
+      "(1, 'Passive_Narrow')": 0.005573500628681017,
+      "(1, 'Exit_Freeze_50')": 0.0012913687412135113,
+      "(1, 'Stochastic_5pct')": 0.003363591772254455,
+      "(2, 'Threshold_2pct')": 0.004450773579701572,
+      "(2, 'Periodic_24h')": 0.0013147912335888278,
+      "(3, 'Exit_Freeze_50')": 6.346745372718413e-05,
+      "(3, 'Stochastic_5pct')": 0.0035645086961729575,
+      "(3, 'Passive_Narrow')": 0.006091807425706067,
+      "(4, 'Threshold_2pct')": 0.0020023987010066723,
+      "(4, 'Periodic_24h')": 0.0023045737902092724,
+      "(2, 'Passive_Wide')": 0.0024137433659949235,
+      "(1, 'Threshold_2pct')": 0.0013311502893675745,
+      "(1, 'Periodic_24h')": 0.0007338137709046527,
+      "(4, 'Passive_Wide')": 0.0025567270900264546,
+      "(3, 'Threshold_2pct')": 0.0038703834487702274,
+      "(3, 'Periodic_24h')": 0.0008868786182359581,
+      "(2, 'Exit_Freeze_50')": 6.346745372718413e-05,
+      "(2, 'Stochastic_5pct')": 0.003922940676089258,
+      "(2, 'Passive_Narrow')": 0.005837528495314444,
+      "(1, 'Passive_Wide')": 0.0017240144472064278
+    },
+    "1": {
+      "(4, 'Exit_Freeze_50')": 0.0001991358827193259,
+      "(4, 'Stochastic_5pct')": 0.004874414630411533,
+      "(4, 'Passive_Narrow')": 0.005876190509183467,
+      "(3, 'Passive_Wide')": 0.0020624907228254333,
+      "(0, 'Threshold_2pct')": 0.0013627712308210236,
+      "(0, 'Periodic_24h')": 0.0008016932173378741,
+      "(2, 'Threshold_2pct')": 0.0045418528362466985,
+      "(2, 'Periodic_24h')": 0.0013501959094846393,
+      "(3, 'Exit_Freeze_50')": 3.6062981232834813e-05,
+      "(3, 'Stochastic_5pct')": 0.0035033003763122743,
+      "(3, 'Passive_Narrow')": 0.0060949702524350745,
+      "(4, 'Threshold_2pct')": 0.0020067200152146664,
+      "(4, 'Periodic_24h')": 0.0023088951044172665,
+      "(0, 'Passive_Wide')": 0.001726876489616244,
+      "(2, 'Passive_Wide')": 0.0024300493955161256,
+      "(4, 'Passive_Wide')": 0.0025833419015209745,
+      "(3, 'Threshold_2pct')": 0.0038660621345622333,
+      "(3, 'Periodic_24h')": 0.0008854974006847334,
+      "(0, 'Exit_Freeze_50')": 0.0013703670059306014,
+      "(0, 'Stochastic_5pct')": 0.0035890319972947666,
+      "(0, 'Passive_Narrow')": 0.005557582620290174,
+      "(2, 'Exit_Freeze_50')": 3.6062981232834813e-05,
+      "(2, 'Stochastic_5pct')": 0.0039370953302487665,
+      "(2, 'Passive_Narrow')": 0.005883891918807333
+    },
+    "2": {
+      "(4, 'Exit_Freeze_50')": 0.00018722933687054314,
+      "(4, 'Stochastic_5pct')": 0.004895465555395824,
+      "(4, 'Passive_Narrow')": 0.005815039066858221,
+      "(3, 'Passive_Wide')": 0.002081268513740923,
+      "(1, 'Passive_Narrow')": 0.005566168467059533,
+      "(1, 'Exit_Freeze_50')": 0.0013632101423444924,
+      "(0, 'Threshold_2pct')": 0.0013156313806315816,
+      "(1, 'Stochastic_5pct')": 0.0033347096938710977,
+      "(0, 'Periodic_24h')": 0.0008110203037368075,
+      "(3, 'Exit_Freeze_50')": 6.797682295520755e-05,
+      "(3, 'Stochastic_5pct')": 0.003504360840830743,
+      "(3, 'Passive_Narrow')": 0.0060997501508962835,
+      "(4, 'Threshold_2pct')": 0.001985669090230377,
+      "(4, 'Periodic_24h')": 0.002287844179432977,
+      "(0, 'Passive_Wide')": 0.0018020504219869,
+      "(1, 'Threshold_2pct')": 0.0012659495436053124,
+      "(1, 'Periodic_24h')": 0.0006966575196725924,
+      "(4, 'Passive_Wide')": 0.0025697153616367928,
+      "(3, 'Threshold_2pct')": 0.003937802590161072,
+      "(3, 'Periodic_24h')": 0.0008982271259712233,
+      "(0, 'Exit_Freeze_50')": 0.0014950728664883924,
+      "(0, 'Stochastic_5pct')": 0.0035000511744738808,
+      "(0, 'Passive_Narrow')": 0.005669094842983588,
+      "(1, 'Passive_Wide')": 0.0017497598359539077
+    },
+    "3": {
+      "(4, 'Exit_Freeze_50')": 0.0003025415618049844,
+      "(4, 'Stochastic_5pct')": 0.004891914769388016,
+      "(4, 'Passive_Narrow')": 0.005850489118439343,
+      "(1, 'Passive_Narrow')": 0.005579925856490084,
+      "(1, 'Exit_Freeze_50')": 0.0012927528516331705,
+      "(0, 'Threshold_2pct')": 0.0012941191236983246,
+      "(1, 'Stochastic_5pct')": 0.0033250569050317755,
+      "(0, 'Periodic_24h')": 0.0008062339066148294,
+      "(2, 'Threshold_2pct')": 0.004441674802799043,
+      "(2, 'Periodic_24h')": 0.0012931301733881705,
+      "(4, 'Threshold_2pct')": 0.001989219876238185,
+      "(4, 'Periodic_24h')": 0.002291394965440785,
+      "(0, 'Passive_Wide')": 0.001779007657917243,
+      "(2, 'Passive_Wide')": 0.0024143769090591294,
+      "(1, 'Threshold_2pct')": 0.0013233247470821148,
+      "(1, 'Periodic_24h')": 0.0007239729367781295,
+      "(4, 'Passive_Wide')": 0.002574501758758771,
+      "(0, 'Exit_Freeze_50')": 0.0014926605794245065,
+      "(0, 'Stochastic_5pct')": 0.0035096953174625516,
+      "(0, 'Passive_Narrow')": 0.005676512412828416,
+      "(2, 'Exit_Freeze_50')": 6.319042583322943e-05,
+      "(2, 'Stochastic_5pct')": 0.003896083374071643,
+      "(2, 'Passive_Narrow')": 0.005845288382422098,
+      "(1, 'Passive_Wide')": 0.0017193504145330705
+    },
+    "4": {
+      "(3, 'Passive_Wide')": 0.0020728650864633344,
+      "(1, 'Passive_Narrow')": 0.005571861564748304,
+      "(1, 'Exit_Freeze_50')": 0.0013163243292418287,
+      "(0, 'Threshold_2pct')": 0.0013648381482073396,
+      "(1, 'Stochastic_5pct')": 0.003339463951726485,
+      "(0, 'Periodic_24h')": 0.0008055556623030644,
+      "(2, 'Threshold_2pct')": 0.004439216327616465,
+      "(2, 'Periodic_24h')": 0.0013294471144590073,
+      "(3, 'Exit_Freeze_50')": 6.654836158840535e-05,
+      "(3, 'Stochastic_5pct')": 0.003523833884285953,
+      "(3, 'Passive_Narrow')": 0.006086527653129084,
+      "(0, 'Passive_Wide')": 0.0017930803681445655,
+      "(2, 'Passive_Wide')": 0.002403396098708303,
+      "(1, 'Threshold_2pct')": 0.0013088930146472287,
+      "(1, 'Periodic_24h')": 0.0007218579491237288,
+      "(3, 'Threshold_2pct')": 0.003908054336560366,
+      "(3, 'Periodic_24h')": 0.0008930265871092289,
+      "(0, 'Exit_Freeze_50')": 0.0014835661814979959,
+      "(0, 'Stochastic_5pct')": 0.0035338862638154395,
+      "(0, 'Passive_Narrow')": 0.005665972560784429,
+      "(2, 'Exit_Freeze_50')": 6.654836158840535e-05,
+      "(2, 'Stochastic_5pct')": 0.003919749954407434,
+      "(2, 'Passive_Narrow')": 0.005850848930190514,
+      "(1, 'Passive_Wide')": 0.0017168867602980395
+    }
+  },
+  "random_split_coverage": 0.9028814262023217,
+  "random_split_width": 0.00522082157416137,
+  "random_split_strategy_coverage": {
+    "Exit_Freeze_50": 0.9186840471756673,
+    "Passive_Narrow": 0.8995822373510753,
+    "Passive_Wide": 0.9032158793660563,
+    "Periodic_24h": 0.891341788006889,
+    "Stochastic_5pct": 0.9020826857320485,
+    "Threshold_2pct": 0.9022780832678712
+  },
+  "random_split_strategy_width": {
+    "Exit_Freeze_50": 0.0013993977661622666,
+    "Passive_Narrow": 0.011415934823448633,
+    "Passive_Wide": 0.003811824047654857,
+    "Periodic_24h": 0.001918085237632218,
+    "Stochastic_5pct": 0.007403037732373743,
+    "Threshold_2pct": 0.005346117918676961
+  },
+  "random_split_cal_radii": {
+    "(4, 'Exit_Freeze_50')": 0.00019994553984320555,
+    "(4, 'Stochastic_5pct')": 0.005430884981240608,
+    "(4, 'Passive_Narrow')": 0.00639999412085037,
+    "(3, 'Passive_Wide')": 0.0019494519996507695,
+    "(1, 'Passive_Narrow')": 0.005593854089375656,
+    "(1, 'Exit_Freeze_50')": 0.0011556881772269495,
+    "(0, 'Threshold_2pct')": 0.0011611326835845558,
+    "(1, 'Stochastic_5pct')": 0.003502632884945979,
+    "(0, 'Periodic_24h')": 0.0007657399741388917,
+    "(2, 'Threshold_2pct')": 0.004534745438382508,
+    "(2, 'Periodic_24h')": 0.0013835670673492694,
+    "(3, 'Exit_Freeze_50')": 4.888304257813039e-05,
+    "(3, 'Stochastic_5pct')": 0.0035043891212408083,
+    "(3, 'Passive_Narrow')": 0.006123124396065274,
+    "(4, 'Threshold_2pct')": 0.002231372540962326,
+    "(4, 'Periodic_24h')": 0.0021686751583069198,
+    "(0, 'Passive_Wide')": 0.0015974548621315813,
+    "(2, 'Passive_Wide')": 0.002264785608168063,
+    "(1, 'Threshold_2pct')": 0.0013228681656348754,
+    "(1, 'Periodic_24h')": 0.0006603475068822786,
+    "(4, 'Passive_Wide')": 0.00222536869651493,
+    "(3, 'Threshold_2pct')": 0.0042117104182301255,
+    "(3, 'Periodic_24h')": 0.0008240026685528838,
+    "(0, 'Exit_Freeze_50')": 0.0012528112033221306,
+    "(0, 'Stochastic_5pct')": 0.003416926599363972,
+    "(0, 'Passive_Narrow')": 0.005800179685018828,
+    "(2, 'Exit_Freeze_50')": 4.888304257813039e-05,
+    "(2, 'Stochastic_5pct')": 0.004051519450205231,
+    "(2, 'Passive_Narrow')": 0.0056835055517393445,
+    "(1, 'Passive_Wide')": 0.0016986873672372696
+  },
+  "trajectory_blocked_coverage": 0.8928461142563047,
+  "trajectory_blocked_width": 0.005501913339799198,
+  "trajectory_blocked_n_test": 38860,
+  "trajectory_blocked_n_groups": {
+    "train": 537,
+    "cal": 115,
+    "test": 116
+  },
+  "trajectory_blocked_group_coverage": {
+    "mean": 0.8928461142563048,
+    "std": 0.14824911964574344,
+    "se": 0.013764585203533276,
+    "min": 0.382089552238806,
+    "max": 1.0
+  },
+  "path_blocked_coverage": 0.8983333333333333,
+  "path_blocked_width": 0.005837845863518394,
+  "path_blocked_n_test": 40200,
+  "path_blocked_n_groups": {
+    "train": 89,
+    "cal": 19,
+    "test": 20
+  },
+  "path_blocked_group_coverage": {
+    "mean": 0.8983333333333332,
+    "std": 0.0657868483711205,
+    "se": 0.014710386498329675,
+    "min": 0.746268656716418,
+    "max": 0.9691542288557214
+  },
+  "fallback_exclude_regimes": [],
+  "fallback_mode": "similarity",
+  "fallback_partition": "two_class",
+  "conditional_mode": "strategy",
+  "coverage_gap": 0.0007602611940298512,
+  "strategy_coverage_gap": 0.0024004975124378163,
+  "strategy_coverage_gap_definition": "n_test-weighted mean of max(0, nominal - coverage) over (regime, strategy) cells with n_test >= 50; complements coverage_gap, which pools strategies",
+  "coverage_gap_definition": "n_test-weighted mean of max(0, nominal - coverage) over non-sparse held-out regimes (n_test >= 50); sparse regimes excluded from the aggregate and reported separately",
+  "metric_direction": "lower_is_better",
+  "n_test_per_regime": {
+    "0": 46848,
+    "1": 97536,
+    "2": 92928,
+    "3": 18432,
+    "4": 1536
+  },
+  "n_test_random_split": 38592,
+  "sparse_regimes": [],
+  "sparse": false,
+  "regimes_evaluated": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "n_train_per_regime": {
+    "0": 147264,
+    "1": 111744,
+    "2": 115008,
+    "3": 167040,
+    "4": 178944
+  },
+  "n_cal_per_regime": {
+    "0": 63168,
+    "1": 48000,
+    "2": 49344,
+    "3": 71808,
+    "4": 76800
+  }
+}

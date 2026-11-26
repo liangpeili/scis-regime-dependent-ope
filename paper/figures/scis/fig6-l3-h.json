@@ -1,0 +1,16 @@
+{
+  "figure": "fig6-l3-h",
+  "sha256": {
+    "generator": "0e9b0212289d458fbde52bfafeabc3a7449d0ee41b04c5785cdd8a74b8200da9",
+    "pdf": "5b4c07f64ca08029c55029d870e720dfaf7df5082907cb0fbab512d7151c503f",
+    "png": "14fe37029de2c6b0a1ac662820ce8f3e0d36bc9c77a0d1a5faf66a7ca447f322",
+    "inputs": {
+      "results/observable_h_check.json": "6b50ecba7373ac82160bf419118a51470506329f1c8ac80c15d3c0e7f5e5f9ed",
+      "results/trajectory_value_check.json": "370c8172c1819902de4acab3d4c2b3515caa30c5b2cd32dafceee14f0c5dd41d",
+      "results/trajectory_value_check_obs_h.json": "9a253a7d4a5497c5850311ed3134f879b09e3889ce2f8eec9cc5b804e8fba093",
+      "results/trajectory_value_check_obs_h_z25.json": "b120d4b1e849aee4685c48c94f16d063a14fca40b20a5bd9067089b0ea6b6789",
+      "results/trajectory_value_check_obs_h_z40.json": "0732b8ea70d43017ed00c1bb86c7de7ac2abcc9224c9536db7efc3c701b191cc",
+      "results/trajectory_value_check_obs_h_sigma_open.json": "9eae1bcb319359a24046007a59dbf41350b9a518f6bd3e8bbe8b1536a093db2f"
+    }
+  }
+}

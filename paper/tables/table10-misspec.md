@@ -1,0 +1,78 @@
+# Table 10 — Misspecification suite
+
+## Panel A. Wide policy: coverage under one perturbation magnitude per class
+
+| Variant | Model | bias $G$ | $G$ within | $G$ LORO | $G_r$ within | $G_r$ LORO | plug-in $G$ | $G$ LORO width |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Correctly specified | identified | -0.0004 | 0.932 | 0.924 | 0.909 | 0.871 | 0.852 | 0.0463 |
+| Correctly specified | naive | +0.0087 | 0.912 | 0.904 | 0.898 | 0.875 | 0.662 | 0.0448 |
+| AR(2) observation noise | identified | -0.0004 | 0.916 | 0.912 | 0.903 | 0.875 | 0.846 | 0.0458 |
+| AR(2) observation noise | naive | +0.0089 | 0.912 | 0.898 | 0.894 | 0.873 | 0.652 | 0.0438 |
+| Student-$t(3)$ jumps | identified | +0.0002 | 0.920 | 0.910 | 0.895 | 0.875 | 0.848 | 0.0436 |
+| Student-$t(3)$ jumps | naive | +0.0087 | 0.906 | 0.898 | 0.900 | 0.874 | 0.621 | 0.0441 |
+| Regime-label noise | identified | -0.0019 | 0.904 | 0.900 | 0.900 | 0.870 | 0.861 | 0.0440 |
+| Regime-label noise | naive | +0.0086 | 0.912 | 0.902 | 0.900 | 0.873 | 0.643 | 0.0456 |
+| Hidden stale state | identified | +0.0004 | 0.928 | 0.924 | 0.891 | 0.863 | 0.846 | 0.0460 |
+| Hidden stale state | naive | +0.0076 | 0.893 | 0.891 | 0.902 | 0.872 | 0.693 | 0.0410 |
+
+## Panel B. Narrow policy
+
+| Variant | Model | bias $G$ | $G$ within | $G$ LORO | $G_r$ within | $G_r$ LORO | plug-in $G$ | $G$ LORO width |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Correctly specified | identified | -0.0017 | 0.914 | 0.900 | 0.902 | 0.866 | 0.826 | 0.1061 |
+| Correctly specified | naive | +0.0218 | 0.900 | 0.887 | 0.898 | 0.881 | 0.668 | 0.1196 |
+| AR(2) observation noise | identified | -0.0028 | 0.920 | 0.914 | 0.903 | 0.863 | 0.838 | 0.1113 |
+| AR(2) observation noise | naive | +0.0216 | 0.908 | 0.896 | 0.900 | 0.874 | 0.666 | 0.1254 |
+| Student-$t(3)$ jumps | identified | -0.0004 | 0.922 | 0.914 | 0.900 | 0.874 | 0.826 | 0.1094 |
+| Student-$t(3)$ jumps | naive | +0.0214 | 0.900 | 0.885 | 0.902 | 0.873 | 0.633 | 0.1210 |
+| Regime-label noise | identified | -0.0053 | 0.906 | 0.914 | 0.902 | 0.868 | 0.832 | 0.1109 |
+| Regime-label noise | naive | +0.0219 | 0.910 | 0.889 | 0.901 | 0.884 | 0.670 | 0.1210 |
+| Hidden stale state | identified | +0.0003 | 0.912 | 0.912 | 0.898 | 0.861 | 0.822 | 0.1131 |
+| Hidden stale state | naive | +0.0180 | 0.912 | 0.895 | 0.896 | 0.878 | 0.723 | 0.1189 |
+
+## Panel C. Paired identified $-$ naive coverage
+
+| Variant | Policy | $G$ studentized | $G_r$ studentized | plug-in $G$ |
+| --- | --- | --- | --- | --- |
+| Correctly specified | Wide | +0.020 [-0.014, +0.053] | +0.012 [-0.003, +0.027] | +0.189 [+0.141, +0.240] |
+| Correctly specified | Narrow | -0.037 [-0.070, -0.004] | +0.017 [+0.003, +0.031] | +0.158 [+0.104, +0.209] |
+| AR(2) observation noise | Wide | +0.041 [+0.008, +0.074] | +0.017 [+0.003, +0.031] | +0.193 [+0.141, +0.246] |
+| AR(2) observation noise | Narrow | +0.010 [-0.023, +0.043] | +0.008 [-0.007, +0.022] | +0.172 [+0.121, +0.223] |
+| Student-$t(3)$ jumps | Wide | -0.037 [-0.068, -0.006] | +0.015 [+0.001, +0.029] | +0.227 [+0.172, +0.281] |
+| Student-$t(3)$ jumps | Narrow | +0.008 [-0.029, +0.045] | +0.018 [+0.003, +0.034] | +0.193 [+0.137, +0.246] |
+| Regime-label noise | Wide | +0.020 [-0.014, +0.055] | +0.002 [-0.012, +0.016] | +0.219 [+0.170, +0.271] |
+| Regime-label noise | Narrow | -0.010 [-0.043, +0.021] | -0.005 [-0.020, +0.010] | +0.162 [+0.111, +0.211] |
+| Hidden stale state | Wide | +0.033 [-0.006, +0.068] | -0.000 [-0.015, +0.014] | +0.152 [+0.100, +0.203] |
+| Hidden stale state | Narrow | +0.029 [-0.004, +0.062] | +0.016 [-0.000, +0.032] | +0.100 [+0.051, +0.148] |
+
+Notes. 128 calibration and 128 evaluation seeds
+per window, four windows (512 calibration and
+512 evaluation paths), 20 model draws per path;
+nominal 90% ($\alpha=0.1$). $G$ = full
+window, $G_r$ = regime segment; within = same-population calibration, LORO =
+leave-one-window-out ($G$) or leave-one-regime-out ($G_r$). Bias is the mean
+model-mean minus truth over evaluation paths, in units of the initial position
+value $V_0=10^5$ USD ($0.001=\$100$). Panel C
+reports identified minus naive with a 95% path bootstrap interval (2,000
+resamples); $G$ and $G_r$ use the studentized score. The model side is fixed at
+the G0 $\kappa,\mu$, jump probability, and $h$ for every variant; only the
+data-generating process changes. `AR(2) observation noise` replaces the
+EXTENDED AR(1) with $(\phi_1,\phi_2)=(0.70,0.20)$ and the stale AR(1) with
+$(0.90,0.08)$, matching the stationary sd. `Student-$t(3)$ jumps` keeps the
+0.005 jump probability and scales the jump to sd $3\sigma$. `Regime-label
+noise` flips 15% of OPEN and EXTENDED labels; the latent path and $P$ are
+unchanged. `Hidden stale state` adds a simulation-only two-state chain during
+dense hours (enter 0.01, exit 0.125 per hour;
+stationary occupancy 7.4%) that
+switches the observation law to the stale map; the model and policy still see
+the calendar.
+
+## Panel D. Design
+
+| Ingredient | Setting |
+| --- | --- |
+| AR(2) EXTENDED | $\phi=(0.70, 0.20)$, stationary sd 0.0033 |
+| AR(2) stale | $\phi=(0.90, 0.08)$, stationary sd 0.0040 |
+| Student-$t(3)$ jumps | jump probability 0.005; sd $3\sigma$ |
+| Regime-label noise | flip probability 0.15 on OPEN/EXTENDED |
+| Hidden stale state | enter 0.010, exit 0.125, stationary occupancy 7.4%, burn-in 24 h |

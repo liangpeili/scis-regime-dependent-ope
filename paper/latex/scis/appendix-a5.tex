@@ -1,0 +1,307 @@
+% =====================================================================
+% P1 Appendix A.5 --- Proposition 2 (branch-wise calibration and its price).
+%
+% Source of truth: drafts/proofs-props8-12.md v1.4, Sections 5, 7, 8
+% (FS-10, FS-12, FS-12.1).  This file is a fragment: it is meant to be
+% \input under \appendix \section{Proofs} after A.4.
+%
+% Theorem-like environments use the explicit paper numbering
+% (Propositions 2A--2C).  Equation tags (5.1)--(5.3), (7.1)--(7.2)
+% follow the frozen source; do not renumber without updating the main
+% text.
+% =====================================================================
+
+\newtheorem*{aVpropA}{Proposition 2A}
+\newtheorem*{aVpropB}{Proposition 2B}
+\newtheorem*{aVpropC}{Proposition 2C}
+
+% Fixed equation tags: keep the frozen printed numbers while giving
+% hyperref a unique destination for every display.
+\providecommand{\theHequation}{}
+\let\aVtheHequation\theHequation
+\newcounter{aVanchor}
+\renewcommand{\theHequation}{aV.\arabic{aVanchor}}
+\newcommand{\aVfixedtag}[1]{\stepcounter{aVanchor}\tag{#1}}
+
+\subsection{Branch-wise calibration and its price (Proposition~2)}\label{app:a5}
+
+This appendix gives the finite-sample statements and proofs behind
+Proposition~2.  Proposition~2A is the branch-wise split-conformal
+coverage guarantee, Proposition~2B the coverage dominance of the
+branch-union threshold, and Proposition~2C the absence of a
+distribution-free coverage gain per unit width.  The notation of
+Appendix~A.4 is in force.
+
+\paragraph{Setting.}
+Let $D_n=\{(X_i,Y_i,B_i)\}_{i=1}^n$ be a calibration sample and let
+$(X_{n+1},Y_{n+1},B_{n+1})$ be a test point.  The calibration sample and
+the test point are exchangeable, and conditional on $B=b$ the pairs
+$(X_i,Y_i)$ with $B_i=b$ are exchangeable with the test pair.  Write
+\[
+n_b=\#\{i\le n:B_i=b\},
+\qquad
+k_b=\bigl\lceil(n_b+1)(1-\alpha)\bigr\rceil.
+\]
+If $k_b\le n_b$, let $\hat q_b$ be the $k_b$-th order statistic of the
+branch-$b$ calibration scores; if $k_b>n_b$, set $\hat q_b=+\infty$.
+Put
+\[
+C_b(x)=\{y:s(x,y)\le\hat q_b\},
+\qquad
+C_\cup(x)=C_0(x)\cup C_1(x).
+\]
+For the dominance statement we also need the marginal threshold: let
+$k=\lceil(n+1)(1-\alpha)\rceil$, let $\hat q$ be the $k$-th order
+statistic of all $n$ calibration scores (with $\hat q=+\infty$ if
+$k>n$), and put $\hat Q=\max(\hat q_0,\hat q_1)$.
+
+\subsubsection{Branch-wise coverage (Proposition~2A)}
+
+\begin{aVpropA}
+Under the exchangeability assumption above, for $b\in\{0,1\}$,
+\begin{equation}\label{eq:a5-5.1}
+\Pr\bigl(Y_{n+1}\in C_b(X_{n+1})\mid B_{n+1}=b\bigr)\ge1-\alpha,
+\aVfixedtag{5.1}
+\end{equation}
+and
+\begin{equation}\label{eq:a5-5.2}
+\Pr\bigl(Y_{n+1}\in C_\cup(X_{n+1})\mid B_{n+1}=b\bigr)\ge1-\alpha.
+\aVfixedtag{5.2}
+\end{equation}
+If $\hat q_b=+\infty$, then $C_b=\mathcal Y$, the coverage is $1$, and
+the inequality still holds.
+\end{aVpropA}
+
+\begin{proof}
+Condition on the branch labels and on $n_b$.  The $n_b$ calibration
+scores in branch $b$ and the test score are $n_b+1$ exchangeable random
+variables.  Let $R\in\{1,\dots,n_b+1\}$ be the rank of the test score
+among them, with random tie-breaking; $R$ is uniform on
+$\{1,\dots,n_b+1\}$.  Since $\hat q_b$ is the $k_b$-th order statistic,
+\[
+Y_{n+1}\in C_b(X_{n+1})
+\iff s(X_{n+1},Y_{n+1})\le\hat q_b,
+\]
+and $R\le k_b$ implies $s(X_{n+1},Y_{n+1})\le\hat q_b$.  With ties,
+$R\le k_b$ still implies $s\le\hat q_b$.  Therefore
+\begin{equation}\label{eq:a5-5.3}
+\begin{aligned}
+\Pr\bigl(Y_{n+1}\in C_b(X_{n+1})\mid B_{n+1}=b,\,n_b\bigr)
+&\ge\Pr(R\le k_b)\\
+&=\frac{k_b}{n_b+1}
+\ge1-\alpha,
+\end{aligned}
+\aVfixedtag{5.3}
+\end{equation}
+where the last inequality uses
+$k_b=\lceil(n_b+1)(1-\alpha)\rceil\ge(n_b+1)(1-\alpha)$.  Taking
+expectations over $n_b$ gives \eqref{eq:a5-5.1}.  Since
+$C_b\subseteq C_\cup$, \eqref{eq:a5-5.2} follows immediately from
+\eqref{eq:a5-5.1}.
+\end{proof}
+
+\paragraph{Conditioning level.}
+The guarantee is branch-conditional (on $B=b$) but marginal in
+$(X,Y)$: it is not an $X$-conditional guarantee.  Like the
+$\kappa_{\mathrm{conf}}$ bound of Theorem~2, it cannot be read as
+coverage at each $x$.
+
+\paragraph{Union, convex hull, and width.}
+For a symmetric score
+$s(x,y)=|y-\mu(x)|/\mathrm{scale}(x)$,
+\[
+C_b(x)=[\mu(x)-\hat q_b\,\mathrm{scale}(x),\,
+\mu(x)+\hat q_b\,\mathrm{scale}(x)],
+\]
+and $C_\cup(x)$ is the interval with radius
+$\hat Q=\max(\hat q_0,\hat q_1)$.  For CQR,
+\[
+C_b(x)=[\hat q_{\mathrm{lo}}(x)-\hat q_b,\,
+\hat q_{\mathrm{hi}}(x)+\hat q_b],
+\]
+and the convex hull of $C_\cup(x)$ is
+$[\hat q_{\mathrm{lo}}(x)-\hat Q,\,
+\hat q_{\mathrm{hi}}(x)+\hat Q]$.  Under CQR both branch intervals
+contain the base interval
+$[\hat q_{\mathrm{lo}}(x),\hat q_{\mathrm{hi}}(x)]$, so the union is
+itself an interval and equals its convex hull; for a general score the
+union need not be an interval, and the convex hull is the safe object.
+For CQR (and for a symmetric score with base $0$),
+\[
+w_\cup(x)=\mathrm{base}(x)+2\hat Q\,\mathrm{scale}(x)
+\ge\mathrm{base}(x)+2\hat q\,\mathrm{scale}(x)=w_{\mathrm{marg}}(x),
+\]
+where $\hat q$ is the marginal threshold of Proposition~2B.  The extra
+width is $2(\hat Q-\hat q)$ in the CQR case, or the corresponding
+scale factor in the symmetric case.
+
+\paragraph{Small branches and infinite thresholds.}
+If $k_b>n_b$ (for example, $n_b=0$, or $n_b$ small enough that the
+$1-\alpha$ quantile lies beyond the sample), then
+$\hat q_b=+\infty$, $C_b=\mathcal Y$, the coverage is $1$, and the width
+is $+\infty$.  This is a legitimate finite-sample outcome, not an
+implementation error.  Accordingly, we report $n_b$ and the number of
+cells with $\hat q_b=+\infty$, and exclude infinite widths from average
+widths.  In the experiments the smallest branches contain
+only a few dozen calibration points per fold, so their width ratios are
+dominated by high-quantile noise; they should not be read as
+population-level inflation factors.  Section~5.2 reports the branch counts
+for the branch-union runs (112 branch cells, smallest $n_b=16$, no
+infinite threshold).
+
+\subsubsection{Coverage dominance (Proposition~2B)}
+
+\begin{aVpropB}
+Let $s_1,\dots,s_n$ be the calibration scores,
+$k=\lceil(n+1)(1-\alpha)\rceil$, and let $\hat q$ be the $k$-th order
+statistic (with $\hat q=+\infty$ if $k>n$).  Split the scores by branch
+$b\in\{0,1\}$ into $n_b$ scores, set
+$k_b=\lceil(n_b+1)(1-\alpha)\rceil$, and let $\hat q_b$ be the
+$k_b$-th order statistic of branch $b$ (with $\hat q_b=+\infty$ if
+$k_b>n_b$).  Put $\hat Q=\max(\hat q_0,\hat q_1)$.  Then, for any
+calibration set, with ties and empty branches allowed,
+\begin{equation}\label{eq:a5-7.1}
+\hat Q\ge\hat q.
+\aVfixedtag{7.1}
+\end{equation}
+Consequently, for every test point $(x,y)$, $s(x,y)\le\hat q$ implies
+$s(x,y)\le\hat Q$; the set $\{y:s(x,y)\le\hat Q\}$ contains the marginal
+conformal set $\{y:s(x,y)\le\hat q\}$.  For a common scalar score this
+set is exactly $C_0(x)\cup C_1(x)$.  For CQR the union is an interval
+and equals its convex hull; for a general score the union may not be an
+interval, so coverage and width comparisons are stated for its convex
+hull.  If the branches are calibrated with different score functions,
+the raw union is not a sublevel set of a common score; dominance of the
+marginal set is then not automatic and must be checked separately.
+\end{aVpropB}
+
+\begin{proof}
+We first prove the ceiling inequality
+\begin{equation}\label{eq:a5-7.2}
+k=\lceil(n+1)c\rceil
+\le\lceil(n_0+1)c\rceil+\lceil(n_1+1)c\rceil
+=k_0+k_1,
+\qquad c=1-\alpha>0.
+\aVfixedtag{7.2}
+\end{equation}
+Indeed, $\lceil x\rceil+\lceil y\rceil\ge\lceil x+y\rceil$, and
+\[
+(n_0+1)c+(n_1+1)c=(n+2)c\ge(n+1)c.
+\]
+Since the ceiling is monotone, this gives \eqref{eq:a5-7.2}.
+
+\emph{Case 1: $\hat q=+\infty$.}  Then $k>n$.  By \eqref{eq:a5-7.2},
+$k_0+k_1\ge k>n=n_0+n_1$, so at least one $k_b>n_b$; hence
+$\hat q_b=+\infty$ and $\hat Q=+\infty\ge\hat q$.
+
+\emph{Case 2: $\hat q<+\infty$.}  Suppose for contradiction that
+$\hat Q<\hat q$.  For $t\in\mathbb R$, let
+$N(t)=\#\{i:s_i\le t\}$ and
+$N_b(t)=\#\{i:B_i=b,\ s_i\le t\}$.  Since $\hat q$ is the $k$-th order
+statistic, every $t<\hat q$ satisfies $N(t)\le k-1$; ties do not affect
+this count.  Taking $t=\hat Q<\hat q$ gives $N(\hat Q)\le k-1$.  On the
+other hand, for each $b$:
+\begin{itemize}
+\item if $\hat q_b<+\infty$, then $\hat q_b\le\hat Q$, and the $k_b$-th
+order statistic being at most $\hat Q$ means that at least $k_b$
+branch-$b$ scores are at most $\hat Q$, that is,
+$N_b(\hat Q)\ge k_b$;
+\item if $\hat q_b=+\infty$, then $\hat Q=+\infty$, contradicting
+$\hat Q<\hat q<+\infty$.
+\end{itemize}
+Therefore
+\[
+N(\hat Q)=N_0(\hat Q)+N_1(\hat Q)\ge k_0+k_1\ge k
+\]
+by \eqref{eq:a5-7.2}, contradicting $N(\hat Q)\le k-1$.  Hence
+$\hat Q\ge\hat q$.
+\end{proof}
+
+\paragraph{Dominance and width.}
+\begin{itemize}
+\item For a common score, the marginal set is contained in the union
+pointwise, so coverage is monotone.
+\item For CQR,
+$C_{\mathrm{marg}}(x)=[\hat q_{\mathrm{lo}}(x)-\hat q,\,
+\hat q_{\mathrm{hi}}(x)+\hat q]$, while the convex hull of $C_\cup(x)$
+is $[\hat q_{\mathrm{lo}}(x)-\hat Q,\,
+\hat q_{\mathrm{hi}}(x)+\hat Q]$, which contains
+$C_{\mathrm{marg}}(x)$.  Under CQR the two branch intervals both
+contain the base interval, so the union is an interval and equals its
+convex hull; for a general score the union may not be an interval.  The
+convex hull contains the union, so its coverage is at least the union
+coverage and at least the coverage of each $C_b$.
+\item The width comparison is
+$w_\cup(x)=\mathrm{base}(x)+2\hat Q\,\mathrm{scale}(x)
+\ge\mathrm{base}(x)+2\hat q\,\mathrm{scale}(x)=w_{\mathrm{marg}}(x)$;
+the CQR extra width is $2(\hat Q-\hat q)$.
+\item No within-branch exchangeability is required for
+\eqref{eq:a5-7.1}: it is a pure order-statistic inequality that holds
+for every fixed calibration set.
+\end{itemize}
+
+\subsubsection{No distribution-free gain per unit width (Proposition~2C)}
+
+\begin{aVpropC}
+Fix a calibration set with $\hat Q>\hat q$.  For every test sample size
+$m\ge1$ and every positive function $g(\Delta w)$, there exists a test
+distribution such that:
+\begin{enumerate}
+\item[(i)] the population branch-$b$ coverage gain is
+\[
+G_b^{\mathrm{pop}}
+=F_{\mathrm{test},b}(\hat Q)-F_{\mathrm{test},b}(\hat q)=0,
+\]
+and, for every $m$, the empirical gain
+\[
+\hat G_{b,m}
+=\hat F_{\mathrm{test},b}(\hat Q)-\hat F_{\mathrm{test},b}(\hat q)=0
+\]
+almost surely (with the convention that the empirical gain is $0$ when
+branch $b$ has no test point);
+\item[(ii)] the width increment is
+$\Delta w=2(\hat Q-\hat q)\,\mathrm{scale}>0$ for a symmetric score, and
+$\Delta w=2(\hat Q-\hat q)$ for CQR.
+\end{enumerate}
+Hence no distribution-free lower bound of the form
+$G_b\ge g(\Delta w)>0$ can hold.  The width cost is computable from the
+calibration set; the gain is not.
+\end{aVpropC}
+
+\begin{proof}
+Take a test distribution whose branch-$b$ score is supported on
+$(-\infty,\hat q]$ (for example, a point mass $s_0\le\hat q$ in each
+branch, with branch probability $q_b$).  Then
+\[
+F_{\mathrm{test},b}(\hat Q)
+=F_{\mathrm{test},b}(\hat q)=1,
+\qquad
+G_b^{\mathrm{pop}}=0,
+\]
+while $\hat Q>\hat q$ gives $\Delta w>0$.  For every $m$, all test
+scores are at most $\hat q$, so
+$\hat F_{\mathrm{test},b}(\hat Q)
+=\hat F_{\mathrm{test},b}(\hat q)=1$ and the empirical gain is $0$
+almost surely.  If the test distribution is required to be continuous,
+approximate the point mass by a narrow density supported on
+$(-\infty,\hat q]$; the gain is still $0$ (or arbitrarily small), while
+the width increment is unchanged.  Thus every positive $g(\Delta w)$ is
+violated by this test distribution.
+\end{proof}
+
+\paragraph{Scope.}
+\begin{itemize}
+\item Proposition~2C does not claim that branch-union is useless in
+practice.  It does restore branch coverage (Proposition~2A); the gain
+depends on the target distribution.
+\item It does not claim that the width cost is negligible.  The width
+increment is computable from the calibration set and must be reported.
+\item It does not claim that every test distribution gives zero gain.
+The existence of one zero-gain distribution is enough to rule out a
+distribution-free lower bound.
+\item The result is the width-axis counterpart of the non-identification
+in Theorem~3B: both express the same missing information, one through
+coverage and one through width.
+\end{itemize}
+
+\let\theHequation\aVtheHequation

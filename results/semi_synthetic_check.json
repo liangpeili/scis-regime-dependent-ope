@@ -1,0 +1,980 @@
+{
+ "config": {
+  "symbols": [
+   "SPY",
+   "QQQ",
+   "TSLA",
+   "NVDA"
+  ],
+  "cal_seeds": [
+   5000,
+   5063
+  ],
+  "eval_seeds": [
+   6000,
+   6063
+  ],
+  "windows": [
+   "W1",
+   "W2",
+   "W3",
+   "W4"
+  ],
+  "reps": 16,
+  "alpha": 0.1,
+  "calendar": "P1 14-day window; weekend freeze 65 h, holiday 81 h",
+  "sigma": "calibrated sigma_247 (per elapsed hour)",
+  "jump": "calibrated 4-sigma tail probability and absolute sd",
+  "h": "P1 observable-only h",
+  "estimator": "P1 trajectory_value_check cont/ident and cont/naive"
+ },
+ "symbols": {
+  "SPY": {
+   "params": {
+    "sigma_247": 0.0014668876271742353,
+    "kappa": 0.0010923339092533402,
+    "jump_prob": 0.005733944954128441,
+    "jump_sd": 0.011264357565089525,
+    "h": {
+     "open_sd": 0.00041030144014348916,
+     "ext_phi": 0.7740608301014017,
+     "ext_sd": 0.002022731953099615,
+     "stale_phi": 0.9801730921650273,
+     "stale_sd": 0.0007975067179848264
+    }
+   },
+   "n_cal_paths_per_policy": 256,
+   "n_eval_paths_per_policy": 256,
+   "policies": {
+    "Wide_Rebalance_2pct": {
+     "identified": {
+      "bias": {
+       "full": -0.0013011162085083488,
+       "by_regime": {
+        "OPEN": -0.00041973382790393837,
+        "EXTENDED": -0.0007491220573644255,
+        "WEEKEND": -9.144125392094901e-05,
+        "HOLIDAY": -3.565145107771852e-05,
+        "HALT": -5.167618241317378e-06
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.85546875,
+        "loro": 0.86328125
+       },
+       "studentized": {
+        "within": 0.88671875,
+        "loro": 0.88671875
+       },
+       "cqr": {
+        "within": 0.8828125,
+        "loro": 0.875
+       },
+       "plugin_normal": {
+        "coverage": 0.828125,
+        "width": 0.006090820091553591
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.89140625,
+        "loro": 0.8640625
+       },
+       "studentized": {
+        "within": 0.90234375,
+        "loro": 0.90703125
+       },
+       "cqr": {
+        "within": 0.90078125,
+        "loro": 0.9015625
+       },
+       "plugin_normal": {
+        "coverage": 0.91171875,
+        "width": 0.0020228033585005705
+       }
+      }
+     },
+     "naive": {
+      "bias": {
+       "full": -0.00046086680692606355,
+       "by_regime": {
+        "OPEN": -0.00032603789594168065,
+        "EXTENDED": -0.00023216594373522207,
+        "WEEKEND": 0.00011757681414473557,
+        "HOLIDAY": -1.7881051688051145e-05,
+        "HALT": -2.3587297058453063e-06
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.92578125,
+        "loro": 0.87890625
+       },
+       "studentized": {
+        "within": 0.89453125,
+        "loro": 0.88671875
+       },
+       "cqr": {
+        "within": 0.921875,
+        "loro": 0.94140625
+       },
+       "plugin_normal": {
+        "coverage": 0.96875,
+        "width": 0.0058848972144860765
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.915625,
+        "loro": 0.87578125
+       },
+       "studentized": {
+        "within": 0.9015625,
+        "loro": 0.89453125
+       },
+       "cqr": {
+        "within": 0.89765625,
+        "loro": 0.8828125
+       },
+       "plugin_normal": {
+        "coverage": 0.90546875,
+        "width": 0.0018349231738636201
+       }
+      }
+     },
+     "paired": {
+      "full_window.raw.within": -0.0703125,
+      "full_window.studentized.within": -0.0078125,
+      "full_window.cqr.within": -0.0390625,
+      "full_window.plugin_normal": -0.140625,
+      "regime.raw.within": -0.024218750000000067,
+      "regime.studentized.within": 0.0007812499999999556,
+      "regime.cqr.within": 0.0031249999999999334,
+      "regime.plugin_normal": 0.006249999999999978
+     }
+    },
+    "Narrow_Rebalance_1pct": {
+     "identified": {
+      "bias": {
+       "full": -0.0043527128098399225,
+       "by_regime": {
+        "OPEN": -0.0012623697196691274,
+        "EXTENDED": -0.0023504707404341757,
+        "WEEKEND": -0.0004947318293071208,
+        "HOLIDAY": -0.00021393895650767374,
+        "HALT": -3.120156392182494e-05
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.90625,
+        "loro": 0.921875
+       },
+       "studentized": {
+        "within": 0.88671875,
+        "loro": 0.875
+       },
+       "cqr": {
+        "within": 0.890625,
+        "loro": 0.890625
+       },
+       "plugin_normal": {
+        "coverage": 0.79296875,
+        "width": 0.016705036140938004
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.90390625,
+        "loro": 0.8609375
+       },
+       "studentized": {
+        "within": 0.890625,
+        "loro": 0.88203125
+       },
+       "cqr": {
+        "within": 0.8890625,
+        "loro": 0.88671875
+       },
+       "plugin_normal": {
+        "coverage": 0.875,
+        "width": 0.006023604234627623
+       }
+      }
+     },
+     "naive": {
+      "bias": {
+       "full": -0.0021434566700601044,
+       "by_regime": {
+        "OPEN": -0.001544506232986987,
+        "EXTENDED": -0.0008689179283704077,
+        "WEEKEND": 0.0004938164642391316,
+        "HOLIDAY": -0.00018892948942935905,
+        "HALT": -3.491948351248265e-05
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.9140625,
+        "loro": 0.94140625
+       },
+       "studentized": {
+        "within": 0.95703125,
+        "loro": 0.9453125
+       },
+       "cqr": {
+        "within": 0.94140625,
+        "loro": 0.9296875
+       },
+       "plugin_normal": {
+        "coverage": 0.9375,
+        "width": 0.015693120854678035
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.9140625,
+        "loro": 0.86875
+       },
+       "studentized": {
+        "within": 0.9,
+        "loro": 0.8953125
+       },
+       "cqr": {
+        "within": 0.90078125,
+        "loro": 0.890625
+       },
+       "plugin_normal": {
+        "coverage": 0.89609375,
+        "width": 0.005449136591979283
+       }
+      }
+     },
+     "paired": {
+      "full_window.raw.within": -0.0078125,
+      "full_window.studentized.within": -0.0703125,
+      "full_window.cqr.within": -0.05078125,
+      "full_window.plugin_normal": -0.14453125,
+      "regime.raw.within": -0.010156249999999978,
+      "regime.studentized.within": -0.009375000000000022,
+      "regime.cqr.within": -0.01171875,
+      "regime.plugin_normal": -0.021093750000000022
+     }
+    }
+   }
+  },
+  "QQQ": {
+   "params": {
+    "sigma_247": 0.0021594593706511472,
+    "kappa": 0.0007830524063968669,
+    "jump_prob": 0.006303724928366762,
+    "jump_sd": 0.014269273077410004,
+    "h": {
+     "open_sd": 0.00041030144014348916,
+     "ext_phi": 0.7740608301014017,
+     "ext_sd": 0.002022731953099615,
+     "stale_phi": 0.9801730921650273,
+     "stale_sd": 0.0007975067179848264
+    }
+   },
+   "n_cal_paths_per_policy": 256,
+   "n_eval_paths_per_policy": 256,
+   "policies": {
+    "Wide_Rebalance_2pct": {
+     "identified": {
+      "bias": {
+       "full": -0.0014991210343510402,
+       "by_regime": {
+        "OPEN": -0.0004133075920005049,
+        "EXTENDED": -0.0009213098839216285,
+        "WEEKEND": -9.389420752800248e-05,
+        "HOLIDAY": -6.153361284663849e-05,
+        "HALT": -9.075738054265336e-06
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.890625,
+        "loro": 0.8671875
+       },
+       "studentized": {
+        "within": 0.91015625,
+        "loro": 0.875
+       },
+       "cqr": {
+        "within": 0.875,
+        "loro": 0.85546875
+       },
+       "plugin_normal": {
+        "coverage": 0.8359375,
+        "width": 0.008132935623193624
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.90546875,
+        "loro": 0.86171875
+       },
+       "studentized": {
+        "within": 0.91640625,
+        "loro": 0.91015625
+       },
+       "cqr": {
+        "within": 0.90703125,
+        "loro": 0.9109375
+       },
+       "plugin_normal": {
+        "coverage": 0.90390625,
+        "width": 0.0028167823884620454
+       }
+      }
+     },
+     "naive": {
+      "bias": {
+       "full": -0.0004723469195437432,
+       "by_regime": {
+        "OPEN": -0.0002698157023943479,
+        "EXTENDED": -0.0004189474747436539,
+        "WEEKEND": 0.00025439732159142326,
+        "HOLIDAY": -3.191666186032322e-05,
+        "HALT": -6.064402136841808e-06
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.859375,
+        "loro": 0.85546875
+       },
+       "studentized": {
+        "within": 0.86328125,
+        "loro": 0.8671875
+       },
+       "cqr": {
+        "within": 0.859375,
+        "loro": 0.83984375
+       },
+       "plugin_normal": {
+        "coverage": 0.94140625,
+        "width": 0.007786526296214574
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.9015625,
+        "loro": 0.86796875
+       },
+       "studentized": {
+        "within": 0.903125,
+        "loro": 0.89921875
+       },
+       "cqr": {
+        "within": 0.89609375,
+        "loro": 0.89921875
+       },
+       "plugin_normal": {
+        "coverage": 0.8953125,
+        "width": 0.0025436658672344085
+       }
+      }
+     },
+     "paired": {
+      "full_window.raw.within": 0.03125,
+      "full_window.studentized.within": 0.046875,
+      "full_window.cqr.within": 0.015625,
+      "full_window.plugin_normal": -0.10546875,
+      "regime.raw.within": 0.00390625,
+      "regime.studentized.within": 0.013281250000000022,
+      "regime.cqr.within": 0.010937499999999933,
+      "regime.plugin_normal": 0.008593750000000067
+     }
+    },
+    "Narrow_Rebalance_1pct": {
+     "identified": {
+      "bias": {
+       "full": -0.005188350117362973,
+       "by_regime": {
+        "OPEN": -0.0013742598631062343,
+        "EXTENDED": -0.0030501043436510535,
+        "WEEKEND": -0.0005098748800884794,
+        "HOLIDAY": -0.0002138952091977484,
+        "HALT": -4.021582131945639e-05
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.91015625,
+        "loro": 0.90234375
+       },
+       "studentized": {
+        "within": 0.90234375,
+        "loro": 0.90625
+       },
+       "cqr": {
+        "within": 0.91796875,
+        "loro": 0.91796875
+       },
+       "plugin_normal": {
+        "coverage": 0.8203125,
+        "width": 0.02389204125592946
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.89765625,
+        "loro": 0.8625
+       },
+       "studentized": {
+        "within": 0.8921875,
+        "loro": 0.88828125
+       },
+       "cqr": {
+        "within": 0.89375,
+        "loro": 0.8890625
+       },
+       "plugin_normal": {
+        "coverage": 0.87109375,
+        "width": 0.008779945433662777
+       }
+      }
+     },
+     "naive": {
+      "bias": {
+       "full": -0.0019462429909985852,
+       "by_regime": {
+        "OPEN": -0.0015303862251928105,
+        "EXTENDED": -0.0013264364491477605,
+        "WEEKEND": 0.0010875686407313817,
+        "HOLIDAY": -0.0001356930468344831,
+        "HALT": -4.1295910554912506e-05
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.89453125,
+        "loro": 0.90625
+       },
+       "studentized": {
+        "within": 0.8984375,
+        "loro": 0.890625
+       },
+       "cqr": {
+        "within": 0.9140625,
+        "loro": 0.91015625
+       },
+       "plugin_normal": {
+        "coverage": 0.9296875,
+        "width": 0.021862299762853823
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.89375,
+        "loro": 0.871875
+       },
+       "studentized": {
+        "within": 0.88203125,
+        "loro": 0.878125
+       },
+       "cqr": {
+        "within": 0.88359375,
+        "loro": 0.87421875
+       },
+       "plugin_normal": {
+        "coverage": 0.85546875,
+        "width": 0.007792844902454276
+       }
+      }
+     },
+     "paired": {
+      "full_window.raw.within": 0.015625,
+      "full_window.studentized.within": 0.00390625,
+      "full_window.cqr.within": 0.00390625,
+      "full_window.plugin_normal": -0.109375,
+      "regime.raw.within": 0.00390625,
+      "regime.studentized.within": 0.010156249999999978,
+      "regime.cqr.within": 0.010156250000000089,
+      "regime.plugin_normal": 0.015625
+     }
+    }
+   }
+  },
+  "TSLA": {
+   "params": {
+    "sigma_247": 0.004858478250708408,
+    "kappa": 0.0016598297499884618,
+    "jump_prob": 0.0057306590257879654,
+    "jump_sd": 0.033895655560648434,
+    "h": {
+     "open_sd": 0.00041030144014348916,
+     "ext_phi": 0.7740608301014017,
+     "ext_sd": 0.002022731953099615,
+     "stale_phi": 0.9801730921650273,
+     "stale_sd": 0.0007975067179848264
+    }
+   },
+   "n_cal_paths_per_policy": 256,
+   "n_eval_paths_per_policy": 256,
+   "policies": {
+    "Wide_Rebalance_2pct": {
+     "identified": {
+      "bias": {
+       "full": -0.003629104700644048,
+       "by_regime": {
+        "OPEN": -0.0009764842890354744,
+        "EXTENDED": -0.0021658958011173297,
+        "WEEKEND": -0.0002546456578223229,
+        "HOLIDAY": -0.00020620966158883737,
+        "HALT": -2.586929108008459e-05
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.9296875,
+        "loro": 0.8984375
+       },
+       "studentized": {
+        "within": 0.92578125,
+        "loro": 0.890625
+       },
+       "cqr": {
+        "within": 0.953125,
+        "loro": 0.90625
+       },
+       "plugin_normal": {
+        "coverage": 0.78515625,
+        "width": 0.020421858930111718
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.91015625,
+        "loro": 0.878125
+       },
+       "studentized": {
+        "within": 0.915625,
+        "loro": 0.89921875
+       },
+       "cqr": {
+        "within": 0.9140625,
+        "loro": 0.90703125
+       },
+       "plugin_normal": {
+        "coverage": 0.86875,
+        "width": 0.007474858470897528
+       }
+      }
+     },
+     "naive": {
+      "bias": {
+       "full": -0.00030073084275194194,
+       "by_regime": {
+        "OPEN": -0.0005221874298595376,
+        "EXTENDED": -0.0008269699209271056,
+        "WEEKEND": 0.001158104286660433,
+        "HOLIDAY": -8.38577527308509e-05,
+        "HALT": -2.5820025894880953e-05
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.8828125,
+        "loro": 0.87890625
+       },
+       "studentized": {
+        "within": 0.89453125,
+        "loro": 0.8828125
+       },
+       "cqr": {
+        "within": 0.88671875,
+        "loro": 0.890625
+       },
+       "plugin_normal": {
+        "coverage": 0.890625,
+        "width": 0.018081593095150332
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.90546875,
+        "loro": 0.875
+       },
+       "studentized": {
+        "within": 0.896875,
+        "loro": 0.89765625
+       },
+       "cqr": {
+        "within": 0.89765625,
+        "loro": 0.88671875
+       },
+       "plugin_normal": {
+        "coverage": 0.84765625,
+        "width": 0.006383296288299515
+       }
+      }
+     },
+     "paired": {
+      "full_window.raw.within": 0.046875,
+      "full_window.studentized.within": 0.03125,
+      "full_window.cqr.within": 0.06640625,
+      "full_window.plugin_normal": -0.10546875,
+      "regime.raw.within": 0.004687499999999956,
+      "regime.studentized.within": 0.018750000000000044,
+      "regime.cqr.within": 0.016406249999999956,
+      "regime.plugin_normal": 0.021093750000000022
+     }
+    },
+    "Narrow_Rebalance_1pct": {
+     "identified": {
+      "bias": {
+       "full": -0.011658695336593807,
+       "by_regime": {
+        "OPEN": -0.0029024537136028185,
+        "EXTENDED": -0.006926436710503286,
+        "WEEKEND": -0.0010943385480118458,
+        "HOLIDAY": -0.0006301359817128763,
+        "HALT": -0.00010533038276298114
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.921875,
+        "loro": 0.91015625
+       },
+       "studentized": {
+        "within": 0.921875,
+        "loro": 0.91796875
+       },
+       "cqr": {
+        "within": 0.921875,
+        "loro": 0.92578125
+       },
+       "plugin_normal": {
+        "coverage": 0.7578125,
+        "width": 0.06500185462116254
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.9125,
+        "loro": 0.85859375
+       },
+       "studentized": {
+        "within": 0.90390625,
+        "loro": 0.89140625
+       },
+       "cqr": {
+        "within": 0.903125,
+        "loro": 0.884375
+       },
+       "plugin_normal": {
+        "coverage": 0.8734375,
+        "width": 0.025350563933968694
+       }
+      }
+     },
+     "naive": {
+      "bias": {
+       "full": -0.0016400931775025576,
+       "by_regime": {
+        "OPEN": -0.0016669589909904825,
+        "EXTENDED": -0.0023120070647379056,
+        "WEEKEND": 0.002618892809440625,
+        "HOLIDAY": -0.00017317989383735537,
+        "HALT": -0.00010684003737743947
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.85546875,
+        "loro": 0.85546875
+       },
+       "studentized": {
+        "within": 0.86328125,
+        "loro": 0.83984375
+       },
+       "cqr": {
+        "within": 0.859375,
+        "loro": 0.86328125
+       },
+       "plugin_normal": {
+        "coverage": 0.87109375,
+        "width": 0.05963075524110652
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.90234375,
+        "loro": 0.87421875
+       },
+       "studentized": {
+        "within": 0.90625,
+        "loro": 0.903125
+       },
+       "cqr": {
+        "within": 0.90234375,
+        "loro": 0.871875
+       },
+       "plugin_normal": {
+        "coverage": 0.84453125,
+        "width": 0.022803404980205895
+       }
+      }
+     },
+     "paired": {
+      "full_window.raw.within": 0.06640625,
+      "full_window.studentized.within": 0.05859375,
+      "full_window.cqr.within": 0.0625,
+      "full_window.plugin_normal": -0.11328125,
+      "regime.raw.within": 0.010156249999999978,
+      "regime.studentized.within": -0.002343749999999978,
+      "regime.cqr.within": 0.0007812499999999556,
+      "regime.plugin_normal": 0.028906250000000022
+     }
+    }
+   }
+  },
+  "NVDA": {
+   "params": {
+    "sigma_247": 0.004226102549253526,
+    "kappa": 0.002909185260637992,
+    "jump_prob": 0.0057306590257879654,
+    "jump_sd": 0.03546789563443133,
+    "h": {
+     "open_sd": 0.00041030144014348916,
+     "ext_phi": 0.7740608301014017,
+     "ext_sd": 0.002022731953099615,
+     "stale_phi": 0.9801730921650273,
+     "stale_sd": 0.0007975067179848264
+    }
+   },
+   "n_cal_paths_per_policy": 256,
+   "n_eval_paths_per_policy": 256,
+   "policies": {
+    "Wide_Rebalance_2pct": {
+     "identified": {
+      "bias": {
+       "full": -0.003958268564941189,
+       "by_regime": {
+        "OPEN": -0.0010594199669752636,
+        "EXTENDED": -0.0023431717922893606,
+        "WEEKEND": -0.00033503169183985386,
+        "HOLIDAY": -0.0001931906032274602,
+        "HALT": -2.7454510609251416e-05
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.9140625,
+        "loro": 0.8984375
+       },
+       "studentized": {
+        "within": 0.89453125,
+        "loro": 0.890625
+       },
+       "cqr": {
+        "within": 0.921875,
+        "loro": 0.91015625
+       },
+       "plugin_normal": {
+        "coverage": 0.765625,
+        "width": 0.019013163882655913
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.9109375,
+        "loro": 0.8671875
+       },
+       "studentized": {
+        "within": 0.89921875,
+        "loro": 0.9
+       },
+       "cqr": {
+        "within": 0.9109375,
+        "loro": 0.89609375
+       },
+       "plugin_normal": {
+        "coverage": 0.88125,
+        "width": 0.006875339054283017
+       }
+      }
+     },
+     "naive": {
+      "bias": {
+       "full": -0.0012789557495578433,
+       "by_regime": {
+        "OPEN": -0.000689860932781074,
+        "EXTENDED": -0.0012377862426584214,
+        "WEEKEND": 0.0007701281955605867,
+        "HOLIDAY": -9.473053691476475e-05,
+        "HALT": -2.670623276417018e-05
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.890625,
+        "loro": 0.90625
+       },
+       "studentized": {
+        "within": 0.890625,
+        "loro": 0.890625
+       },
+       "cqr": {
+        "within": 0.86328125,
+        "loro": 0.87890625
+       },
+       "plugin_normal": {
+        "coverage": 0.90234375,
+        "width": 0.017369154816829782
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.90625,
+        "loro": 0.8875
+       },
+       "studentized": {
+        "within": 0.91328125,
+        "loro": 0.9109375
+       },
+       "cqr": {
+        "within": 0.91953125,
+        "loro": 0.909375
+       },
+       "plugin_normal": {
+        "coverage": 0.8796875,
+        "width": 0.006032529174234724
+       }
+      }
+     },
+     "paired": {
+      "full_window.raw.within": 0.0234375,
+      "full_window.studentized.within": 0.00390625,
+      "full_window.cqr.within": 0.05859375,
+      "full_window.plugin_normal": -0.13671875,
+      "regime.raw.within": 0.004687499999999956,
+      "regime.studentized.within": -0.014062500000000089,
+      "regime.cqr.within": -0.008593750000000067,
+      "regime.plugin_normal": 0.0015625000000000222
+     }
+    },
+    "Narrow_Rebalance_1pct": {
+     "identified": {
+      "bias": {
+       "full": -0.012959030194933933,
+       "by_regime": {
+        "OPEN": -0.0032861198096435567,
+        "EXTENDED": -0.007647494538816979,
+        "WEEKEND": -0.0012690681312635035,
+        "HOLIDAY": -0.0006266730865913664,
+        "HALT": -0.00012967462861852597
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.91015625,
+        "loro": 0.91796875
+       },
+       "studentized": {
+        "within": 0.94140625,
+        "loro": 0.9296875
+       },
+       "cqr": {
+        "within": 0.921875,
+        "loro": 0.9140625
+       },
+       "plugin_normal": {
+        "coverage": 0.78515625,
+        "width": 0.06187220289902984
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.91484375,
+        "loro": 0.8703125
+       },
+       "studentized": {
+        "within": 0.91171875,
+        "loro": 0.90390625
+       },
+       "cqr": {
+        "within": 0.9203125,
+        "loro": 0.89375
+       },
+       "plugin_normal": {
+        "coverage": 0.87578125,
+        "width": 0.023888405652997824
+       }
+      }
+     },
+     "naive": {
+      "bias": {
+       "full": -0.004708390758424926,
+       "by_regime": {
+        "OPEN": -0.0023475435215834367,
+        "EXTENDED": -0.003664809653198908,
+        "WEEKEND": 0.0017089761520303944,
+        "HOLIDAY": -0.0002729062053835049,
+        "HALT": -0.00013210753028947118
+       }
+      },
+      "full_window": {
+       "raw": {
+        "within": 0.8828125,
+        "loro": 0.89453125
+       },
+       "studentized": {
+        "within": 0.87109375,
+        "loro": 0.859375
+       },
+       "cqr": {
+        "within": 0.90625,
+        "loro": 0.8984375
+       },
+       "plugin_normal": {
+        "coverage": 0.91796875,
+        "width": 0.05882943981559406
+       }
+      },
+      "regime": {
+       "raw": {
+        "within": 0.90859375,
+        "loro": 0.88984375
+       },
+       "studentized": {
+        "within": 0.90546875,
+        "loro": 0.903125
+       },
+       "cqr": {
+        "within": 0.9078125,
+        "loro": 0.89453125
+       },
+       "plugin_normal": {
+        "coverage": 0.86796875,
+        "width": 0.02189091388478536
+       }
+      }
+     },
+     "paired": {
+      "full_window.raw.within": 0.02734375,
+      "full_window.studentized.within": 0.0703125,
+      "full_window.cqr.within": 0.015625,
+      "full_window.plugin_normal": -0.1328125,
+      "regime.raw.within": 0.006249999999999978,
+      "regime.studentized.within": 0.006249999999999978,
+      "regime.cqr.within": 0.012499999999999956,
+      "regime.plugin_normal": 0.0078125
+     }
+    }
+   }
+  }
+ },
+ "limits": [
+  "Pilot seed counts and model draws; intervals are descriptive.",
+  "The calendar and freeze durations remain P1's, not the measured P2 durations; the semi-synthetic check calibrates return dynamics, not the calendar.",
+  "h is P1's observable-only estimate; no real pool-price series is available, so the observation map is not externally calibrated.",
+  "The jump scale is a 4-sigma tail descriptor, not a fitted jump-diffusion mixture; the forward model uses it as a fixed absolute jump sd.",
+  "The model filter ignores jumps in its process noise, as in P1; only the forward draws include them."
+ ]
+}

@@ -1,0 +1,33 @@
+% =====================================================================
+% P1 Appendix E --- moved L2/L3 tables and real-path calibration support.
+%
+% 2026-11-09: to meet the TNNLS 15-page main-text limit after restoring
+% IEEEtran defaults, the two wide result floats table4.tex (L2
+% branch-conditional coverage) and table5.tex (L3 observable-only
+% observation map) were moved here from the main text.  They are the SAME
+% generated files (all numbers, captions, panels, notes, negative results,
+% boundaries and caveats unchanged); only their placement changed.  The
+% main text now points to them as "Appendix Table B12" and "Appendix
+% Table B13".  They keep \label{tab:4} / \label{tab:5} so that Appendix
+% Table B8 (table7.tex) resolves locally in this document.
+%
+% Numbering: the main text uses no xr package and references appendix
+% tables by hardcoded "Appendix Table B#" (the paper's existing
+% convention). appendix-b.tex sets \thetable = B\arabic{table}; the stress
+% table is B10, appendix-c.tex sets its evidence table to B11, and appendix D
+% is unnumbered. Forcing the counter to 11 here makes the two moved tables
+% B12 and B13, exactly the numbers used in the main text.
+% =====================================================================
+
+\section{Additional result and calibration tables}\label{app:e}
+
+The full panels behind the L2 (main-text Section 7.3) and L3 (main-text
+Section 7.5) results are reproduced here, followed by the real-path
+calibration-support counts. They were moved from the main text
+to keep the SCIS Research Paper within its 16-page limit.
+
+\renewcommand{\thetable}{B\arabic{table}}
+\setcounter{table}{11}
+\input{tables/table4}
+\input{tables/table5}
+\input{tables/table15}

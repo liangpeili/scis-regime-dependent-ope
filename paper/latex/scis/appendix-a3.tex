@@ -1,0 +1,561 @@
+% =====================================================================
+% P1 Appendix A.3 --- Theorem 2 (finite-sample coverage under drift).
+%
+% Source of truth: paper/theorem2.md v0.5 (2026-10-21 theorem statements/proofs; 2026-10-26 interface wording).
+% This file is a fragment: it is meant to be \input under
+%   \appendix \section{Proofs}
+% after A.1 and A.2 (the standalone driver main-a3.tex sets the
+% subsection counter to 2, so this fragment becomes A.3).
+%
+% Requirements: amsmath, amssymb, amsthm, natbib, and url (hyperref loads
+% url). Theorem-like environments are defined here with the explicit paper
+% numbering (Theorem 2A/2B, Corollaries 2.1/2.2, Lemmas 1--3,
+% Remarks 2.1--2.3 and 3.1). Equation tags (2.1)--(2.6) and (3.1)--(3.3)
+% follow the frozen source; do not renumber without updating the main text.
+% =====================================================================
+
+\newtheorem*{aIIIthmA}{Theorem 2A}
+\newtheorem*{aIIIthmB}{Theorem 2B}
+\newtheorem*{aIIIcorA}{Corollary 2.1}
+\newtheorem*{aIIIcorB}{Corollary 2.2}
+\newtheorem*{aIIIlemA}{Lemma 1}
+\newtheorem*{aIIIlemB}{Lemma 2}
+\newtheorem*{aIIIlemC}{Lemma 3}
+\newtheorem*{aIIIremA}{Remark 2.1}
+\newtheorem*{aIIIremB}{Remark 2.2}
+\newtheorem*{aIIIremC}{Remark 2.3}
+\newtheorem*{aIIIremD}{Remark 3.1}
+
+% Fixed equation tags do not advance the equation counter, so hyperref would
+% give every display the same destination. A dedicated counter keeps the
+% destinations unique without changing the printed (frozen) tag numbers. The
+% original \theHequation is restored at the end of the fragment.
+\providecommand{\theHequation}{}
+\let\aIIItheHequation\theHequation
+\newcounter{aIIIanchor}
+\renewcommand{\theHequation}{aIII.\arabic{aIIIanchor}}
+\newcommand{\aIIIfixedtag}[1]{\stepcounter{aIIIanchor}\tag{#1}}
+
+\subsection{Finite-sample coverage under drift (Theorem~2)}\label{app:a3}
+
+This appendix gives the finite-sample statement and proof of Theorem~2 in the
+notation of the main text. It is \emph{not} a population
+identification result. Theorem~2A treats marginal coverage of split conformal when
+the drift $\kappa$ is known; Theorem~2B treats conditional (PAC) coverage when
+$\kappa$ is estimated; Corollary~2.2 gives a confidence lower bound on the marginal
+coverage rate using only $\hat\kappa$; and Remark~2.3 gives a fallback bound in
+expectation. None of these results depends on the POMDP identification of
+Theorem~1: when the scores are produced by the plug-in pipeline of Theorem~1, all
+statements are conditional on the fixed score function.
+
+\paragraph{Notation.}
+Let $E_1,\dots,E_n$ be i.i.d.\ with CDF $F_{\mathrm{cal}}$, let
+$E'_1,\dots,E'_m$ be i.i.d.\ with CDF $F_{\mathrm{test}}$, and let
+$E\sim F_{\mathrm{test}}$ be independent of the calibration sample. Write
+$\hat F_{\mathrm{cal}}$ and $\hat F_{\mathrm{test}}$ for the empirical CDFs, and
+write $\kappa:=\kappa_{\mathrm{conf}}$ and $\hat\kappa:=\hat\kappa_{\mathrm{conf}}$
+for the drift and its estimate used in the main text:
+\[
+\kappa=\sup_x\bigl|F_{\mathrm{cal}}(x)-F_{\mathrm{test}}(x)\bigr|,
+\qquad
+\hat\kappa=\sup_x\bigl|\hat F_{\mathrm{cal}}(x)-\hat F_{\mathrm{test}}(x)\bigr|,
+\]
+where $\hat\kappa$ is the two-sample Kolmogorov--Smirnov statistic.
+
+Fix $\alpha\in(0,1)$ and set $k=\lceil(n+1)(1-\alpha)\rceil$. If $k\le n$, let
+$\hat q:=E_{(k)}$ be the $k$-th order statistic of the calibration scores; if
+$k>n$, set $\hat q:=+\infty$. The prediction set is
+$C(x)=\{y:s(x,y)\le\hat q\}$ and $E=s(X,Y)$ is the conformity score; only the
+marginal law of the scores is used and the specific form of $s$ is irrelevant.
+Raw, studentized and CQR scores are special cases. Let
+$\delta_{\mathrm{cal}},\delta_\kappa\in(0,1)$ be confidence parameters, and let
+\[
+\gamma:=\Pr\{E\le\hat q\}
+\]
+be the \emph{marginal coverage rate} of the split-conformal procedure, where the
+probability is over the calibration sample and the new test point. Given
+$F_{\mathrm{cal}},F_{\mathrm{test}},n,k$, $\gamma$ is a constant; it does not vary
+with a particular calibration draw.
+
+\paragraph{Reading convention.}
+The coverage probability in Theorem~2A is taken over the calibration sample and the
+new test point (marginal coverage), i.e.\ it is $\gamma$; it is \emph{not} a
+pathwise lower bound on $F_{\mathrm{cal}}(\hat q)$ for every calibration sample.
+The quantity $F_{\mathrm{test}}(\hat q)$ in Theorem~2B is the conditional coverage
+given the data, and its $1-\delta$ lower bound holds with probability over the
+calibration and test-score samples; it does \emph{not} imply an unconditional bound
+of the same value on $\Pr\{E\le\hat q\}$. Corollary~2.2 combines the constant bound
+of 2A with a confidence upper bound on $\kappa$ and yields a $1-\delta_\kappa$ lower
+confidence bound on $\gamma$; Remark~2.3 gives an unconditional bound in
+expectation.
+
+\begin{aIIIthmA}
+Let $E_1,\dots,E_n$ be i.i.d.\ $F_{\mathrm{cal}}$ and let $E$ be independent of the
+calibration sample with $E\sim F_{\mathrm{test}}$. Set
+$\kappa=\sup_x|F_{\mathrm{cal}}(x)-F_{\mathrm{test}}(x)|$. Then for
+$k=\lceil(n+1)(1-\alpha)\rceil\le n$,
+\begin{equation}\label{eq:a3-2.1}
+\Pr\{E\le\hat q\}\;\ge\;\max\!\Bigl(0,\;\frac{k}{n+1}-\kappa\Bigr)
+\;\ge\;\max\!\bigl(0,\;1-\alpha-\kappa\bigr).
+\aIIIfixedtag{2.1}
+\end{equation}
+If $k>n$, then $\hat q=+\infty$ and the coverage is $1$.
+\end{aIIIthmA}
+
+The calibration and test distributions need not be exchangeable; only the i.i.d.\
+calibration sample and the independence of the test point are required. The term
+$k/(n+1)$ is the standard finite-sample term of split conformal
+\cite{vovk2005,lei2018} (with equality in the continuous case), and $-\kappa$ is
+the price of drift. This is the exact form of Proposition~7; no ``ignoring
+finite-sample terms'' is involved. If only an upper bound
+$\bar\kappa\ge\kappa$ is known (the original $\kappa_{\mathrm{conf}}$ formulation),
+replace $\kappa$ by $\bar\kappa$ in \eqref{eq:a3-2.1}.
+
+\begin{aIIIremA}
+The proof only uses
+$|F_{\mathrm{test}}(\hat q)-F_{\mathrm{cal}}(\hat q)|\le\kappa$ at the random
+threshold $\hat q$; the supremum over $x$ is taken so that $\kappa$ is estimable by
+a two-sample KS statistic. More precisely, 2A only needs the one-sided inequality
+$F_{\mathrm{cal}}(\hat q)-F_{\mathrm{test}}(\hat q)\le\kappa$. When the direction of
+drift is known, the sharper one-sided quantity
+$\kappa^+:=\sup_x(F_{\mathrm{cal}}(x)-F_{\mathrm{test}}(x))$ can replace $\kappa$;
+its estimated version requires a one-sided DKW inequality and is not developed
+here. A local CDF difference near $\hat q$ would give a smaller quantity, but the
+result would no longer be a distribution-free KS bound.
+\end{aIIIremA}
+
+\begin{aIIIthmB}
+In the setting of 2A, suppose in addition that $E'_1,\dots,E'_m$ are i.i.d.\
+$F_{\mathrm{test}}$, independent of the calibration sample and of $E$, and let
+$\hat\kappa$ be the two-sample KS statistic. For any
+$\delta_{\mathrm{cal}},\delta_\kappa\in(0,1)$, with probability at least
+$1-\delta_{\mathrm{cal}}-\delta_\kappa$ (over the calibration and test-score
+samples),
+\begin{equation}\label{eq:a3-2.2}
+F_{\mathrm{test}}(\hat q)\;\ge\;
+\max\!\Bigl(0,\;\frac{k}{n}-\varepsilon_{\mathrm{cal}}-\hat\kappa-\varepsilon_\kappa\Bigr),
+\aIIIfixedtag{2.2}
+\end{equation}
+where
+\begin{equation}\label{eq:a3-2.3}
+\varepsilon_{\mathrm{cal}}=\sqrt{\frac{\ln(2/\delta_{\mathrm{cal}})}{2n}},
+\qquad
+\varepsilon_\kappa=\sqrt{\frac{\ln(4/\delta_\kappa)}{2n}}
++\sqrt{\frac{\ln(4/\delta_\kappa)}{2m}}.
+\aIIIfixedtag{2.3}
+\end{equation}
+\end{aIIIthmB}
+
+This is a PAC bound on \emph{conditional} coverage, not an unconditional marginal
+bound; for the PAC/risk-control reading of such statements see
+\cite{bates2021}. Equation~\eqref{eq:a3-2.2} says that, with probability at least
+$1-\delta_{\mathrm{cal}}-\delta_\kappa$ over the calibration and test-score samples,
+the coverage probability
+$F_{\mathrm{test}}(\hat q)=\Pr\{E\le\hat q\mid\text{data}\}$ of a new test point is
+at least the right-hand side. It does not imply that $\Pr\{E\le\hat q\}$, with the
+probability also over the data, is bounded below by the same value. To see the
+distinction, write the right-hand side as the random variable $b$: on the good event
+$A\cap B$ we have $F_{\mathrm{test}}(\hat q)\ge b$, and on the bad event
+$F_{\mathrm{test}}(\hat q)\ge0$, so the unconditional coverage is at least
+$\mathbb E[b\,\mathbf 1_{A\cap B}]$. Since $b\le1$, its worst case (with the bad
+event concentrated where $b$ is largest) is $\mathbb E[b]-\delta$; when $b$ is
+constant this reduces to $(1-\delta)b$. Note that $(1-\delta)\mathbb E[b]$ is
+generally \emph{not} valid for random $b$: if $b\in\{0,1\}$ and
+$\Pr\{b=1\}=p\le\delta$, the left-hand side can be $0$. The exact expectation bound
+is Remark~2.3; for a marginal confidence bound that uses only $\hat\kappa$, see
+Corollary~2.2.
+
+\paragraph{Why $k/n$ rather than $k/(n+1)$.}
+The term $k/(n+1)$ in 2A is an identity in \emph{expectation},
+$\mathbb E[F_{\mathrm{cal}}(\hat q)]\ge k/(n+1)$ (Lemma~1). Theorem~2B needs a
+pathwise lower bound given the data and can only use
+$\hat F_{\mathrm{cal}}(\hat q)\ge k/n$ (the $k$-th order statistic is exceeded by at
+most $n-k$ calibration scores) together with the calibration DKW slack
+$\varepsilon_{\mathrm{cal}}$. The difference is $k/(n(n+1))\le1/n$, about $0.007$
+at $n=128$.
+
+\begin{aIIIremB}
+If the test scores \emph{and their coverage outcomes} are observable, then
+$\hat F_{\mathrm{test}}(\hat q)$ is the empirical coverage on the test sample and,
+for any $\delta\in(0,1)$, the one-sample DKW inequality gives
+\begin{equation}\label{eq:a3-2.4}
+F_{\mathrm{test}}(\hat q)\;\ge\;
+\hat F_{\mathrm{test}}(\hat q)-\sqrt{\frac{\ln(2/\delta)}{2m}}
+\quad\text{with probability }1-\delta,
+\aIIIfixedtag{2.4}
+\end{equation}
+where the probability is over the $m$ test scores and $\hat q$ is held fixed
+(calibration and test are independent).
+This bound is typically sharper than \eqref{eq:a3-2.2} (about $0.75$ for the
+studentized score in our experiment, versus $0.38$ for \eqref{eq:a3-2.2}), but it
+uses only the coverage on the test sample itself and does not transfer to a
+deployment setting without test labels. The value of $\kappa$ is that it is a
+transferable drift quantity. The main text reports the PAC bound
+\eqref{eq:a3-2.2} and the $\hat\kappa$-based marginal confidence bound of
+Corollary~2.2; the direct test-CDF bound is stated here and is not part of the
+main-text table.
+\end{aIIIremB}
+
+\begin{aIIIremC}
+With the notation of 2B, let
+$b:=\max(0,k/n-\varepsilon_{\mathrm{cal}}-\hat\kappa-\varepsilon_\kappa)$ and
+$\delta:=\delta_{\mathrm{cal}}+\delta_\kappa$. Then
+\begin{equation}\label{eq:a3-2.5}
+\Pr\{E\le\hat q\}\;\ge\;\max\!\bigl(0,\;\mathbb E[b]-\delta\bigr).
+\aIIIfixedtag{2.5}
+\end{equation}
+Indeed, on the good event $A\cap B$ (probability at least $1-\delta$) we have
+$F_{\mathrm{test}}(\hat q)\ge b$, while on the bad event
+$F_{\mathrm{test}}(\hat q)\ge0$; hence pathwise
+$F_{\mathrm{test}}(\hat q)\ge b\,\mathbf 1_{A\cap B}$. Taking expectations and using
+$b\le1$,
+$\mathbb E[F_{\mathrm{test}}(\hat q)]\ge\mathbb E[b]-\Pr\{(A\cap B)^c\}\ge
+\mathbb E[b]-\delta$. The bound involves $\mathbb E[b]$, not the observed $b$; in
+practice one estimates $\mathbb E[b]$ by bootstrap and reports a CI, but this is
+\emph{heuristic} ($\hat\kappa$ is a sup-type statistic and the bootstrap is biased
+for non-pivotal functionals). The bound is usually weaker than
+\eqref{eq:a3-2.2} and Corollary~2.2; the main text therefore states
+\eqref{eq:a3-2.2} as the conditional PAC bound and keeps \eqref{eq:a3-2.5} in the
+appendix as a fallback unconditional statement in expectation. For a marginal
+confidence bound that uses only $\hat\kappa$, use Corollary~2.2.
+\end{aIIIremC}
+
+\begin{aIIIcorA}
+Replacing $\kappa$ by $\hat\kappa$ and $k/(n+1)$ by $1-\alpha$ in 2A gives
+$\max(0,1-\alpha-\hat\kappa)$. This is a \emph{plug-in point estimate}: it neither
+accounts for the sampling error of $\hat\kappa$ nor retains the finite-sample term
+$k/(n+1)$. Finite-sample \emph{conditional} coverage requires 2B; finite-sample
+\emph{marginal} coverage requires 2A (if $\kappa$ is known), Corollary~2.2 (a
+confidence bound with estimated $\kappa$), or the expectation bound of Remark~2.3.
+Substituting $\hat\kappa$ directly does not give a guarantee.
+\end{aIIIcorA}
+
+This is precisely the risk of using an estimator as an upper bound. The quantity
+$\max(0,1-\alpha-\hat\kappa)$ is an estimate whose uncertainty is
+described by a bootstrap CI; the distribution-free conditional PAC lower bound is
+\eqref{eq:a3-2.2}; the marginal coverage confidence lower bound that uses only
+$\hat\kappa$ is Corollary~2.2; and the fallback in expectation is
+\eqref{eq:a3-2.5} (weaker than Corollary~2.2 and requiring an estimate of
+$\mathbb E[b]$). At $n=128$, \eqref{eq:a3-2.2} is empty for the raw and CQR scores,
+whereas Corollary~2.2 still gives a small positive bound for CQR; see the main
+text.
+
+\begin{aIIIcorB}
+In the setting of 2A, let $\gamma:=\Pr\{E\le\hat q\}$ be the marginal coverage rate
+of the split-conformal procedure (probability over the calibration sample and an
+independent new test point; given $F_{\mathrm{cal}},F_{\mathrm{test}},n,k$ it is a
+constant). Let $E'_1,\dots,E'_m$ be test scores used for $\hat\kappa$, and let
+$\varepsilon_\kappa$ be as in \eqref{eq:a3-2.3}. Then for any
+$\delta_\kappa\in(0,1)$, with probability at least $1-\delta_\kappa$ over the
+calibration and test-score samples,
+\begin{equation}\label{eq:a3-2.6}
+\gamma\;\ge\;
+\max\!\Bigl(0,\;\frac{k}{n+1}-\hat\kappa-\varepsilon_\kappa\Bigr).
+\aIIIfixedtag{2.6}
+\end{equation}
+\end{aIIIcorB}
+\begin{proof}
+By 2A, $\gamma\ge k/(n+1)-\kappa$. This is a deterministic inequality for the
+\emph{constant} $\gamma$, not a pathwise lower bound on $F_{\mathrm{cal}}(\hat q)$
+for an individual calibration sample. By Lemma~3, the event
+$A=\{\kappa\le\hat\kappa+\varepsilon_\kappa\}$ has probability at least
+$1-\delta_\kappa$. On $A$,
+$\gamma\ge k/(n+1)-\kappa\ge k/(n+1)-\hat\kappa-\varepsilon_\kappa$.
+\end{proof}
+
+\paragraph{Reading notes.}
+\begin{enumerate}
+\item The object of \eqref{eq:a3-2.6} is the \emph{average coverage rate} $\gamma$
+  of the procedure, not the coverage probability of the particular interval in
+  hand. It answers ``what is the marginal coverage of this split-conformal
+  procedure over repeated calibration draws, at confidence $1-\delta_\kappa$''
+  and not ``given this batch of data, what is the conditional coverage of the next
+  test point'' (the latter is 2B).
+\item Equation~\eqref{eq:a3-2.1} must \emph{not} be read as the pathwise statement
+  $F_{\mathrm{cal}}(\hat q)\ge k/(n+1)$. The term $k/(n+1)$ comes from the
+  \emph{expectation} in Lemma~1, and $F_{\mathrm{cal}}(\hat q)$ can fall below it
+  for an individual calibration sample. The proof of Corollary~2.2 applies 2A only
+  to the constant $\gamma$ and makes no assertion about the realized
+  $F_{\mathrm{cal}}(\hat q)$. This is the most common place to err.
+\item Numerically, \eqref{eq:a3-2.6} is usually stronger than \eqref{eq:a3-2.2}
+  (it omits $\varepsilon_{\mathrm{cal}}$, uses $k/(n+1)$ instead of $k/n$, and
+  spends confidence only on $\delta_\kappa$), but it concerns a \emph{marginal}
+  object and does not replace the conditional semantics of 2B. The two are
+  reported side by side.
+\item If $\kappa$ is known, \eqref{eq:a3-2.6} reduces to 2A. If $\hat\kappa$ comes
+  from a sample that overlaps the evaluated test points (for example a pooled
+  two-sample KS statistic), \eqref{eq:a3-2.6} remains a valid confidence bound:
+  $\gamma$ is a population constant, so the overlap affects only the honesty of
+  $m$, not validity. The strict version uses the fold's own $n_{\mathrm{cal}}$
+  scores at $\tau=2$ and the fold's own $m$ scores at $\tau=81$; see the
+  implementation notes below.
+\item The proof only requires each sample to be i.i.d.\ \emph{within itself} (the
+  two one-sample DKW inequalities are applied separately); independence between
+  the two samples and of $E$ is a sufficient condition, not a necessary one (the
+  union bound does not require independence).
+\end{enumerate}
+
+\paragraph{Relation to conditional coverage.}
+Theorem~2A is \emph{marginal}: it averages over the test point according to
+$F_{\mathrm{test}}$ and does not condition on $X$, regime or branch.
+Corollary~2.2 is a confidence lower bound on the same marginal object $\gamma$
+with estimated $\kappa$, and Theorem~2B is a PAC lower bound on the
+\emph{conditional} coverage given the data. None of the three is a
+branch-conditional coverage guarantee; see \cite{barber2021} for the limits
+of distribution-free conditional inference. The drift $\kappa$ is a
+one-dimensional KS distance between marginal score CDFs and is \emph{not} a
+sufficient statistic for conditional coverage; the non-identifiability and minimax
+lower bounds for branch-conditional coverage are in Theorem~3 and Proposition~2
+(Propositions~8--12). In particular, \eqref{eq:a3-2.1}, \eqref{eq:a3-2.2} and
+\eqref{eq:a3-2.6} must not be used to claim that every regime is covered.
+
+\subsubsection{Auxiliary lemmas}
+
+\begin{aIIIlemA}
+Let $E_1,\dots,E_n$ be i.i.d.\ $F$, let $E^*$ be an independent copy, and let
+$E_{(k)}$ be the $k$-th order statistic ($1\le k\le n$). Then
+\begin{equation}\label{eq:a3-3.1}
+\mathbb E\bigl[F(E_{(k)})\bigr]\;\ge\;\frac{k}{n+1}.
+\aIIIfixedtag{3.1}
+\end{equation}
+\end{aIIIlemA}
+\begin{proof}
+Sort the $n+1$ i.i.d.\ variables $E^*,E_1,\dots,E_n$, breaking ties uniformly at
+random, and let $R$ be the rank of $E^*$ (with $1$ the smallest). By
+exchangeability, $R$ is uniform on $\{1,\dots,n+1\}$. If $R\le k$, then $E^*$ lies
+among the first $k$ in the tie-broken order, so $E^*\le E_{(k)}$ (ties only make the
+inequality easier). Therefore
+\[
+\mathbb E[F(E_{(k)})]
+=\Pr\{E^*\le E_{(k)}\}
+\ge\Pr\{R\le k\}
+=\frac{k}{n+1}.
+\]
+In the continuous case $F(E_{(k)})\sim\mathrm{Beta}(k,n+1-k)$ and the expectation
+equals $k/(n+1)$; with ties, random tie-breaking leaves the conclusion unchanged.
+A discrete example shows the bound can be conservative: for a Bernoulli$(1/2)$
+law with $n=k=1$, $\mathbb E[F(E_{(1)})]=3/4>1/2$.
+\end{proof}
+
+\begin{aIIIlemB}[\cite{massart1990}]
+Let $E_1,\dots,E_N$ be i.i.d.\ $F$ and let $\hat F_N$ be the
+empirical CDF. Then for every $\varepsilon>0$,
+\begin{equation}\label{eq:a3-3.2}
+\Pr\Bigl\{\sup_x|\hat F_N(x)-F(x)|>\varepsilon\Bigr\}
+\le 2e^{-2N\varepsilon^2}.
+\aIIIfixedtag{3.2}
+\end{equation}
+Equivalently, with probability at least $1-\delta$,
+$\sup_x|\hat F_N-F|\le\sqrt{\ln(2/\delta)/(2N)}$.
+\end{aIIIlemB}
+
+\begin{aIIIlemC}
+Under the independent-sample setting of 2B, for every
+$\delta_\kappa\in(0,1)$,
+\begin{equation}\label{eq:a3-3.3}
+\Pr\{\kappa\le\hat\kappa+\varepsilon_\kappa\}\;\ge\;1-\delta_\kappa,
+\qquad
+\varepsilon_\kappa=
+\sqrt{\frac{\ln(4/\delta_\kappa)}{2n}}
++\sqrt{\frac{\ln(4/\delta_\kappa)}{2m}}.
+\aIIIfixedtag{3.3}
+\end{equation}
+\end{aIIIlemC}
+\begin{proof}
+By the triangle inequality,
+\[
+\sup_x\bigl|(F_{\mathrm{cal}}-F_{\mathrm{test}})
+-(\hat F_{\mathrm{cal}}-\hat F_{\mathrm{test}})\bigr|
+\le
+\sup_x|\hat F_{\mathrm{cal}}-F_{\mathrm{cal}}|
++\sup_x|\hat F_{\mathrm{test}}-F_{\mathrm{test}}|.
+\]
+Apply Lemma~2 to the two terms with failure probability $\delta_\kappa/2$ each:
+each term is at most $\sqrt{\ln(4/\delta_\kappa)/(2n)}$ and
+$\sqrt{\ln(4/\delta_\kappa)/(2m)}$, respectively, with probability at least
+$1-\delta_\kappa/2$; the union bound gives \eqref{eq:a3-3.3}.
+\end{proof}
+
+\begin{aIIIremD}
+The frequently cited form $2\exp(-2nm\varepsilon^2/(n+m))$ is the \emph{two-sample}
+DKWM inequality. \cite{weiDudley2012} show that, for equal sample sizes, the
+constant $2$ is valid \emph{if and only if} $n\ge458$; there are counterexamples for
+smaller samples. We therefore do not use that form and instead combine two
+\emph{one-sample} DKW inequalities as in \eqref{eq:a3-3.3}, which is valid for all
+$n,m$ at the price of a larger slack. At $n=m=128$ the price is $0.28$ versus
+$0.19$, but it buys a genuine finite-sample guarantee; moreover
+$n=m=128<458$ lies exactly in the uncovered regime of the constant-$2$
+two-sample form.
+\end{aIIIremD}
+
+\subsubsection{Proof of Theorem~2A}
+
+Given the calibration sample, $\hat q$ is fixed and $E$ is independent of the
+calibration sample, so
+\[
+\Pr\{E\le\hat q\mid E_1,\dots,E_n\}=F_{\mathrm{test}}(\hat q)
+\ge F_{\mathrm{cal}}(\hat q)-\kappa.
+\]
+Taking expectations and applying Lemma~1,
+\[
+\Pr\{E\le\hat q\}
+\ge \mathbb E[F_{\mathrm{cal}}(\hat q)]-\kappa
+\ge \frac{k}{n+1}-\kappa.
+\]
+The second inequality in \eqref{eq:a3-2.1} follows from
+$k\ge(n+1)(1-\alpha)$; negative values are replaced by $\max(0,\cdot)$. If $k>n$,
+then $\hat q=+\infty$ and the coverage is $1$. Note that the second inequality is a
+\emph{marginal} statement after taking expectations: the left-hand side
+$\Pr\{E\le\hat q\}$ is the constant $\gamma$, while the intermediate
+$F_{\mathrm{cal}}(\hat q)$ is random. One must not read $k/(n+1)$ as a pathwise
+lower bound on $F_{\mathrm{cal}}(\hat q)$.
+
+\subsubsection{Proof of Theorem~2B}
+
+Assume first that $k\le n$. If $k>n$, then $\hat q=+\infty$ and
+$F_{\mathrm{test}}(\hat q)=1$, while the right-hand side of \eqref{eq:a3-2.2} does
+not exceed $1$ (for $n\ge3$, $\varepsilon_{\mathrm{cal}}\ge1/n$ because
+$\sqrt{\ln2/(2n)}\ge1/n$ iff $n\ge2/\ln2\approx2.885$; for $n=1,2$ the claim is
+immediate), so the conclusion is trivial. Define the events
+$B=\{\sup_x|\hat F_{\mathrm{cal}}-F_{\mathrm{cal}}|\le\varepsilon_{\mathrm{cal}}\}$
+and $A=\{\kappa\le\hat\kappa+\varepsilon_\kappa\}$. By Lemma~2,
+$\Pr\{B\}\ge1-\delta_{\mathrm{cal}}$; by Lemma~3, $\Pr\{A\}\ge1-\delta_\kappa$;
+hence $\Pr\{A\cap B\}\ge1-\delta_{\mathrm{cal}}-\delta_\kappa$.
+
+On $B$, $F_{\mathrm{cal}}(\hat q)\ge\hat F_{\mathrm{cal}}(\hat q)-\varepsilon_{\mathrm{cal}}$;
+since $\hat q$ is the $k$-th order statistic,
+$\hat F_{\mathrm{cal}}(\hat q)\ge k/n$ (this remains true with ties). On $A$,
+$\kappa\le\hat\kappa+\varepsilon_\kappa$. Therefore
+\[
+F_{\mathrm{test}}(\hat q)
+\ge F_{\mathrm{cal}}(\hat q)-\kappa
+\ge \frac{k}{n}-\varepsilon_{\mathrm{cal}}-\hat\kappa-\varepsilon_\kappa.
+\]
+Taking probabilities over $A\cap B$ gives \eqref{eq:a3-2.2}. An unconditional
+marginal bound cannot be read directly from the same display: one either takes a
+further expectation as in Remark~2.3, or combines the constant bound of 2A with
+$A$ as in Corollary~2.2 (the latter is stronger but applies only to the marginal
+coverage rate $\gamma$).
+
+\subsubsection{Implementation notes and limitations}
+
+\begin{enumerate}
+\item \textbf{Leave-fold-out split conformal, not CV+.} The code
+  \path{_cross_tau_detail} (\path{policy_value_check.py}:1982--1987) takes, for
+  each fold $f$, the calibration set \path{cal = cal_scores[cal_folds != f]} and
+  the quantile \path{q = conformal_quantile(cal, alpha)}, and declares coverage
+  when \path{test_scores[test_folds == f] <= q}. Thus the $\hat q$ of every test
+  point \emph{is} the $k$-th order statistic of a single split, with
+  $n_{\mathrm{cal}}=100$ or $104$ ($k=91$ or $95$), not a CV+ aggregate quantile.
+  Theorem~2A applies exactly per fold, provided the scores within a $\tau$ are
+  i.i.d.; the fold assignment groups the four windows of the same seed into one
+  fold, so the calibration and test sides come from different seeds, and i.i.d.\
+  within the calibration set invokes the standing assumption that the 128 paths
+  are mutually independent. The five fold coverages average five valid
+  split-conformal coverages. The figures with $n=m=128$ are a balanced reference;
+  with the pooled $\hat\kappa$, the exact per-fold 2A bounds are $0.784$--$0.788$
+  for the studentized score (versus $0.790$); with the strict per-fold
+  $\hat\kappa$ they fall to $0.552$--$0.783$ (Table~\ref{tab:a3-strict}). The real
+  limitations are not that ``the quantile is not an order statistic'', but that
+  $\hat\kappa$ in the pooled row is pooled over all $128+128$ scores and overlaps
+  the evaluated test fold, that the five folds share data and are correlated, and
+  that a single dataset cannot validate the 95\% PAC frequency.
+\item \textbf{Paired samples.} The scores at $\tau=2$ and $\tau=81$ are paired by
+  path. The leave-fold-out protocol holds out entire paths, so the calibration set
+  (scores at $\tau=2$ from the other folds) and the test points (scores at
+  $\tau=81$ from the held-out fold) come from different paths and are independent;
+  pairing does \emph{not} break the independence required by the theorem. It
+  affects the bootstrap SE of $\hat\kappa$ (\texttt{bootstrap\_ks} resamples paths
+  in pairs, which is correct) and the fact that all numbers come from the same
+  paths. If $\hat\kappa$ is pooled over all 128 paths, the two one-sample DKW
+  bounds in Lemma~3 still hold separately (the union bound does not require the
+  two samples to be independent). The strict version uses the fold's own
+  calibration set ($n_{\mathrm{cal}}$ scores at $\tau=2$) and the fold's own
+  $m=24$--$28$ scores at $\tau=81$; overlap of $\hat\kappa$ with the evaluated
+  test fold does \emph{not} affect the validity of \eqref{eq:a3-2.2} or
+  \eqref{eq:a3-2.6} (both $F_{\mathrm{test}}(\hat q)$ and $\gamma$ are population
+  quantities); non-overlap is required only for the PAC-frequency validation in
+  item~7. Table~\ref{tab:a3-strict} lists the five folds. The 2B values are
+  $0.345$--$0.354$ with the pooled $\hat\kappa$ and $m=128$, $0.170$--$0.184$ with
+  the fold's $m$ but the pooled $\hat\kappa$ (the old ``strict'' row), and
+  $0.000$--$0.165$ with the strict per-fold $\hat\kappa$; only the last is the
+  strict row, and fold~3 (zero-based) is empty.
+\item \textbf{Fixed model.} The score functions (the $h$ of G0 and
+  $\kappa/\mu/\text{jump}$) are fixed between calibration and test. If they are
+  re-estimated within folds, the coverage guarantee is conditional on the fitted
+  model and does not cover model uncertainty.
+\item \textbf{Marginal, conditional, PAC and expectation must not be conflated.}
+  2A is an exact finite-sample marginal lower bound with known $\kappa$; Corollary~2.2 is a confidence
+  lower bound on the \emph{marginal coverage rate} $\gamma$ with estimated
+  $\kappa$; 2B is a PAC bound on \emph{conditional} coverage given the data; and
+  Remark~2.3 is an unconditional bound in expectation. They are different objects
+  and cannot substitute for one another. The statistic $\hat\kappa$ is a KS
+  distance between marginal score distributions; within-group coverage
+  (EXTENDED/WEEKEND etc.) is only a descriptive diagnostic, not a conditional
+  guarantee. The boundary for branch-conditional coverage is in
+  Theorem~3/Proposition~2.
+\item \textbf{Unlabeled deployment.} The estimate $\hat\kappa$ requires test
+  scores. If no immediate labels are available at deployment, one can only use a
+  proxy distribution or a conservative upper bound.
+\item \textbf{The supremum over $x$ is conservative.} Under one-sided drift (for
+  example the scale change from $\tau=2$ to $\tau=81$), the sup-norm $\kappa$
+  exceeds the local CDF difference at the threshold, so the bound is loose; this
+  is the price paid for estimability.
+\item \textbf{Single-dataset PAC frequency versus the independent check.} The
+  original batch of 128 paths and five correlated folds does not validate the
+  95\% frequency. Table~A3 therefore uses 100 independent three-sample
+  replicates ($n=m=64$, final $N=256$), with the radius, $\hat\kappa$, and
+  final evaluation separated by independent seeds. The below-bound column
+  compares noisy final-sample coverage with the bound; it is a tightness
+  diagnostic, not a direct estimate of the population event
+  $\{F_{\mathrm{test}}(\hat q)\ge b\}$ or an exact PAC-violation frequency.
+\end{enumerate}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Strict per-fold quantities for the Wide rebalance studentized score
+($\tau=2\to81$, $\alpha=0.1$). $\hat\kappa$ is the two-sample KS distance between
+the fold's own calibration scores at $\tau=2$ and its own test scores at
+$\tau=81$; 2A treats $\hat\kappa$ as known, 2B uses
+$\delta_{\mathrm{cal}}=\delta_\kappa=0.025$, and Cor.~2.2 uses $\delta_\kappa=0.05$.
+Source: \texttt{results/theorem2\_bounds.json}, written by
+\texttt{code/theorem2\_bounds.py}.}
+\label{tab:a3-strict}
+\begin{tabular}{@{}rrrrrrr@{}}
+\toprule
+Fold & $n_{\mathrm{cal}}$ & $m$ & $k$ & $\hat\kappa$ & 2A & 2B / Cor.~2.2 \\
+\midrule
+0 & 100 & 28 & 91 & 0.186 & 0.715 & 0.116 / 0.288 \\
+1 & 100 & 28 & 91 & 0.256 & 0.645 & 0.046 / 0.218 \\
+2 & 104 & 24 & 95 & 0.122 & 0.783 & 0.165 / 0.336 \\
+3 & 104 & 24 & 95 & 0.353 & 0.552 & 0.000 / 0.105 \\
+4 & 104 & 24 & 95 & 0.154 & 0.751 & 0.133 / 0.304 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Independent three-sample check.} Table~\ref{tab:14} separates radius
+construction, drift estimation, and final evaluation into three independently
+seeded samples. This checks out-of-sample coverage and tightness without using
+final-test scores to compute $\hat\kappa$. It does not convert the finite final
+sample into a direct observation of the population PAC event.
+\input{tables/table14}
+
+\paragraph{Relation to the other results.}
+Theorem~1 gives population identification and plug-in consistency for $V^\pi$.
+Theorem~2A and Corollary~2.2 give \emph{marginal} coverage at the score level
+(exact bound and confidence bound with estimated $\kappa$), and Theorem~2B gives
+\emph{conditional} (PAC) coverage. The two are on different tracks: Theorem~1 does
+not imply a finite-sample rate, and Theorem~2 does not rely on the identification
+assumptions (only on a fixed score function). Theorem~3/Proposition~2 show that
+marginal coverage cannot be upgraded to branch-conditional coverage; the KS bound
+on $\kappa$ concerns only the \emph{marginal} score distribution and cannot be used
+to refute those impossibility results. Theorem~4 (Proposition~11) is a
+within-class non-identification result on the identification side: in the
+non-Markov freeze class with a bridge reward not determined by endpoints,
+dropping I5/I5$'$ yields observationally equivalent models with different
+values. It does not assert general necessity of I5 and has no direct
+dependence on Theorem~2.
+
+\let\theHequation\aIIItheHequation

@@ -1,0 +1,405 @@
+{
+ "config": {
+  "symbols": [
+   "SPY",
+   "QQQ",
+   "TSLA",
+   "NVDA"
+  ],
+  "price_source": "Yahoo Finance chart API, interval=1h, range=1y, includePrePost=true",
+  "price_window": "2025-10-22 to 2026-10-21 (per fetched cache)",
+  "freeze_source": "p2-market-structure/data/oracle_stale_intervals.csv",
+  "freeze_filter": "weekend gaps >=40 h; holiday = longest gap per labelled holiday",
+  "sigma_session": "regular 09:30--16:00 ET, consecutive bars <=90 min; bar timestamps are interval starts, so the 16:00 bar is excluded",
+  "sigma_247": "sqrt(sum r^2 / sum dt) over all consecutive bars, per elapsed hour",
+  "kappa": "1 - phi from AR(1) on consecutive regular-session log closes",
+  "jump": "|r| > 4 sigma_h on regular-session hourly returns",
+  "gap_benchmarks": "gap sd / (sigma_h*sqrt(tau)) and gap sd / (gamma*sigma_h*sqrt(1-exp(-tau/40))) for gamma=1,4",
+  "tau0_hours": 40.0,
+  "h_source": "P1 G0 diagnostic and observable-only estimates; not independently calibrated by the public-bar/feed-schedule inputs"
+ },
+ "symbols": {
+  "SPY": {
+   "n_bars": 4147,
+   "first_bar_et": "2025-10-22T04:00:00-04:00",
+   "last_bar_et": "2026-10-21T19:59:58-04:00",
+   "n_returns_pre": 1248,
+   "sigma_pre": 0.0015461940900134573,
+   "mean_pre": 1.3347613077614052e-06,
+   "n_returns_regular": 1494,
+   "sigma_regular": 0.002213774235077425,
+   "mean_regular": -1.8254752517938572e-05,
+   "n_returns_post": 649,
+   "sigma_post": 0.0011426797603902843,
+   "mean_post": 5.932533259923328e-05,
+   "kappa_ar1_regular": 0.0009023870415819646,
+   "kappa_ar1_regular_se": 0.0010296389942632794,
+   "ar1_phi_regular": 0.999097612958418,
+   "ar1_n": 1494,
+   "jump": {
+    "threshold_4sd": {
+     "n": 9,
+     "prob": 0.006024096385542169,
+     "cond_sd": 0.011054371004080018,
+     "cond_sd_ratio": 4.9934500225554395
+    },
+    "threshold_5sd": {
+     "n": 4,
+     "prob": 0.002677376171352075,
+     "cond_sd": 0.0013816350799491703,
+     "cond_sd_ratio": 0.6241083928329524
+    },
+    "sigma_h": 0.002213774235077425,
+    "n_regular_returns": 1494
+   },
+   "gaps": {
+    "overnight": {
+     "n": 198,
+     "gap_hours_median": 9.0,
+     "sd": 0.003502094845030907,
+     "median_abs": 0.001782757288590897,
+     "p99_abs": 0.011544228196308747,
+     "max_abs": 0.014192318817887184
+    },
+    "weekend": {
+     "n": 44,
+     "gap_hours_median": 57.0,
+     "sd": 0.005881829496787248,
+     "median_abs": 0.003809028285397975,
+     "p99_abs": 0.014256063353455257,
+     "max_abs": 0.015254755317960722
+    },
+    "holiday": {
+     "n": 8,
+     "gap_hours_median": 81.0,
+     "sd": 0.007838193076532248,
+     "median_abs": 0.0033236670250791356,
+     "p99_abs": 0.01689882791580009,
+     "max_abs": 0.01755796911009533
+    }
+   },
+   "sigma_h_regular": 0.002213774235077425,
+   "sigma_247": 0.0014668876271742353,
+   "annualized_vol_247": 0.13729315919677165,
+   "freeze": {
+    "p2_feed": "SPY-USD (24/5)",
+    "n_rows": 198,
+    "weekend": {
+     "n": 28,
+     "median_h": 56.06,
+     "p90_h": 60.681,
+     "max_h": 62.66
+    },
+    "holiday": {
+     "n": 5,
+     "median_h": 78.73,
+     "p90_h": 80.226,
+     "max_h": 80.77
+    }
+   },
+   "benchmarks": {
+    "tau_weekend": 56.06,
+    "gap_ratio_weekend": 0.3548563291581443,
+    "gap_over_g1_weekend": 3.0602641411291818,
+    "gap_over_g4_weekend": 0.7650660352822954,
+    "tau_holiday": 78.73,
+    "gap_ratio_holiday": 0.3990363899739957,
+    "gap_over_g1_holiday": 3.817314567276325,
+    "gap_over_g4_holiday": 0.9543286418190813
+   }
+  },
+  "QQQ": {
+   "n_bars": 4128,
+   "first_bar_et": "2025-10-22T04:00:00-04:00",
+   "last_bar_et": "2026-10-21T19:59:52-04:00",
+   "n_returns_pre": 1236,
+   "sigma_pre": 0.002082491580139164,
+   "mean_pre": -2.308393744254338e-05,
+   "n_returns_regular": 1495,
+   "sigma_regular": 0.0030215228784400395,
+   "mean_regular": 5.8916071286202594e-06,
+   "n_returns_post": 646,
+   "sigma_post": 0.001679639499799169,
+   "mean_post": 6.882634358386739e-05,
+   "kappa_ar1_regular": 0.0007146972273597285,
+   "kappa_ar1_regular_se": 0.0009388779884273376,
+   "ar1_phi_regular": 0.9992853027726403,
+   "ar1_n": 1495,
+   "jump": {
+    "threshold_4sd": {
+     "n": 9,
+     "prob": 0.006020066889632107,
+     "cond_sd": 0.012626600097232172,
+     "cond_sd_ratio": 4.1788861462306945
+    },
+    "threshold_5sd": {
+     "n": 3,
+     "prob": 0.002006688963210702,
+     "cond_sd": 0.0017626787446889344,
+     "cond_sd_ratio": 0.5833742836324228
+    },
+    "sigma_h": 0.0030215228784400395,
+    "n_regular_returns": 1495
+   },
+   "gaps": {
+    "overnight": {
+     "n": 198,
+     "gap_hours_median": 9.0,
+     "sd": 0.005642505502628087,
+     "median_abs": 0.0030811100415983894,
+     "p99_abs": 0.0181889361104518,
+     "max_abs": 0.02549301976719054
+    },
+    "weekend": {
+     "n": 44,
+     "gap_hours_median": 57.0,
+     "sd": 0.008975121149173596,
+     "median_abs": 0.0061353069541607574,
+     "p99_abs": 0.019176566715931632,
+     "max_abs": 0.019610864393738936
+    },
+    "holiday": {
+     "n": 8,
+     "gap_hours_median": 81.0,
+     "sd": 0.010020791762684032,
+     "median_abs": 0.00513183919990956,
+     "p99_abs": 0.020465569620314754,
+     "max_abs": 0.021168857776495464
+    }
+   },
+   "sigma_h_regular": 0.0030215228784400395,
+   "sigma_247": 0.0021594593706511472,
+   "annualized_vol_247": 0.2021143226389439,
+   "freeze": {
+    "p2_feed": "QQQ-USD (24/5)",
+    "n_rows": 166,
+    "weekend": {
+     "n": 28,
+     "median_h": 55.375,
+     "p90_h": 58.315,
+     "max_h": 71.01
+    },
+    "holiday": {
+     "n": 5,
+     "median_h": 76.27,
+     "p90_h": 87.458,
+     "max_h": 91.49
+    }
+   },
+   "benchmarks": {
+    "tau_weekend": 55.375,
+    "gap_ratio_weekend": 0.3991696956780049,
+    "gap_over_g1_weekend": 3.4310172914601735,
+    "gap_over_g4_weekend": 0.8577543228650434,
+    "tau_holiday": 76.27,
+    "gap_ratio_holiday": 0.3797513069167061,
+    "gap_over_g1_holiday": 3.5941793587116733,
+    "gap_over_g4_holiday": 0.8985448396779183
+   }
+  },
+  "TSLA": {
+   "n_bars": 4128,
+   "first_bar_et": "2025-10-22T04:00:00-04:00",
+   "last_bar_et": "2026-10-21T19:59:57-04:00",
+   "n_returns_pre": 1236,
+   "sigma_pre": 0.00395978399320976,
+   "mean_pre": -0.00022256015695071028,
+   "n_returns_regular": 1495,
+   "sigma_regular": 0.006506375937715376,
+   "mean_regular": 5.5813223316700976e-05,
+   "n_returns_post": 646,
+   "sigma_post": 0.005495291748337815,
+   "mean_post": -0.0001384981039378356,
+   "kappa_ar1_regular": 0.0020057997667332073,
+   "kappa_ar1_regular_se": 0.0016582605356384162,
+   "ar1_phi_regular": 0.9979942002332668,
+   "ar1_n": 1495,
+   "jump": {
+    "threshold_4sd": {
+     "n": 5,
+     "prob": 0.0033444816053511705,
+     "cond_sd": 0.0373099105726323,
+     "cond_sd_ratio": 5.734361329531961
+    },
+    "threshold_5sd": {
+     "n": 3,
+     "prob": 0.002006688963210702,
+     "cond_sd": 0.04347819541767031,
+     "cond_sd_ratio": 6.682398286524015
+    },
+    "sigma_h": 0.006506375937715376,
+    "n_regular_returns": 1495
+   },
+   "gaps": {
+    "overnight": {
+     "n": 198,
+     "gap_hours_median": 9.0,
+     "sd": 0.009737205733833429,
+     "median_abs": 0.004749408652715115,
+     "p99_abs": 0.030659788898816816,
+     "max_abs": 0.04421035982961552
+    },
+    "weekend": {
+     "n": 44,
+     "gap_hours_median": 57.0,
+     "sd": 0.012038941268835356,
+     "median_abs": 0.009733350716332634,
+     "p99_abs": 0.025954781217478535,
+     "max_abs": 0.026650059966568662
+    },
+    "holiday": {
+     "n": 8,
+     "gap_hours_median": 81.0,
+     "sd": 0.015542629823631254,
+     "median_abs": 0.011651604839814755,
+     "p99_abs": 0.029889612650477564,
+     "max_abs": 0.031073750494253538
+    }
+   },
+   "sigma_h_regular": 0.006506375937715376,
+   "sigma_247": 0.004858478250708409,
+   "annualized_vol_247": 0.45472864831065374,
+   "freeze": {
+    "p2_feed": "TSLA-USD (24/5)",
+    "n_rows": 95,
+    "weekend": {
+     "n": 28,
+     "median_h": 52.07,
+     "p90_h": 54.651,
+     "max_h": 57.53
+    },
+    "holiday": {
+     "n": 5,
+     "median_h": 76.08,
+     "p90_h": 78.042,
+     "max_h": 78.19
+    }
+   },
+   "benchmarks": {
+    "tau_weekend": 52.07,
+    "gap_ratio_weekend": 0.25642204167218957,
+    "gap_over_g1_weekend": 2.1687023112415607,
+    "gap_over_g4_weekend": 0.5421755778103902,
+    "tau_holiday": 76.08,
+    "gap_ratio_holiday": 0.27387355456679086,
+    "gap_over_g1_holiday": 2.5899383150404303,
+    "gap_over_g4_holiday": 0.6474845787601076
+   }
+  },
+  "NVDA": {
+   "n_bars": 4128,
+   "first_bar_et": "2025-10-22T04:00:00-04:00",
+   "last_bar_et": "2026-10-21T19:59:57-04:00",
+   "n_returns_pre": 1236,
+   "sigma_pre": 0.003987868447760183,
+   "mean_pre": 7.984853141877499e-05,
+   "n_returns_regular": 1495,
+   "sigma_regular": 0.005767216080892653,
+   "mean_regular": -1.0760818807616243e-05,
+   "n_returns_post": 646,
+   "sigma_post": 0.004160465511135411,
+   "mean_post": -2.2810242607072588e-05,
+   "kappa_ar1_regular": 0.003613836229260925,
+   "kappa_ar1_regular_se": 0.0017077796833464864,
+   "ar1_phi_regular": 0.9963861637707391,
+   "ar1_n": 1495,
+   "jump": {
+    "threshold_4sd": {
+     "n": 7,
+     "prob": 0.0046822742474916385,
+     "cond_sd": 0.029294629721870444,
+     "cond_sd_ratio": 5.079509647458225
+    },
+    "threshold_5sd": {
+     "n": 2,
+     "prob": 0.0013377926421404682,
+     "cond_sd": 0.04469635004141758,
+     "cond_sd_ratio": 7.750073764272667
+    },
+    "sigma_h": 0.005767216080892653,
+    "n_regular_returns": 1495
+   },
+   "gaps": {
+    "overnight": {
+     "n": 198,
+     "gap_hours_median": 9.0,
+     "sd": 0.009104341740818292,
+     "median_abs": 0.004633643619383676,
+     "p99_abs": 0.029243959637379868,
+     "max_abs": 0.03298210528932799
+    },
+    "weekend": {
+     "n": 44,
+     "gap_hours_median": 57.0,
+     "sd": 0.011578089436413235,
+     "median_abs": 0.008954416157925582,
+     "p99_abs": 0.024666859230174244,
+     "max_abs": 0.024967781023941704
+    },
+    "holiday": {
+     "n": 8,
+     "gap_hours_median": 81.0,
+     "sd": 0.014813236885250004,
+     "median_abs": 0.008760500723489884,
+     "p99_abs": 0.03128571467307399,
+     "max_abs": 0.03265562885883355
+    }
+   },
+   "sigma_h_regular": 0.005767216080892653,
+   "sigma_247": 0.004226102549253528,
+   "annualized_vol_247": 0.39554152569563517,
+   "freeze": {
+    "p2_feed": "NVDA-USD (24/5)",
+    "n_rows": 118,
+    "weekend": {
+     "n": 28,
+     "median_h": 52.15,
+     "p90_h": 55.719,
+     "max_h": 56.86
+    },
+    "holiday": {
+     "n": 5,
+     "median_h": 76.0,
+     "p90_h": 77.596,
+     "max_h": 78.58
+    }
+   },
+   "benchmarks": {
+    "tau_weekend": 52.15,
+    "gap_ratio_weekend": 0.2779991833596339,
+    "gap_over_g1_weekend": 2.35211953981452,
+    "gap_over_g4_weekend": 0.58802988495363,
+    "tau_holiday": 76.0,
+    "gap_ratio_holiday": 0.29462998813997093,
+    "gap_over_g1_holiday": 2.7852495056376716,
+    "gap_over_g4_holiday": 0.6963123764094179
+   }
+  }
+ },
+ "h": {
+  "g0_true_s_diagnostic": {
+   "open_sd": 0.0004963508741068216,
+   "ext_phi": 0.8049098909749637,
+   "ext_sd": 0.0020159497023632543,
+   "stale_phi": 0.9784250924755432,
+   "stale_sd": 0.000796630359529454
+  },
+  "observable_only": {
+   "open_sd": 0.00041030144014348916,
+   "ext_phi": 0.7740608301014017,
+   "ext_sd": 0.002022731953099615,
+   "stale_phi": 0.9801730921650273,
+   "stale_sd": 0.0007975067179848264
+  }
+ },
+ "limits": [
+  "Yahoo hourly closes are consolidated market data, not the latent reference price of the AMM; they proxy the 24/5 equity reference.",
+  "The observation map h is not independently calibrated to real pool prices in this semi-synthetic check; the public bars and feed schedules used here calibrate return/freeze inputs, not a paired full-h estimation sample. The run therefore tests return/freeze calibration, not h external validity.",
+  "kappa is a local AR(1) estimate on a nonstationary price level; it is not a structural mean-reversion parameter.",
+  "Jump statistics use a fixed 4-sigma threshold and are descriptive; they do not identify a jump-diffusion mixture.",
+  "Weekend/holiday gap sd mixes latent price movement with market microstructure at the reopen; it is not a pure de-freeze jump.",
+  "The gap sd is measured across the market closure (~65 h on weekends), not the 52--56 h oracle stale interval used as tau; using the longer market duration in the denominator would lower the reported gap ratios, so they are conservative.",
+  "Sigma and the AR(1) use bar timestamps as interval starts; the 16:00 bar is after-hours and is excluded from the regular session. The 40--70 h gap bucket is duration-based and can contain midweek holiday closures.",
+  "P2's holiday labels include short partial gaps (e.g. 24 h weekday outages inside a holiday week); the table takes the longest gap per labelled holiday to recover the closure."
+ ]
+}

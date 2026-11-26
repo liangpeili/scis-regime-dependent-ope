@@ -1,0 +1,3412 @@
+{
+  "generated_at": "2026-10-30T10:23:22.289685+00:00",
+  "sample": {
+    "kind": "case",
+    "window": "2026-07-01T00:00Z/2026-10-20T00:00Z",
+    "n_events": 33,
+    "n_dates": 16,
+    "n_weekend": 14,
+    "n_holiday": 2,
+    "by_symbol": {
+      "NVDAon": 3,
+      "SPYon": 15,
+      "TSLAon": 15
+    },
+    "thin": 16,
+    "nonthin": 17,
+    "pre_hours": 24.0,
+    "post_hours": 24.0,
+    "draws": 256,
+    "alpha": 0.1
+  },
+  "parameters": {
+    "NVDAon": {
+      "sigma_open": 0.0047672353896995815,
+      "sigma_closed": 0.0015246838843007648,
+      "sigma_all": 0.002319817326508897,
+      "open_sd": 0.003197185185995252,
+      "closed_sd": 0.0010225416472500416,
+      "stale_phi": 0.9204704097100848,
+      "stale_sd": 0.001645726580704969,
+      "n_open_returns": 23,
+      "n_closed_returns": 138,
+      "n_stale_pairs": 163,
+      "n_basis": 6
+    },
+    "SPYon": {
+      "sigma_open": 0.002045316611514447,
+      "sigma_closed": 0.0017401270225624345,
+      "sigma_all": 0.0016351117845064289,
+      "open_sd": 0.00404974269018483,
+      "closed_sd": 0.003445464946572422,
+      "stale_phi": 0.908282763903975,
+      "stale_sd": 0.0014248512108960148,
+      "n_open_returns": 94,
+      "n_closed_returns": 678,
+      "n_stale_pairs": 903,
+      "n_basis": 30
+    },
+    "TSLAon": {
+      "sigma_open": 0.0072082656280808175,
+      "sigma_closed": 0.0033724344465575003,
+      "sigma_all": 0.004057547021739038,
+      "open_sd": 0.005877441475377499,
+      "closed_sd": 0.0027497996205872594,
+      "stale_phi": 0.8775851512052772,
+      "stale_sd": 0.0027702658415231485,
+      "n_open_returns": 137,
+      "n_closed_returns": 694,
+      "n_stale_pairs": 832,
+      "n_basis": 30
+    }
+  },
+  "e1": {
+    "identified.raw.total_main": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8107786357786358,
+        1.0
+      ],
+      "width": 0.005353206092663085,
+      "width_ci95": [
+        0.005346204798567951,
+        0.005359407238861633
+      ],
+      "bias": -0.0005094897145685175,
+      "mae": 0.0012161402589654176,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.5862068965517241,
+      "kappa_symbol": 0.8,
+      "coverage_lower_bound_type_shift": 0.31379310344827593,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 1.0,
+      "nonthin_coverage": 0.8235294117647058
+    },
+    "identified.raw.event": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8054166666666667,
+        1.0
+      ],
+      "width": 0.004015065287815707,
+      "width_ci95": [
+        0.003998060725243054,
+        0.0040299761209082775
+      ],
+      "bias": -0.0008285115233179928,
+      "mae": 0.0010532747573109495,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3362068965517241,
+      "kappa_symbol": 0.6666666666666667,
+      "coverage_lower_bound_type_shift": 0.5637931034482759,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "identified.raw.freeze": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8125,
+        1.0
+      ],
+      "width": 0.0003295643898883207,
+      "width_ci95": [
+        0.00031560397311802515,
+        0.0003432380777948617
+      ],
+      "bias": 9.97025218834656e-06,
+      "mae": 5.7568283415253006e-05,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.23275862068965514,
+      "kappa_symbol": 0.4666666666666667,
+      "coverage_lower_bound_type_shift": 0.6672413793103449,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "identified.raw.open": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8055555555555556,
+        1.0
+      ],
+      "width": 0.004296558139417767,
+      "width_ci95": [
+        0.004269864712952831,
+        0.004321269307932193
+      ],
+      "bias": 0.00017792040445546424,
+      "mae": 0.0007390048936341495,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.4655172413793104,
+      "kappa_symbol": 1.0,
+      "coverage_lower_bound_type_shift": 0.43448275862068964,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.5
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9655172413793104
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "identified.raw.closed": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8064516129032258,
+        1.0
+      ],
+      "width": 0.006117788472673124,
+      "width_ci95": [
+        0.006114799157343193,
+        0.006120436151965346
+      ],
+      "bias": -0.0011811584422031912,
+      "mae": 0.0012845737710998118,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.4827586206896552,
+      "kappa_symbol": 0.8666666666666667,
+      "coverage_lower_bound_type_shift": 0.41724137931034483,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "identified.raw.post2h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8181818181818182,
+        1.0
+      ],
+      "width": 0.0023580243850863376,
+      "width_ci95": [
+        0.0022812553304385925,
+        0.002434793439734084
+      ],
+      "bias": 0.00016714826357704278,
+      "mae": 0.00032019858187721953,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.46551724137931033,
+      "kappa_symbol": 1.0,
+      "coverage_lower_bound_type_shift": 0.4344827586206897,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "identified.raw.post24h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8064516129032258,
+        1.0
+      ],
+      "width": 0.003598456192123941,
+      "width_ci95": [
+        0.0035552699667166063,
+        0.003636706848913295
+      ],
+      "bias": -0.0003166298074138201,
+      "mae": 0.0007161103035999746,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.5775862068965517,
+      "kappa_symbol": 0.5333333333333334,
+      "coverage_lower_bound_type_shift": 0.3224137931034483,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "identified.studentized.total_main": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8107786357786358,
+        1.0
+      ],
+      "width": 0.004070378056758044,
+      "width_ci95": [
+        0.003744331575224223,
+        0.0044086574299187576
+      ],
+      "bias": -0.0005094897145685175,
+      "mae": 0.0012161402589654176,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.2413793103448276,
+      "kappa_symbol": 0.4666666666666667,
+      "coverage_lower_bound_type_shift": 0.6586206896551724,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 1.0,
+      "nonthin_coverage": 0.8235294117647058
+    },
+    "identified.studentized.event": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8054166666666667,
+        1.0
+      ],
+      "width": 0.0030283815682506333,
+      "width_ci95": [
+        0.002891748590406549,
+        0.003182406188469159
+      ],
+      "bias": -0.0008285115233179928,
+      "mae": 0.0010532747573109495,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3793103448275862,
+      "kappa_symbol": 0.6666666666666667,
+      "coverage_lower_bound_type_shift": 0.5206896551724138,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "identified.studentized.freeze": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.7777777777777778,
+        1.0
+      ],
+      "width": 0.0004141391141937958,
+      "width_ci95": [
+        0.00036568742067485385,
+        0.00046108943489088706
+      ],
+      "bias": 9.97025218834656e-06,
+      "mae": 5.7568283415253006e-05,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3448275862068966,
+      "kappa_symbol": 0.5333333333333333,
+      "coverage_lower_bound_type_shift": 0.5551724137931034,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "identified.studentized.open": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.7998529411764707,
+        1.0
+      ],
+      "width": 0.0026772531722289434,
+      "width_ci95": [
+        0.002500879226843053,
+        0.002852179163109285
+      ],
+      "bias": 0.00017792040445546424,
+      "mae": 0.0007390048936341495,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.43103448275862066,
+      "kappa_symbol": 1.0,
+      "coverage_lower_bound_type_shift": 0.46896551724137936,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "identified.studentized.closed": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8064516129032258,
+        1.0
+      ],
+      "width": 0.004221655047469989,
+      "width_ci95": [
+        0.003992325718629434,
+        0.00445517291343907
+      ],
+      "bias": -0.0011811584422031912,
+      "mae": 0.0012845737710998118,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3362068965517241,
+      "kappa_symbol": 0.8,
+      "coverage_lower_bound_type_shift": 0.5637931034482759,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "identified.studentized.post2h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8181818181818182,
+        1.0
+      ],
+      "width": 0.0015688253667251065,
+      "width_ci95": [
+        0.0014716829104703367,
+        0.0016726254867906738
+      ],
+      "bias": 0.00016714826357704278,
+      "mae": 0.00032019858187721953,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.39655172413793105,
+      "kappa_symbol": 1.0,
+      "coverage_lower_bound_type_shift": 0.503448275862069,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "identified.studentized.post24h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8125,
+        1.0
+      ],
+      "width": 0.002699249267403357,
+      "width_ci95": [
+        0.00259126766991447,
+        0.0028178584487603344
+      ],
+      "bias": -0.0003166298074138201,
+      "mae": 0.0007161103035999746,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.4396551724137931,
+      "kappa_symbol": 0.5333333333333334,
+      "coverage_lower_bound_type_shift": 0.46034482758620693,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "identified.cqr.total_main": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8123487903225807,
+        1.0
+      ],
+      "width": 0.00446943255891552,
+      "width_ci95": [
+        0.004122514295840031,
+        0.004817083682500689
+      ],
+      "bias": -0.0005094897145685175,
+      "mae": 0.0012161402589654176,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3793103448275862,
+      "kappa_symbol": 0.8,
+      "coverage_lower_bound_type_shift": 0.5206896551724138,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "identified.cqr.event": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.7837837837837838,
+        1.0
+      ],
+      "width": 0.0033501052197575905,
+      "width_ci95": [
+        0.003158766411475916,
+        0.0035559822198147754
+      ],
+      "bias": -0.0008285115233179928,
+      "mae": 0.0010532747573109495,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.48275862068965514,
+      "kappa_symbol": 0.5333333333333334,
+      "coverage_lower_bound_type_shift": 0.4172413793103449,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "identified.cqr.freeze": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.7777777777777778,
+        1.0
+      ],
+      "width": 0.0003787199368840755,
+      "width_ci95": [
+        0.00034304432127137596,
+        0.00041443724274709866
+      ],
+      "bias": 9.97025218834656e-06,
+      "mae": 5.7568283415253006e-05,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.4051724137931034,
+      "kappa_symbol": 0.8,
+      "coverage_lower_bound_type_shift": 0.4948275862068966,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "identified.cqr.open": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8054166666666667,
+        1.0
+      ],
+      "width": 0.0029448605384828344,
+      "width_ci95": [
+        0.002705950199187516,
+        0.0031877511064608136
+      ],
+      "bias": 0.00017792040445546424,
+      "mae": 0.0007390048936341495,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3103448275862069,
+      "kappa_symbol": 0.8,
+      "coverage_lower_bound_type_shift": 0.5896551724137931,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "identified.cqr.closed": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8064516129032258,
+        1.0
+      ],
+      "width": 0.0046018879698561405,
+      "width_ci95": [
+        0.0043544621913123175,
+        0.004860413981171032
+      ],
+      "bias": -0.0011811584422031912,
+      "mae": 0.0012845737710998118,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3362068965517241,
+      "kappa_symbol": 0.8,
+      "coverage_lower_bound_type_shift": 0.5637931034482759,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "identified.cqr.post2h": {
+      "n": 33,
+      "coverage": 0.8787878787878788,
+      "coverage_ci95": [
+        0.75,
+        1.0
+      ],
+      "width": 0.0009525575187582211,
+      "width_ci95": [
+        0.0008631546898622517,
+        0.0010497737857477689
+      ],
+      "bias": 0.00016714826357704278,
+      "mae": 0.00032019858187721953,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.48275862068965514,
+      "kappa_symbol": 0.9333333333333333,
+      "coverage_lower_bound_type_shift": 0.4172413793103449,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.3333333333333333
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.8620689655172413
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8235294117647058
+    },
+    "identified.cqr.post24h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8205128205128205,
+        1.0
+      ],
+      "width": 0.003080668530746297,
+      "width_ci95": [
+        0.002916329861662322,
+        0.00325983110295467
+      ],
+      "bias": -0.0003166298074138201,
+      "mae": 0.0007161103035999746,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.4137931034482759,
+      "kappa_symbol": 0.7333333333333334,
+      "coverage_lower_bound_type_shift": 0.4862068965517241,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 1.0
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 1.0,
+      "nonthin_coverage": 0.8235294117647058
+    },
+    "identified.plugin.total_main": {
+      "n": 33,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        1.0,
+        1.0
+      ],
+      "width": 0.004676921241856848,
+      "width_ci95": [
+        0.0044132849203041115,
+        0.004951110791254663
+      ],
+      "bias": -0.0005094897145685175,
+      "mae": 0.0012161402589654176
+    },
+    "identified.plugin.event": {
+      "n": 33,
+      "coverage": 0.9696969696969697,
+      "coverage_ci95": [
+        0.9032258064516129,
+        1.0
+      ],
+      "width": 0.003874275408638052,
+      "width_ci95": [
+        0.00370064382857291,
+        0.004067113527668401
+      ],
+      "bias": -0.0008285115233179928,
+      "mae": 0.0010532747573109495
+    },
+    "identified.plugin.freeze": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.7777777777777778,
+        1.0
+      ],
+      "width": 0.0003976920417076219,
+      "width_ci95": [
+        0.00036535428588064633,
+        0.00043533785495828954
+      ],
+      "bias": 9.97025218834656e-06,
+      "mae": 5.7568283415253006e-05
+    },
+    "identified.plugin.post2h": {
+      "n": 33,
+      "coverage": 0.8181818181818182,
+      "coverage_ci95": [
+        0.7142857142857143,
+        0.9310344827586207
+      ],
+      "width": 0.001238373293995821,
+      "width_ci95": [
+        0.0011743276945431346,
+        0.0013073062867443627
+      ],
+      "bias": 0.00016714826357704278,
+      "mae": 0.00032019858187721953
+    },
+    "identified.plugin.post24h": {
+      "n": 33,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        1.0,
+        1.0
+      ],
+      "width": 0.00367895626165515,
+      "width_ci95": [
+        0.0035327388382536337,
+        0.0038402242929144984
+      ],
+      "bias": -0.0003166298074138201,
+      "mae": 0.0007161103035999746
+    },
+    "naive.raw.total_main": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.809447004608295,
+        1.0
+      ],
+      "width": 0.0055918444835114985,
+      "width_ci95": [
+        0.005563211680441466,
+        0.005617197205193422
+      ],
+      "bias": -0.0001542880178932283,
+      "mae": 0.0010351045283680039,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.41379310344827586,
+      "kappa_symbol": 0.8,
+      "coverage_lower_bound_type_shift": 0.48620689655172417,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.raw.event": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8125,
+        1.0
+      ],
+      "width": 0.004138016207188544,
+      "width_ci95": [
+        0.004124746998441394,
+        0.004150504874244684
+      ],
+      "bias": -0.0007485021222178225,
+      "mae": 0.00095464584111556,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3793103448275862,
+      "kappa_symbol": 1.0,
+      "coverage_lower_bound_type_shift": 0.5206896551724138,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.raw.freeze": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8064516129032258,
+        1.0
+      ],
+      "width": 0.0019068669142071333,
+      "width_ci95": [
+        0.001905417262147715,
+        0.0019082312926159977
+      ],
+      "bias": -0.00044833697064824225,
+      "mae": 0.000451336790457814,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.5,
+      "kappa_symbol": 1.0,
+      "coverage_lower_bound_type_shift": 0.4,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.5
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9655172413793104
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.raw.open": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.7998529411764707,
+        1.0
+      ],
+      "width": 0.007436209187532579,
+      "width_ci95": [
+        0.00733581291598019,
+        0.0075198209605884195
+      ],
+      "bias": 0.0009621336272280901,
+      "mae": 0.0010454440987653756,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.43103448275862066,
+      "kappa_symbol": 1.0,
+      "coverage_lower_bound_type_shift": 0.46896551724137936,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.raw.closed": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8,
+        1.0
+      ],
+      "width": 0.005087573826959344,
+      "width_ci95": [
+        0.005082510424725599,
+        0.005091793328820795
+      ],
+      "bias": -0.0007252311958478481,
+      "mae": 0.0009850700851061136,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.4051724137931034,
+      "kappa_symbol": 0.5333333333333334,
+      "coverage_lower_bound_type_shift": 0.4948275862068966,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "naive.raw.post2h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8181818181818182,
+        1.0
+      ],
+      "width": 0.002523317472634041,
+      "width_ci95": [
+        0.002513717255417118,
+        0.002532917689850964
+      ],
+      "bias": 0.00027327558466599575,
+      "mae": 0.0003239288206128367,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3275862068965517,
+      "kappa_symbol": 0.9333333333333333,
+      "coverage_lower_bound_type_shift": 0.5724137931034483,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.raw.post24h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.7878787878787878,
+        1.0
+      ],
+      "width": 0.0031745749814641204,
+      "width_ci95": [
+        0.003072461294769702,
+        0.0032506693152989027
+      ],
+      "bias": 0.00021612906329122381,
+      "mae": 0.0006198741154735688,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.43103448275862066,
+      "kappa_symbol": 0.6666666666666667,
+      "coverage_lower_bound_type_shift": 0.46896551724137936,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "naive.studentized.total_main": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8125,
+        1.0
+      ],
+      "width": 0.0038770815915859683,
+      "width_ci95": [
+        0.0036291289508137703,
+        0.004171775298194745
+      ],
+      "bias": -0.0001542880178932283,
+      "mae": 0.0010351045283680039,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.4827586206896552,
+      "kappa_symbol": 0.6,
+      "coverage_lower_bound_type_shift": 0.41724137931034483,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.studentized.event": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8124577702702702,
+        1.0
+      ],
+      "width": 0.0028323109605672544,
+      "width_ci95": [
+        0.002648553964352488,
+        0.0030584015106796987
+      ],
+      "bias": -0.0007485021222178225,
+      "mae": 0.00095464584111556,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3448275862068966,
+      "kappa_symbol": 0.6666666666666667,
+      "coverage_lower_bound_type_shift": 0.5551724137931034,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.studentized.freeze": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8064516129032258,
+        1.0
+      ],
+      "width": 0.0012254687986324154,
+      "width_ci95": [
+        0.0010895551851182825,
+        0.0013872015567915497
+      ],
+      "bias": -0.00044833697064824225,
+      "mae": 0.000451336790457814,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.5517241379310345,
+      "kappa_symbol": 0.7333333333333333,
+      "coverage_lower_bound_type_shift": 0.34827586206896555,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 1.0
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "naive.studentized.open": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8055555555555556,
+        1.0
+      ],
+      "width": 0.00460620626906604,
+      "width_ci95": [
+        0.004345372022768252,
+        0.004910564184323128
+      ],
+      "bias": 0.0009621336272280901,
+      "mae": 0.0010454440987653756,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.4655172413793104,
+      "kappa_symbol": 0.8666666666666667,
+      "coverage_lower_bound_type_shift": 0.43448275862068964,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.5
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9655172413793104
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.studentized.closed": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8064516129032258,
+        1.0
+      ],
+      "width": 0.0035365350136396805,
+      "width_ci95": [
+        0.0033830831293052274,
+        0.0037070011281561833
+      ],
+      "bias": -0.0007252311958478481,
+      "mae": 0.0009850700851061136,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.4051724137931034,
+      "kappa_symbol": 0.4666666666666667,
+      "coverage_lower_bound_type_shift": 0.4948275862068966,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "naive.studentized.post2h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8181818181818182,
+        1.0
+      ],
+      "width": 0.0022380074675993834,
+      "width_ci95": [
+        0.0020416893152793688,
+        0.002451906914508047
+      ],
+      "bias": 0.00027327558466599575,
+      "mae": 0.0003239288206128367,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.2931034482758621,
+      "kappa_symbol": 0.8666666666666667,
+      "coverage_lower_bound_type_shift": 0.6068965517241379,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.studentized.post24h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8125,
+        1.0
+      ],
+      "width": 0.0030585045949295887,
+      "width_ci95": [
+        0.0028669697724524154,
+        0.003243972792658887
+      ],
+      "bias": 0.00021612906329122381,
+      "mae": 0.0006198741154735688,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.39655172413793105,
+      "kappa_symbol": 0.5333333333333334,
+      "coverage_lower_bound_type_shift": 0.503448275862069,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.cqr.total_main": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8125,
+        1.0
+      ],
+      "width": 0.003992789381374806,
+      "width_ci95": [
+        0.003690875845716182,
+        0.004355329766494633
+      ],
+      "bias": -0.0001542880178932283,
+      "mae": 0.0010351045283680039,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.39655172413793105,
+      "kappa_symbol": 0.8,
+      "coverage_lower_bound_type_shift": 0.503448275862069,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "naive.cqr.event": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8125,
+        1.0
+      ],
+      "width": 0.0033890533787090385,
+      "width_ci95": [
+        0.0031347428190750333,
+        0.0036947711969029353
+      ],
+      "bias": -0.0007485021222178225,
+      "mae": 0.00095464584111556,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3448275862068966,
+      "kappa_symbol": 0.6666666666666667,
+      "coverage_lower_bound_type_shift": 0.5551724137931034,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 1.0
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.896551724137931
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "naive.cqr.freeze": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8,
+        1.0
+      ],
+      "width": 0.001996595575888798,
+      "width_ci95": [
+        0.001773003443216378,
+        0.002263402887389751
+      ],
+      "bias": -0.00044833697064824225,
+      "mae": 0.000451336790457814,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.5862068965517241,
+      "kappa_symbol": 0.5333333333333334,
+      "coverage_lower_bound_type_shift": 0.31379310344827593,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "naive.cqr.open": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.7998529411764707,
+        1.0
+      ],
+      "width": 0.00628144161333271,
+      "width_ci95": [
+        0.006187615452667535,
+        0.006362474434544959
+      ],
+      "bias": 0.0009621336272280901,
+      "mae": 0.0010454440987653756,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.5086206896551724,
+      "kappa_symbol": 0.5333333333333334,
+      "coverage_lower_bound_type_shift": 0.39137931034482765,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.cqr.closed": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8064516129032258,
+        1.0
+      ],
+      "width": 0.0034001900269577485,
+      "width_ci95": [
+        0.003239281395469333,
+        0.0035843080136384333
+      ],
+      "bias": -0.0007252311958478481,
+      "mae": 0.0009850700851061136,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.25,
+      "kappa_symbol": 0.8666666666666667,
+      "coverage_lower_bound_type_shift": 0.65,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.cqr.post2h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8107018308631212,
+        1.0
+      ],
+      "width": 0.002492638031231833,
+      "width_ci95": [
+        0.002392197156843401,
+        0.0026034258002223558
+      ],
+      "bias": 0.00027327558466599575,
+      "mae": 0.0003239288206128367,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.25,
+      "kappa_symbol": 0.8666666666666667,
+      "coverage_lower_bound_type_shift": 0.65,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 0.6666666666666666
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 1.0
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.875,
+      "nonthin_coverage": 0.9411764705882353
+    },
+    "naive.cqr.post24h": {
+      "n": 33,
+      "coverage": 0.9090909090909091,
+      "coverage_ci95": [
+        0.8125,
+        1.0
+      ],
+      "width": 0.0022229540256073228,
+      "width_ci95": [
+        0.0021389975246613514,
+        0.002316438890599608
+      ],
+      "bias": 0.00021612906329122381,
+      "mae": 0.0006198741154735688,
+      "kappa_conf_cal_test": 0.0,
+      "coverage_lower_bound": 0.9,
+      "kappa_type": 0.3017241379310345,
+      "kappa_symbol": 0.6,
+      "coverage_lower_bound_type_shift": 0.5982758620689655,
+      "per_symbol": {
+        "NVDAon": {
+          "n": 3,
+          "coverage": 1.0
+        },
+        "SPYon": {
+          "n": 15,
+          "coverage": 0.8666666666666667
+        },
+        "TSLAon": {
+          "n": 15,
+          "coverage": 0.9333333333333333
+        }
+      },
+      "per_type": {
+        "holiday": {
+          "n": 4,
+          "coverage": 0.75
+        },
+        "weekend": {
+          "n": 29,
+          "coverage": 0.9310344827586207
+        }
+      },
+      "thin_coverage": 0.9375,
+      "nonthin_coverage": 0.8823529411764706
+    },
+    "naive.plugin.total_main": {
+      "n": 33,
+      "coverage": 0.9696969696969697,
+      "coverage_ci95": [
+        0.9090909090909091,
+        1.0
+      ],
+      "width": 0.004334279692490143,
+      "width_ci95": [
+        0.004057516061066131,
+        0.004657473413428451
+      ],
+      "bias": -0.0001542880178932283,
+      "mae": 0.0010351045283680039
+    },
+    "naive.plugin.event": {
+      "n": 33,
+      "coverage": 0.9696969696969697,
+      "coverage_ci95": [
+        0.9032258064516129,
+        1.0
+      ],
+      "width": 0.003925341711768046,
+      "width_ci95": [
+        0.0036822620880911498,
+        0.004231425214431902
+      ],
+      "bias": -0.0007485021222178225,
+      "mae": 0.00095464584111556
+    },
+    "naive.plugin.freeze": {
+      "n": 33,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        1.0,
+        1.0
+      ],
+      "width": 0.0024511168792791154,
+      "width_ci95": [
+        0.0021893690992519114,
+        0.0027709547931204143
+      ],
+      "bias": -0.00044833697064824225,
+      "mae": 0.000451336790457814
+    },
+    "naive.plugin.post2h": {
+      "n": 33,
+      "coverage": 0.7878787878787878,
+      "coverage_ci95": [
+        0.6857142857142857,
+        0.9
+      ],
+      "width": 0.0006548474509968761,
+      "width_ci95": [
+        0.0006018282831447267,
+        0.0007089402714671721
+      ],
+      "bias": 0.00027327558466599575,
+      "mae": 0.0003239288206128367
+    },
+    "naive.plugin.post24h": {
+      "n": 33,
+      "coverage": 0.8484848484848485,
+      "coverage_ci95": [
+        0.7352450980392158,
+        0.9428571428571428
+      ],
+      "width": 0.0024478957792285483,
+      "width_ci95": [
+        0.002360408763291216,
+        0.00254179042943066
+      ],
+      "bias": 0.00021612906329122381,
+      "mae": 0.0006198741154735688
+    }
+  },
+  "e2": {
+    "Wide_Rebalance_2pct": {
+      "identified": {
+        "n_branch0": 26,
+        "n_branch1": 7,
+        "n_branch1_first_open": 2,
+        "min_branch_calibration": 9,
+        "underpowered": true,
+        "marginal_coverage": 0.9090909090909091,
+        "branch_coverage": 0.9090909090909091,
+        "union_coverage": null,
+        "branch0_coverage": 0.9230769230769231,
+        "branch1_coverage": 0.8571428571428571,
+        "width_union": null,
+        "width_marginal": 0.005353206092663085,
+        "width_ratio": null,
+        "union_note": "branch-conditional 90% interval not identifiable; branch_coverage uses the pooled fallback for the small branch"
+      },
+      "naive": {
+        "n_branch0": 26,
+        "n_branch1": 7,
+        "n_branch1_first_open": 2,
+        "min_branch_calibration": 9,
+        "underpowered": true,
+        "marginal_coverage": 0.9090909090909091,
+        "branch_coverage": 0.8787878787878788,
+        "union_coverage": null,
+        "branch0_coverage": 0.9230769230769231,
+        "branch1_coverage": 0.7142857142857143,
+        "width_union": null,
+        "width_marginal": 0.0055918444835114985,
+        "width_ratio": null,
+        "union_note": "branch-conditional 90% interval not identifiable; branch_coverage uses the pooled fallback for the small branch"
+      }
+    },
+    "Narrow_Rebalance_1pct": {
+      "identified": {
+        "n_branch0": 19,
+        "n_branch1": 14,
+        "n_branch1_first_open": 8,
+        "min_branch_calibration": 9,
+        "underpowered": false,
+        "marginal_coverage": 0.9090909090909091,
+        "branch_coverage": 0.9393939393939394,
+        "union_coverage": 0.9696969696969697,
+        "branch0_coverage": 0.9473684210526315,
+        "branch1_coverage": 0.9285714285714286,
+        "width_union": 0.030267005138342483,
+        "width_marginal": 0.02367864794326118,
+        "width_ratio": 1.2782404304024595
+      },
+      "naive": {
+        "n_branch0": 19,
+        "n_branch1": 14,
+        "n_branch1_first_open": 8,
+        "min_branch_calibration": 9,
+        "underpowered": false,
+        "marginal_coverage": 0.9090909090909091,
+        "branch_coverage": 0.9393939393939394,
+        "union_coverage": 0.9696969696969697,
+        "branch0_coverage": 0.9473684210526315,
+        "branch1_coverage": 0.9285714285714286,
+        "width_union": 0.020597247981602236,
+        "width_marginal": 0.019009915975800245,
+        "width_ratio": 1.0835002115644632
+      }
+    }
+  },
+  "e3": {
+    "identified": {
+      "raw": {
+        "loso": {
+          "NVDAon": {
+            "n": 3,
+            "coverage": 1.0,
+            "width": 0.005359407238861633
+          },
+          "SPYon": {
+            "n": 15,
+            "coverage": 1.0,
+            "width": 0.006802999739103072
+          },
+          "TSLAon": {
+            "n": 15,
+            "coverage": 0.26666666666666666,
+            "width": 0.001979036511158332
+          }
+        },
+        "loro": {
+          "holiday": {
+            "n": 4,
+            "coverage": 1.0
+          },
+          "weekend": {
+            "n": 29,
+            "coverage": 1.0
+          }
+        },
+        "duration_transfer": {
+          "post2h_to_post24h": {
+            "n": 33,
+            "n_covered": 29,
+            "coverage": 0.8787878787878788,
+            "radius": 0.0012173967198670418
+          },
+          "post24h_to_post2h": {
+            "n": 33,
+            "n_covered": 33,
+            "coverage": 1.0,
+            "radius": 0.0018183534244566482
+          }
+        },
+        "duration_transfer_per_symbol": {
+          "post2h_to_post24h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 11,
+              "coverage": 0.7333333333333333
+            }
+          },
+          "post24h_to_post2h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            }
+          }
+        },
+        "symbol_conditional": {
+          "per_symbol": {
+            "SPYon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.001974304741686781
+            },
+            "TSLAon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.0067594038596250966
+            }
+          },
+          "n_symbols": 2,
+          "macro_coverage": 0.9333333333333333,
+          "note": "Symbols are skipped when a leave-one-date-out fold is too small for a 90% radius."
+        }
+      },
+      "studentized": {
+        "loso": {
+          "NVDAon": {
+            "n": 3,
+            "coverage": 1.0,
+            "width": 0.0028231141918494385
+          },
+          "SPYon": {
+            "n": 15,
+            "coverage": 1.0,
+            "width": 0.00288050429623896
+          },
+          "TSLAon": {
+            "n": 15,
+            "coverage": 0.6,
+            "width": 0.003930459243106108
+          }
+        },
+        "loro": {
+          "holiday": {
+            "n": 4,
+            "coverage": 1.0
+          },
+          "weekend": {
+            "n": 29,
+            "coverage": 1.0
+          }
+        },
+        "duration_transfer": {
+          "post2h_to_post24h": {
+            "n": 33,
+            "n_covered": 29,
+            "coverage": 0.8787878787878788,
+            "radius": 0.0012173967198670418
+          },
+          "post24h_to_post2h": {
+            "n": 33,
+            "n_covered": 33,
+            "coverage": 1.0,
+            "radius": 0.0018183534244566482
+          }
+        },
+        "duration_transfer_per_symbol": {
+          "post2h_to_post24h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 11,
+              "coverage": 0.7333333333333333
+            }
+          },
+          "post24h_to_post2h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            }
+          }
+        },
+        "symbol_conditional": {
+          "per_symbol": {
+            "SPYon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.0018246456760946529
+            },
+            "TSLAon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.0061988346032678604
+            }
+          },
+          "n_symbols": 2,
+          "macro_coverage": 0.9333333333333333,
+          "note": "Symbols are skipped when a leave-one-date-out fold is too small for a 90% radius."
+        }
+      },
+      "cqr": {
+        "loso": {
+          "NVDAon": {
+            "n": 3,
+            "coverage": 1.0,
+            "width": 0.002591146755496661
+          },
+          "SPYon": {
+            "n": 15,
+            "coverage": 1.0,
+            "width": 0.0024967350289703816
+          },
+          "TSLAon": {
+            "n": 15,
+            "coverage": 0.9333333333333333,
+            "width": 0.006837636476710219
+          }
+        },
+        "loro": {
+          "holiday": {
+            "n": 4,
+            "coverage": 1.0
+          },
+          "weekend": {
+            "n": 29,
+            "coverage": 1.0
+          }
+        },
+        "duration_transfer": {
+          "post2h_to_post24h": {
+            "n": 33,
+            "n_covered": 29,
+            "coverage": 0.8787878787878788,
+            "radius": 0.0012173967198670418
+          },
+          "post24h_to_post2h": {
+            "n": 33,
+            "n_covered": 33,
+            "coverage": 1.0,
+            "radius": 0.0018183534244566482
+          }
+        },
+        "duration_transfer_per_symbol": {
+          "post2h_to_post24h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 11,
+              "coverage": 0.7333333333333333
+            }
+          },
+          "post24h_to_post2h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            }
+          }
+        },
+        "symbol_conditional": {
+          "per_symbol": {
+            "SPYon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.0024855142006278736
+            },
+            "TSLAon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.00684452120058266
+            }
+          },
+          "n_symbols": 2,
+          "macro_coverage": 0.9333333333333333,
+          "note": "Symbols are skipped when a leave-one-date-out fold is too small for a 90% radius."
+        }
+      }
+    },
+    "naive": {
+      "raw": {
+        "loso": {
+          "NVDAon": {
+            "n": 3,
+            "coverage": 1.0,
+            "width": 0.005617197205193422
+          },
+          "SPYon": {
+            "n": 15,
+            "coverage": 1.0,
+            "width": 0.006848697849172082
+          },
+          "TSLAon": {
+            "n": 15,
+            "coverage": 0.26666666666666666,
+            "width": 0.00208100539814118
+          }
+        },
+        "loro": {
+          "holiday": {
+            "n": 4,
+            "coverage": 0.75
+          },
+          "weekend": {
+            "n": 29,
+            "coverage": 1.0
+          }
+        },
+        "duration_transfer": {
+          "post2h_to_post24h": {
+            "n": 33,
+            "n_covered": 28,
+            "coverage": 0.8484848484848485,
+            "radius": 0.001266458844925482
+          },
+          "post24h_to_post2h": {
+            "n": 33,
+            "n_covered": 33,
+            "coverage": 1.0,
+            "radius": 0.0016253346576494514
+          }
+        },
+        "duration_transfer_per_symbol": {
+          "post2h_to_post24h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 14,
+              "coverage": 0.9333333333333333
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 11,
+              "coverage": 0.7333333333333333
+            }
+          },
+          "post24h_to_post2h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            }
+          }
+        },
+        "symbol_conditional": {
+          "per_symbol": {
+            "SPYon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.002018699550783507
+            },
+            "TSLAon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.006789309081815948
+            }
+          },
+          "n_symbols": 2,
+          "macro_coverage": 0.9333333333333333,
+          "note": "Symbols are skipped when a leave-one-date-out fold is too small for a 90% radius."
+        }
+      },
+      "studentized": {
+        "loso": {
+          "NVDAon": {
+            "n": 3,
+            "coverage": 1.0,
+            "width": 0.0029508118997672458
+          },
+          "SPYon": {
+            "n": 15,
+            "coverage": 1.0,
+            "width": 0.0025714355016571754
+          },
+          "TSLAon": {
+            "n": 15,
+            "coverage": 0.9333333333333333,
+            "width": 0.005896003810593917
+          }
+        },
+        "loro": {
+          "holiday": {
+            "n": 4,
+            "coverage": 1.0
+          },
+          "weekend": {
+            "n": 29,
+            "coverage": 1.0
+          }
+        },
+        "duration_transfer": {
+          "post2h_to_post24h": {
+            "n": 33,
+            "n_covered": 28,
+            "coverage": 0.8484848484848485,
+            "radius": 0.001266458844925482
+          },
+          "post24h_to_post2h": {
+            "n": 33,
+            "n_covered": 33,
+            "coverage": 1.0,
+            "radius": 0.0016253346576494514
+          }
+        },
+        "duration_transfer_per_symbol": {
+          "post2h_to_post24h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 14,
+              "coverage": 0.9333333333333333
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 11,
+              "coverage": 0.7333333333333333
+            }
+          },
+          "post24h_to_post2h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            }
+          }
+        },
+        "symbol_conditional": {
+          "per_symbol": {
+            "SPYon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.0020492560820897596
+            },
+            "TSLAon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.007084248337201592
+            }
+          },
+          "n_symbols": 2,
+          "macro_coverage": 0.9333333333333333,
+          "note": "Symbols are skipped when a leave-one-date-out fold is too small for a 90% radius."
+        }
+      },
+      "cqr": {
+        "loso": {
+          "NVDAon": {
+            "n": 3,
+            "coverage": 1.0,
+            "width": 0.0028785576603123507
+          },
+          "SPYon": {
+            "n": 15,
+            "coverage": 1.0,
+            "width": 0.0020718843383409854
+          },
+          "TSLAon": {
+            "n": 15,
+            "coverage": 0.9333333333333333,
+            "width": 0.006435764182396958
+          }
+        },
+        "loro": {
+          "holiday": {
+            "n": 4,
+            "coverage": 1.0
+          },
+          "weekend": {
+            "n": 29,
+            "coverage": 1.0
+          }
+        },
+        "duration_transfer": {
+          "post2h_to_post24h": {
+            "n": 33,
+            "n_covered": 28,
+            "coverage": 0.8484848484848485,
+            "radius": 0.001266458844925482
+          },
+          "post24h_to_post2h": {
+            "n": 33,
+            "n_covered": 33,
+            "coverage": 1.0,
+            "radius": 0.0016253346576494514
+          }
+        },
+        "duration_transfer_per_symbol": {
+          "post2h_to_post24h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 14,
+              "coverage": 0.9333333333333333
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 11,
+              "coverage": 0.7333333333333333
+            }
+          },
+          "post24h_to_post2h": {
+            "NVDAon": {
+              "n": 3,
+              "n_covered": 3,
+              "coverage": 1.0
+            },
+            "SPYon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            },
+            "TSLAon": {
+              "n": 15,
+              "n_covered": 15,
+              "coverage": 1.0
+            }
+          }
+        },
+        "symbol_conditional": {
+          "per_symbol": {
+            "SPYon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.0017767089634578076
+            },
+            "TSLAon": {
+              "n": 15,
+              "coverage": 0.9333333333333333,
+              "width": 0.006708890405163227
+            }
+          },
+          "n_symbols": 2,
+          "macro_coverage": 0.9333333333333333,
+          "note": "Symbols are skipped when a leave-one-date-out fold is too small for a 90% radius."
+        }
+      }
+    }
+  },
+  "e5": {
+    "thin_nonthin": {
+      "identified.raw.total_main": {
+        "thin": 1.0,
+        "nonthin": 0.8235294117647058
+      },
+      "identified.studentized.total_main": {
+        "thin": 1.0,
+        "nonthin": 0.8235294117647058
+      },
+      "identified.cqr.total_main": {
+        "thin": 0.875,
+        "nonthin": 0.9411764705882353
+      },
+      "identified.plugin.total_main": {
+        "thin": null,
+        "nonthin": null
+      },
+      "naive.raw.total_main": {
+        "thin": 0.9375,
+        "nonthin": 0.8823529411764706
+      },
+      "naive.studentized.total_main": {
+        "thin": 0.9375,
+        "nonthin": 0.8823529411764706
+      },
+      "naive.cqr.total_main": {
+        "thin": 0.875,
+        "nonthin": 0.9411764705882353
+      },
+      "naive.plugin.total_main": {
+        "thin": null,
+        "nonthin": null
+      }
+    },
+    "fee": {
+      "0.0030": {
+        "identified": {
+          "total_main": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.8107786357786358,
+              1.0
+            ],
+            "width": 0.005353206092663085,
+            "width_ci95": [
+              0.005346204798567952,
+              0.005359407238861632
+            ],
+            "bias": -0.0005094897145685175,
+            "mae": 0.0012161402589654176,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.5862068965517241,
+            "kappa_symbol": 0.8,
+            "coverage_lower_bound_type_shift": 0.31379310344827593,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 1.0
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 1.0
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 1.0
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.896551724137931
+              }
+            },
+            "thin_coverage": 1.0,
+            "nonthin_coverage": 0.8235294117647058
+          },
+          "freeze": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.8125,
+              1.0
+            ],
+            "width": 0.0003295643898883207,
+            "width_ci95": [
+              0.00031560397311802515,
+              0.0003432380777948617
+            ],
+            "bias": 9.970252188346565e-06,
+            "mae": 5.7568283415253006e-05,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.23275862068965514,
+            "kappa_symbol": 0.4666666666666667,
+            "coverage_lower_bound_type_shift": 0.6672413793103449,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 1.0
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 0.9333333333333333
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8666666666666667
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 1.0
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.896551724137931
+              }
+            },
+            "thin_coverage": 0.875,
+            "nonthin_coverage": 0.9411764705882353
+          },
+          "post2h": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.8181818181818182,
+              1.0
+            ],
+            "width": 0.0023580243850863376,
+            "width_ci95": [
+              0.0022812553304385925,
+              0.002434793439734084
+            ],
+            "bias": 0.00016714826357704278,
+            "mae": 0.0003201985818772195,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.46551724137931033,
+            "kappa_symbol": 1.0,
+            "coverage_lower_bound_type_shift": 0.4344827586206897,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 0.6666666666666666
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 1.0
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8666666666666667
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 0.75
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.9310344827586207
+              }
+            },
+            "thin_coverage": 0.9375,
+            "nonthin_coverage": 0.8823529411764706
+          }
+        },
+        "naive": {
+          "total_main": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.809447004608295,
+              1.0
+            ],
+            "width": 0.0055918444835115,
+            "width_ci95": [
+              0.005563211680441467,
+              0.005617197205193424
+            ],
+            "bias": -0.0001542880178932283,
+            "mae": 0.0010351045283680039,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.41379310344827586,
+            "kappa_symbol": 0.8,
+            "coverage_lower_bound_type_shift": 0.48620689655172417,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 1.0
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 1.0
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 0.75
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.9310344827586207
+              }
+            },
+            "thin_coverage": 0.9375,
+            "nonthin_coverage": 0.8823529411764706
+          },
+          "freeze": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.8064516129032258,
+              1.0
+            ],
+            "width": 0.0019068669142071333,
+            "width_ci95": [
+              0.001905417262147715,
+              0.0019082312926159977
+            ],
+            "bias": -0.0004483369706482422,
+            "mae": 0.000451336790457814,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.5,
+            "kappa_symbol": 1.0,
+            "coverage_lower_bound_type_shift": 0.4,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 1.0
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 1.0
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 0.5
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.9655172413793104
+              }
+            },
+            "thin_coverage": 0.9375,
+            "nonthin_coverage": 0.8823529411764706
+          },
+          "post2h": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.8181818181818182,
+              1.0
+            ],
+            "width": 0.002523317472634041,
+            "width_ci95": [
+              0.002513717255417118,
+              0.002532917689850964
+            ],
+            "bias": 0.0002732755846659957,
+            "mae": 0.00032392882061283665,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.3275862068965517,
+            "kappa_symbol": 0.9333333333333333,
+            "coverage_lower_bound_type_shift": 0.5724137931034483,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 0.6666666666666666
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 1.0
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8666666666666667
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 0.75
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.9310344827586207
+              }
+            },
+            "thin_coverage": 0.9375,
+            "nonthin_coverage": 0.8823529411764706
+          }
+        }
+      },
+      "0.0100": {
+        "identified": {
+          "total_main": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.8107786357786358,
+              1.0
+            ],
+            "width": 0.005353206092663085,
+            "width_ci95": [
+              0.005346204798567951,
+              0.005359407238861633
+            ],
+            "bias": -0.0005094897145685177,
+            "mae": 0.0012161402589654176,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.5862068965517241,
+            "kappa_symbol": 0.8,
+            "coverage_lower_bound_type_shift": 0.31379310344827593,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 1.0
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 1.0
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 1.0
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.896551724137931
+              }
+            },
+            "thin_coverage": 1.0,
+            "nonthin_coverage": 0.8235294117647058
+          },
+          "freeze": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.8125,
+              1.0
+            ],
+            "width": 0.0003295643898883207,
+            "width_ci95": [
+              0.00031560397311802515,
+              0.0003432380777948617
+            ],
+            "bias": 9.970252188346565e-06,
+            "mae": 5.756828341525301e-05,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.23275862068965514,
+            "kappa_symbol": 0.4666666666666667,
+            "coverage_lower_bound_type_shift": 0.6672413793103449,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 1.0
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 0.9333333333333333
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8666666666666667
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 1.0
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.896551724137931
+              }
+            },
+            "thin_coverage": 0.875,
+            "nonthin_coverage": 0.9411764705882353
+          },
+          "post2h": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.8181818181818182,
+              1.0
+            ],
+            "width": 0.0023580243850863376,
+            "width_ci95": [
+              0.002281255330438592,
+              0.002434793439734083
+            ],
+            "bias": 0.00016714826357704278,
+            "mae": 0.0003201985818772195,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.46551724137931033,
+            "kappa_symbol": 1.0,
+            "coverage_lower_bound_type_shift": 0.4344827586206897,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 0.6666666666666666
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 1.0
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8666666666666667
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 0.75
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.9310344827586207
+              }
+            },
+            "thin_coverage": 0.9375,
+            "nonthin_coverage": 0.8823529411764706
+          }
+        },
+        "naive": {
+          "total_main": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.809447004608295,
+              1.0
+            ],
+            "width": 0.0055918444835114985,
+            "width_ci95": [
+              0.005563211680441466,
+              0.005617197205193422
+            ],
+            "bias": -0.0001542880178932283,
+            "mae": 0.0010351045283680039,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.41379310344827586,
+            "kappa_symbol": 0.8,
+            "coverage_lower_bound_type_shift": 0.48620689655172417,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 1.0
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 1.0
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 0.75
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.9310344827586207
+              }
+            },
+            "thin_coverage": 0.9375,
+            "nonthin_coverage": 0.8823529411764706
+          },
+          "freeze": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.8064516129032258,
+              1.0
+            ],
+            "width": 0.0019068669142071333,
+            "width_ci95": [
+              0.001905417262147715,
+              0.0019082312926159977
+            ],
+            "bias": -0.00044833697064824225,
+            "mae": 0.00045133679045781394,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.5,
+            "kappa_symbol": 1.0,
+            "coverage_lower_bound_type_shift": 0.4,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 1.0
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 1.0
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 0.5
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.9655172413793104
+              }
+            },
+            "thin_coverage": 0.9375,
+            "nonthin_coverage": 0.8823529411764706
+          },
+          "post2h": {
+            "n": 33,
+            "coverage": 0.9090909090909091,
+            "coverage_ci95": [
+              0.8181818181818182,
+              1.0
+            ],
+            "width": 0.002523317472634041,
+            "width_ci95": [
+              0.002513717255417118,
+              0.0025329176898509637
+            ],
+            "bias": 0.00027327558466599575,
+            "mae": 0.00032392882061283676,
+            "kappa_conf_cal_test": 0.0,
+            "coverage_lower_bound": 0.9,
+            "kappa_type": 0.3275862068965517,
+            "kappa_symbol": 0.9333333333333333,
+            "coverage_lower_bound_type_shift": 0.5724137931034483,
+            "per_symbol": {
+              "NVDAon": {
+                "n": 3,
+                "coverage": 0.6666666666666666
+              },
+              "SPYon": {
+                "n": 15,
+                "coverage": 1.0
+              },
+              "TSLAon": {
+                "n": 15,
+                "coverage": 0.8666666666666667
+              }
+            },
+            "per_type": {
+              "holiday": {
+                "n": 4,
+                "coverage": 0.75
+              },
+              "weekend": {
+                "n": 29,
+                "coverage": 0.9310344827586207
+              }
+            },
+            "thin_coverage": 0.9375,
+            "nonthin_coverage": 0.8823529411764706
+          }
+        }
+      }
+    }
+  },
+  "caveats": [
+    "Post-hoc liquid-regime window (2026-07-01T00:00Z/2026-10-20T00:00Z); not a pre-registered sample. Results are regime-conditional and descriptive.",
+    "Truth is deterministic replay of the target policy on the observed pool-price path with a P-marked reward; it is not a deployed-policy counterfactual and not a causal logged OPE estimate.",
+    "Identified/naive are model-based OPE pipelines; the model is fit to observable P/oracle-basis data, not to latent S.",
+    "open_sd is estimated from event-level boundary basis values, not a full Chainlink round path; treat it as a first-pass estimate.",
+    "CLOSED_LIVE is a separate observation branch with its own sigma_closed; its noise scale is derived from open_sd through the closed/open volatility ratio, not estimated independently.",
+    "NVDAon uses the NVDA-USD (24/5) proxy feed and contributes only 3 of the 33 A-layer events.",
+    "Bootstrap CIs resample the 16 calendar dates, not symbol-events; they account for cross-symbol dependence but are wide.",
+    "Observation-map parameters are estimated once on all events; leave-one-episode-out folds recalibrate only the conformal radius, so this is not nested cross-validation.",
+    "Duration target-shift rows calibrate and evaluate on the same event set; they are not out-of-sample transfer results.",
+    "Thin events are retained for coverage, width, and transfer analyses; the sensitivity check splits coverage over all 33 events (16 thin/17 non-thin). No economic-value estimate is reported."
+  ],
+  "redaction": "Event-level rows, calibration-support events and input paths are removed. Aggregate results needed for the reported tables remain."
+}

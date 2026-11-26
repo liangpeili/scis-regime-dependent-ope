@@ -1,0 +1,12 @@
+{
+  "figure": "fig3-l0-coverage",
+  "sha256": {
+    "generator": "0e9b0212289d458fbde52bfafeabc3a7449d0ee41b04c5785cdd8a74b8200da9",
+    "pdf": "36c2f02b09ad68de32914ba323e4a7aacd8e5671d9918e7a19715ab526d2fbcb",
+    "png": "a7b103b6c803a7e56bee8764f469074c0a6332928516ed1928b359b56797fad0",
+    "inputs": {
+      "results/coverage_gap_naive_global.json": "fda64a44114c001ba0f00ea101aafd2bca5c08ed3437b424067b10d20f6ed8e3",
+      "results/coverage_gap_exp1_mondrian.json": "3f0266bbf6bcc59c425bb2452df6fa956ce7456e00af55401a46a6d983e1ab7b"
+    }
+  }
+}

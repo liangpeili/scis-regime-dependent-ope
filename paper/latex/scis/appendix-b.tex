@@ -1,0 +1,115 @@
+% =====================================================================
+% P1 Appendix B.1 --- Protocol details.
+%
+% Source of truth: paper/main-draft.md Section 6.2 (pre-M5 text) and
+% results/generation_summary.json.  This file is a fragment: it is meant
+% to be \input under \appendix after Appendix A.
+%
+% Counts and hyperparameters here must match Section 6.1 and the
+% generation summary; do not change one without the other.
+% =====================================================================
+
+\section{Protocol details and additional results}\label{app:b}
+
+\subsection{Protocol details}\label{app:b1}
+
+\paragraph{L0 (row level).}
+For each held-out regime $r$, train on a chronological 70\% of the rows from the
+other four regimes, calibrate on the remaining 30\%, and test on all rows of $r$.
+The iid baseline is a 70/15/15 random split that ignores regime. The compared
+rules are a pooled radius, Mondrian radii per calibration regime with max
+fallback, a similarity-class fallback ($\{\text{OPEN},\text{EXTENDED}\}$ versus
+$\{\text{WEEKEND},\text{HOLIDAY},\text{HALT}\}$), and a strategy-conditional
+radius.
+
+\paragraph{L1 (trajectory level).}
+Calibration and evaluation use independent path sets: 128 seeds $\times$ 4
+windows each, for 512 calibration and 512 evaluation paths, with $R=32$
+simulations per path. We use split conformal at $\alpha=0.1$,
+raw/studentized/CQR scores, and a Gaussian plug-in normal baseline. The
+protocols are within-window and within-regime positive controls and
+leave-one-window-out/leave-one-regime-out. The paired bootstrap resamples test
+paths 2{,}000 times, conditioning on the fitted calibration quantiles.
+
+\paragraph{L2 (branch level).}
+The event study uses the 128 offline paths (32 seeds $\times$ 4 windows), one
+freeze-to-OPEN event per path at $\tau=2$ (main) and $\tau=81$ (transfer), with
+five-fold out-of-fold predictions by path. \texttt{post\_rebalance} is used only
+to evaluate coverage; the branch-union threshold
+$\max(\hat q_{\mathrm{hold}},\hat q_{\mathrm{rebalance}})$ is computed on the
+calibration side. Pre-decision Mondrian stratifies on \texttt{onset\_action},
+\texttt{onset\_distance}, and \texttt{onset\_side}.
+
+\paragraph{L3 (observation map).}
+The observable-only estimate maximizes a state-space Gaussian-sum likelihood
+with a two-component jump mixture and a trimmed likelihood that masks $|z|>3$.
+Uncertainty is a bootstrap and a numerical Hessian. The five coverage specifications are the true-$S$ diagnostic (G0) plus four
+observable-only re-runs that vary the trimming threshold ($z=3$ main, 2.5, 4)
+and the volatility source (oracle or estimated from OPEN). An unmasked MLE is
+used only in the parameter-specification curve and has no coverage re-run.
+
+\paragraph{Second synthetic sensor-POMDP testbed.}
+The latent state and action-dependent transition are
+\[
+x_{t+1}=0.97x_t+0.35a_t+0.20w_t,\qquad w_t\sim N(0,1).
+\]
+Steps 16--31 are degraded, steps 32--39 are outages, and all others are normal.
+Normal observations are $y_t=x_t+\varepsilon_t$ with
+$\varepsilon_t\sim N(0,0.10^2)$. Degraded observations are $y_t=x_t+b_t$ with
+$b_t=0.85b_{t-1}+\nu_t$, $\nu_t\sim N(0,0.35^2)$. Outage observations are
+$y_t=y_{31}+\eta_t$, $\eta_t=0.90\eta_{t-1}+\zeta_t$,
+$\zeta_t\sim N(0,0.05^2)$. The logging action in the eight-step burn-in is
+$\operatorname{clip}(-0.15y_t+e_t,-1,1)$ with $e_t\sim N(0,0.30^2)$; the target
+action is $\operatorname{clip}(-0.70m_t,-1,1)$, where $m_t$ is the identified
+belief mean. Truth and both predictive models use this target-action rule and
+identified-belief filter, but action realizations follow their simulated
+observation histories. The per-step reward is
+$-(x_{t+1}^2+0.05a_t^2)$. The reported error is the mean absolute difference
+between the 64-rollout predictive mean and realized target return $G$, not a
+value-bias estimate; it is a descriptive point estimate without a paired
+uncertainty interval. Both predictors use the known control coefficient $B=0.35$.
+The identified-transition predictor also uses known $A$ and $\sigma$ and an
+augmented Kalman belief in normal/degraded regimes, propagating the state belief
+without an outage measurement update. The fitted-transition comparator uses the
+same identified-belief target-action rule and filter; only its autonomous rollout
+AR(1) coefficient and residual scale are estimated from burn-in observations/actions.
+It is not an alternative observation-filter
+or policy comparison. Calibration and evaluation use disjoint sets of 128 paths,
+with 64 target rollouts per model and path. The intervention branch is any target
+action with magnitude at least 0.65; pre-decision stratification uses three groups
+from the sign and magnitude of the last burn-in observation. Random streams for
+truth and estimation are separate, and the latent start is used only for the truth rollout.
+
+\paragraph{I5 stress variant.}
+A separate environment uses 384-step windows, 128 seeds $\times$ 4 windows $=$
+512 paths, and 1{,}536 double-endpoint events at $\tau\in\{2,65,81\}$ (512 each),
+with five-fold out-of-fold predictions by seed mod 5. An unfreeze jump
+$J_e\sim N(0,g(\tau_e,\sigma_e)^2)$ with
+$g=\gamma\sigma\sqrt{1-e^{-\tau/\tau_0}}$ and $\tau_0=40$ is injected only on
+freeze-to-OPEN transitions. The $\gamma=4$ environment is compared with a
+$\gamma=0$ placebo; twin paths share the main RNG stream. The cross-event
+estimator fits $\operatorname{Var}(r_e)=v_{0e}+\theta w_e$ with
+$w_e=\sigma^2(1-e^{-\tau_e/\tau_0})$ and $\theta=\gamma^2$.
+
+\subsection{Additional tables moved from the main text}
+\label{app:b-tables}
+
+These tables carry the full panels behind the summaries in
+Sections~\ref*{sec:identification}--\ref*{sec:results}. The moved tables are
+B1--B9: B1--B4 are the three-term decomposition, bridge, semi-synthetic, and misspecification
+tables, B5 is the L0/L1 coverage panel, B6 is the related-work positioning
+table, B7 is the second synthetic sensor-POMDP testbed, B8 answers Q1--Q3, and B9 is
+the real-path usage check.
+
+\renewcommand{\thetable}{B\arabic{table}}
+\renewcommand{\theHtable}{B\arabic{table}}  % unique hyperref anchors: avoid name{table.N} collisions with Appendix A/C/D tables
+\setcounter{table}{0}
+\input{tables/table8}
+\input{tables/table9}
+\input{tables/table11}
+\input{tables/table10}
+\input{tables/table3}
+\input{tables/table-positioning}
+\input{tables/table13}
+\input{tables/table7}
+\input{tables/table12}

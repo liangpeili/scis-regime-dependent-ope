@@ -1,0 +1,21 @@
+\begin{table*}[!htbp]
+\centering
+\footnotesize
+\caption{I5 stress variant (unfreeze jumps)}
+\label{tab:stress-scis}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{@{}llllllll@{}}
+\toprule
+Environment & Tier & open-only cov. (SE) & open width & cross-event cov. (SE) & cross width & width ratio & $\hat\gamma_{\mathrm{st}}$ [95\% CI] \\
+\midrule
+$\gamma_{\mathrm{st}}=0$ & oracle & 0.906 (0.007) & 0.1635 & 0.901 (0.008) & 0.1606 & 0.98$\times$ & 0.00 [0.00, 2.14] \\
+$\gamma_{\mathrm{st}}=0$ & estimated & 0.895 (0.008) & 0.1576 & 0.900 (0.008) & 0.1605 & 1.02$\times$ & 1.72 [0.00, 2.85] \\
+$\gamma_{\mathrm{st}}=4$ & oracle & 0.864 (0.009) & 0.1635 & 0.902 (0.008) & 0.1797 & 1.10$\times$ & 3.97 [3.15, 4.70] \\
+$\gamma_{\mathrm{st}}=4$ & estimated & 0.843 (0.009) & 0.1573 & 0.902 (0.008) & 0.1820 & 1.16$\times$ & 4.31 [3.58, 4.98] \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{0.5em}
+\par\noindent\begin{minipage}{\linewidth}\raggedright{\footnotesize Notes. 90\% prediction intervals, 5-fold out-of-fold (fold = seed mod 5), 128 seeds $\times$ 4 windows = 512 paths, 1,536 double-endpoint events ($\tau$=2/65/81, 512 each). Nominal 0.90 ($\alpha=0.1$). Coverage SEs are binomial over the 1,536 event predictions and ignore within-path and across-fold dependence, so they are lower bounds. \texttt{open-only} uses ordinary OPEN$\to$OPEN one-step transitions; \texttt{cross-event} uses $\operatorname{Var}(r_e)=v_{0e}+\theta w_e$ with $w_e=\sigma^2(1-e^{-\tau_e/\tau_0})$, $\theta=\gamma^2$, and a profile likelihood CI. The $\hat\gamma_{\mathrm{st}}$ CI is the full-data MLE profile interval, not a coverage interval. $\gamma$=4 CIs are [3.15, 4.70] (oracle) and [3.58, 4.98] (estimated); $\gamma$=0 CIs are [0.00, 2.14] and [0.00, 2.85]: the intervals do not overlap. Identification diagnostics: the ordinary OPEN$\to$OPEN one-step kernel is $\gamma_{\mathrm{st}}$-free by construction; the twin open-increment KS statistic is 0.00047 (p=1.000, descriptive and dependent samples). The de-freeze $z^2$ variance ratio ($\gamma$=4/$\gamma$=0) is 1.233, paired path-permutation p=0.0005.}\end{minipage}\par
+
+\end{table*}

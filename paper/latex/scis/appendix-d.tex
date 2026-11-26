@@ -1,0 +1,44 @@
+% =====================================================================
+% P1 Appendix D --- Notation.
+% =====================================================================
+
+\section{Notation}\label{app:d}
+
+\begin{table}[H]
+\caption*{Notation}
+\centering
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$r_t\in\mathcal R$ & calendar regime at time $t$ \\
+$\mathcal R$ & $\{\mathrm{OPEN},\mathrm{EXTENDED},\mathrm{WEEKEND},\mathrm{HOLIDAY},\mathrm{HALT}\}$ \\
+$S_t$ & latent reference price \\
+$Z_t$ & bias state, stale anchor, position, and cash \\
+$X_t=(S_t,Z_t)$ & latent state \\
+$P_t$ & observed pool price \\
+$h_r$ & regime-$r$ observation kernel \\
+$T_r$ & regime-$r$ transition kernel \\
+$\nu$ & initial-state law \\
+$\rho$ & reward function \\
+$H_t^o$ & observable history $(P_{0:t},r_{0:t},a_{0:t-1},\text{position/cash})$ \\
+$\pi,\mu$ & target and logging policies \\
+$V^\pi(R_{\mathrm{eval}})$ & target value over regimes $R_{\mathrm{eval}}$ \\
+$G,G_r$ & trajectory return and per-regime segment \\
+$\alpha$ & nominal miscoverage ($0.1$ in the experiments) \\
+$n,m$ & calibration and test sample sizes \\
+$k$ & $\lceil(n+1)(1-\alpha)\rceil$ \\
+$\hat q$ & conformal quantile \\
+$\kappa,\hat\kappa$ & population and empirical score drift \\
+$\varepsilon_{\mathrm{cal}},\varepsilon_\kappa$ & DKW calibration and drift radii \\
+$\delta_{\mathrm{cal}},\delta_\kappa$ & PAC failure probabilities \\
+$\gamma$ & discount factor in $V^\pi$ (\S2); marginal coverage rate $\Pr\{E\le\hat q\}$ (Cor.~2.2) \\
+$\gamma_{\mathrm{st}}$ & stress jump scale in the I5 variant (\S7.6) \\
+$q_b$ & branch-$b$ probability \\
+$B$ & post-decision branch label (hold or rebalance) \\
+$b$ & branch index ($0$ or $1$) \\
+L0--L3 & row, trajectory, branch, and identification levels \\
+\bottomrule
+\end{tabular}
+\end{table}

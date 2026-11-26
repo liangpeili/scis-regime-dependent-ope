@@ -1,0 +1,50 @@
+{
+ "decision": "G1-R 预跑不通过后的路径 (a)：保留 2h 主口径，真实数据收缩为 liquid-regime 案例（2026-10-22 人拍板）",
+ "generated_from": "projects/p1-c1-ope/results/real_slice_9m_events.csv",
+ "window": {
+  "start": "2026-07-01T00:00:00Z",
+  "end_exclusive": "2026-10-20T00:00:00Z",
+  "selection": "freeze_start in window"
+ },
+ "n_events_total": 48,
+ "n_events_per_symbol": {
+  "NVDAon": 16,
+  "SPYon": 16,
+  "TSLAon": 16
+ },
+ "A_usable_2h": {
+  "total": 33,
+  "per_symbol": {
+   "SPYon": 15,
+   "TSLAon": 15,
+   "NVDAon": 3
+  },
+  "aggregate_rate_pct": 68.8,
+  "independent_calendar_events": 16,
+  "thin": 16,
+  "non_thin": 17
+ },
+ "B_main_replay_2h": 33,
+ "C_economic_2h": {
+  "total": 17,
+  "per_symbol": {
+   "TSLAon": 9,
+   "SPYon": 5,
+   "NVDAon": 3
+  }
+ },
+ "basis_2h_main": {
+  "stale_min_pct": -1.04,
+  "stale_max_pct": 0.91,
+  "open_min_pct": -1.59,
+  "open_max_pct": 0.8,
+  "tiers": {
+   "main": 33
+  }
+ },
+ "caveats": [
+  "窗口为看到月度 liveness 后的事后选择，不是预注册；论文须披露为 regime-conditional descriptive case，不做时间外推。",
+  "9 个月全量 109 事件判定（A 层 53/109、48.6%）保留为数据可得性 audit，不删除、不改写。",
+  "2h 经济窗口与 G1-R 阈值均未修改；真实数据结论不支持部署策略总体 V^π 或 causal logged OPE。"
+ ]
+}

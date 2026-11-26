@@ -1,0 +1,254 @@
+{
+  "nominal": 0.9,
+  "alpha": 0.1,
+  "heldout_regime_coverage": {
+    "0": 0.9238814890710383,
+    "1": 0.9300770997375328,
+    "2": 0.8626355888429752,
+    "3": 0.8990342881944444,
+    "4": 0.890625
+  },
+  "heldout_regime_width": {
+    "0": 0.0061390294047133755,
+    "1": 0.006439894950627052,
+    "2": 0.0051656922535656,
+    "3": 0.005974416690441521,
+    "4": 0.005975792556754744
+  },
+  "heldout_regime_radius": {
+    "0": 0.0030695147023566877,
+    "1": 0.003219947475313526,
+    "2": 0.0025828461267828,
+    "3": 0.0029872083452207607,
+    "4": 0.002987896278377372
+  },
+  "heldout_regime_by_window": {
+    "0": {
+      "W1": {
+        "coverage": 0.9216188524590164,
+        "n_test": 11712
+      },
+      "W2": {
+        "coverage": 0.9300717213114754,
+        "n_test": 11712
+      },
+      "W3": {
+        "coverage": 0.9247780054644809,
+        "n_test": 11712
+      },
+      "W4": {
+        "coverage": 0.9190573770491803,
+        "n_test": 11712
+      }
+    },
+    "1": {
+      "W1": {
+        "coverage": 0.9249507874015748,
+        "n_test": 24384
+      },
+      "W2": {
+        "coverage": 0.9332759186351706,
+        "n_test": 24384
+      },
+      "W3": {
+        "coverage": 0.9358185695538058,
+        "n_test": 24384
+      },
+      "W4": {
+        "coverage": 0.92626312335958,
+        "n_test": 24384
+      }
+    },
+    "2": {
+      "W1": {
+        "coverage": 0.8550275482093664,
+        "n_test": 23232
+      },
+      "W2": {
+        "coverage": 0.878228305785124,
+        "n_test": 23232
+      },
+      "W3": {
+        "coverage": 0.8705664600550964,
+        "n_test": 23232
+      },
+      "W4": {
+        "coverage": 0.846720041322314,
+        "n_test": 23232
+      }
+    },
+    "3": {
+      "W1": {
+        "coverage": 0.8947482638888888,
+        "n_test": 4608
+      },
+      "W2": {
+        "coverage": 0.9069010416666666,
+        "n_test": 4608
+      },
+      "W3": {
+        "coverage": 0.8984375,
+        "n_test": 4608
+      },
+      "W4": {
+        "coverage": 0.8960503472222222,
+        "n_test": 4608
+      }
+    },
+    "4": {
+      "W1": {
+        "coverage": 0.8671875,
+        "n_test": 384
+      },
+      "W2": {
+        "coverage": 0.921875,
+        "n_test": 384
+      },
+      "W3": {
+        "coverage": 0.8880208333333334,
+        "n_test": 384
+      },
+      "W4": {
+        "coverage": 0.8854166666666666,
+        "n_test": 384
+      }
+    }
+  },
+  "heldout_strategy_coverage": {
+    "0": {
+      "Exit_Freeze_50": 0.9777151639344263,
+      "Passive_Narrow": 0.7452612704918032,
+      "Passive_Wide": 0.9597848360655737,
+      "Periodic_24h": 0.9916752049180327,
+      "Stochastic_5pct": 0.8925461065573771,
+      "Threshold_2pct": 0.9763063524590164
+    },
+    "1": {
+      "Exit_Freeze_50": 0.9838213582677166,
+      "Passive_Narrow": 0.75658218503937,
+      "Passive_Wide": 0.9681963582677166,
+      "Periodic_24h": 0.9941560039370079,
+      "Stochastic_5pct": 0.8938238188976378,
+      "Threshold_2pct": 0.983882874015748
+    },
+    "2": {
+      "Exit_Freeze_50": 0.9992897727272727,
+      "Passive_Narrow": 0.679558367768595,
+      "Passive_Wide": 0.9291064049586777,
+      "Periodic_24h": 0.9647469008264463,
+      "Stochastic_5pct": 0.8273502066115702,
+      "Threshold_2pct": 0.7757618801652892
+    },
+    "3": {
+      "Exit_Freeze_50": 0.9990234375,
+      "Passive_Narrow": 0.7213541666666666,
+      "Passive_Wide": 0.9599609375,
+      "Periodic_24h": 0.98828125,
+      "Stochastic_5pct": 0.8717447916666666,
+      "Threshold_2pct": 0.8538411458333334
+    },
+    "4": {
+      "Exit_Freeze_50": 1.0,
+      "Passive_Narrow": 0.66796875,
+      "Passive_Wide": 0.95703125,
+      "Periodic_24h": 0.96484375,
+      "Stochastic_5pct": 0.77734375,
+      "Threshold_2pct": 0.9765625
+    }
+  },
+  "n_test_per_regime": {
+    "0": 46848,
+    "1": 97536,
+    "2": 92928,
+    "3": 18432,
+    "4": 1536
+  },
+  "halt_calibration_radius_bootstrap": {
+    "0": {
+      "n_cal_halt": 384,
+      "point_radius": 0.0033987933253013724,
+      "boot_mean": 0.0033072305724795043,
+      "boot_se": 0.0003151464643526178,
+      "boot_ci95": [
+        0.0025567270900264546,
+        0.0038125196746175427
+      ],
+      "rel_se_point": 0.09272304438360447,
+      "n_boot": 2000,
+      "boot_seed": 20261021,
+      "note": "row-level bootstrap; within-trajectory correlation ignored, so the SE is a lower bound"
+    },
+    "1": {
+      "n_cal_halt": 384,
+      "point_radius": 0.0034031146395093665,
+      "boot_mean": 0.003323584355940917,
+      "boot_se": 0.00030919155851075804,
+      "boot_ci95": [
+        0.0025833419015209745,
+        0.0038300023865406665
+      ],
+      "rel_se_point": 0.09085546367469266,
+      "n_boot": 2000,
+      "boot_seed": 20261021,
+      "note": "row-level bootstrap; within-trajectory correlation ignored, so the SE is a lower bound"
+    },
+    "2": {
+      "n_cal_halt": 384,
+      "point_radius": 0.003382063714525077,
+      "boot_mean": 0.0033102019874012597,
+      "boot_se": 0.0002960964892374879,
+      "boot_ci95": [
+        0.0025697153616367928,
+        0.003775435470038823
+      ],
+      "rel_se_point": 0.08754905709370026,
+      "n_boot": 2000,
+      "boot_seed": 20261021,
+      "note": "row-level bootstrap; within-trajectory correlation ignored, so the SE is a lower bound"
+    },
+    "3": {
+      "n_cal_halt": 384,
+      "point_radius": 0.003385614500532885,
+      "boot_mean": 0.0033123241103437803,
+      "boot_se": 0.00030990118727069587,
+      "boot_ci95": [
+        0.002574501758758771,
+        0.0038008872821301393
+      ],
+      "rel_se_point": 0.09153469398891055,
+      "n_boot": 2000,
+      "boot_seed": 20261021,
+      "note": "row-level bootstrap; within-trajectory correlation ignored, so the SE is a lower bound"
+    }
+  },
+  "random_split_coverage": 0.8997201492537313,
+  "random_split_width": 0.00568181696325606,
+  "random_split_strategy_coverage": {
+    "Exit_Freeze_50": 0.9877405338299193,
+    "Passive_Narrow": 0.7108154107999382,
+    "Passive_Wide": 0.950607785813202,
+    "Periodic_24h": 0.9851260372631908,
+    "Stochastic_5pct": 0.862760335716506,
+    "Threshold_2pct": 0.9021209740769836
+  },
+  "random_split_strategy_width": {
+    "Exit_Freeze_50": 0.00568181696325606,
+    "Passive_Narrow": 0.00568181696325606,
+    "Passive_Wide": 0.00568181696325606,
+    "Periodic_24h": 0.00568181696325606,
+    "Stochastic_5pct": 0.00568181696325606,
+    "Threshold_2pct": 0.00568181696325606
+  },
+  "random_split_n_test": 38592,
+  "strategy_coverage_gap": 0.04287157960199005,
+  "coverage_gap": 0.0136209577114428,
+  "coverage_gap_definition": "n_test-weighted mean of max(0, nominal - coverage) over non-sparse held-out regimes (n_test >= 50); sparse regimes excluded",
+  "strategy_coverage_gap_definition": "n_test-weighted mean of max(0, nominal - coverage) over (regime, strategy) cells with n_test >= 50",
+  "method": "naive global split conformal (single pooled calibration radius)",
+  "provenance": {
+    "reproduced_for": "M3 L0 baseline; original code commit c610494",
+    "script": "/tmp/p1-m3/repro_naive_global.py",
+    "dataset": "results/dataset.csv.gz",
+    "note": "fit_intervals called with cal_regimes=None; chronological 70/30 split per held-out regime; random split 70/15/15 with random_state=0, matching random_split_eval."
+  }
+}

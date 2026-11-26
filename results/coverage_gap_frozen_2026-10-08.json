@@ -1,0 +1,43 @@
+{
+  "nominal": 0.9,
+  "heldout_regime_coverage": {
+    "0": 0.9326703956909054,
+    "2": 0.8444444444444444,
+    "3": 0.75
+  },
+  "heldout_regime_width": {
+    "0": 0.10601279985576981,
+    "2": 0.01376754192551305,
+    "3": 0.015791713104872596
+  },
+  "random_split_coverage": 0.8947368421052632,
+  "random_split_width": 0.016725991555642597,
+  "coverage_gap": 0.004300458715596332,
+  "coverage_gap_definition": "n_test-weighted mean of max(0, nominal - coverage) over non-sparse held-out regimes (n_test >= 50); sparse regimes excluded from the aggregate and reported separately",
+  "metric_direction": "lower_is_better",
+  "n_test_per_regime": {
+    "0": 9654,
+    "2": 810,
+    "3": 48
+  },
+  "n_test_random_split": 1577,
+  "sparse_regimes": [
+    "3"
+  ],
+  "sparse": true,
+  "regimes_evaluated": [
+    "0",
+    "2",
+    "3"
+  ],
+  "n_train_per_regime": {
+    "0": 600,
+    "2": 6786,
+    "3": 7320
+  },
+  "n_cal_per_regime": {
+    "0": 258,
+    "2": 2916,
+    "3": 3144
+  }
+}

@@ -1,0 +1,284 @@
+{
+  "config": {
+    "cal_seeds": [
+      2000,
+      2127
+    ],
+    "n_paths": 512,
+    "windows": [
+      "W1",
+      "W2",
+      "W3",
+      "W4"
+    ],
+    "sigma_mode": "oracle",
+    "z_threshold": 3.0,
+    "n_boot": 48,
+    "kappa": 0.00285,
+    "mu": 4.614,
+    "jump_prob": 0.003,
+    "parameter_source": "results/policy_value_check.json (G0 plug-in)",
+    "note": "The likelihood observes only P and the calendar. Per-path sigma is the simulator oracle in the main specification (sigma_mode='oracle'); --sigma-mode open estimates it from each path's OPEN observations and is reported as a sensitivity. kappa/mu/jump_prob are held at the G0 values, as in trajectory_value_check.py."
+  },
+  "h_estimate": {
+    "open_sd": 0.00041030144014348916,
+    "ext_phi": 0.7740608301014017,
+    "ext_sd": 0.002022731953099615,
+    "stale_phi": 0.9801730921650273,
+    "stale_sd": 0.0007975067179848264
+  },
+  "h_unmasked_mle": {
+    "neg_loglik": -750300.9062833978,
+    "h": {
+      "open_sd": 0.00046739867687744873,
+      "ext_phi": 0.7481347631450209,
+      "ext_sd": 0.00209900595469078,
+      "stale_phi": 0.979560216350303,
+      "stale_sd": 0.0008024649522775901
+    },
+    "optima": {
+      "g0": {
+        "neg_loglik": -750300.9062792914,
+        "h": {
+          "open_sd": 0.0004674215032479292,
+          "ext_phi": 0.7480823740300446,
+          "ext_sd": 0.002098986444845383,
+          "stale_phi": 0.9795599794556108,
+          "stale_sd": 0.0008024651034896628
+        },
+        "converged": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "truth_like": {
+        "neg_loglik": -750300.9055601263,
+        "h": {
+          "open_sd": 0.0004680484695372697,
+          "ext_phi": 0.7477702811241704,
+          "ext_sd": 0.0020980238824006734,
+          "stale_phi": 0.9795639743067388,
+          "stale_sd": 0.000802467640237498
+        },
+        "converged": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "crude": {
+        "neg_loglik": -750300.9062833978,
+        "h": {
+          "open_sd": 0.00046739867687744873,
+          "ext_phi": 0.7481347631450209,
+          "ext_sd": 0.00209900595469078,
+          "stale_phi": 0.979560216350303,
+          "stale_sd": 0.0008024649522775901
+        },
+        "converged": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "slow_eta": {
+        "neg_loglik": -750300.9062581869,
+        "h": {
+          "open_sd": 0.0004677902026950891,
+          "ext_phi": 0.7481018390799186,
+          "ext_sd": 0.002099005283331339,
+          "stale_phi": 0.9795616986290023,
+          "stale_sd": 0.0008024627916543394
+        },
+        "converged": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "fast_eta": {
+        "neg_loglik": -750300.9062643683,
+        "h": {
+          "open_sd": 0.0004677479732767777,
+          "ext_phi": 0.7481366925589633,
+          "ext_sd": 0.0020989936295103474,
+          "stale_phi": 0.9795614706242237,
+          "stale_sd": 0.0008024638211056898
+        },
+        "converged": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      }
+    }
+  },
+  "h_g0_true_s_diagnostic": {
+    "open_sd": 0.0004963508741068216,
+    "ext_phi": 0.8049098909749637,
+    "ext_sd": 0.0020159497023632543,
+    "stale_phi": 0.9784250924755432,
+    "stale_sd": 0.000796630359529454
+  },
+  "h_truth": {
+    "open_sd": 0.0005,
+    "ext_phi": 0.8,
+    "ext_sd": 0.002,
+    "stale_phi": 0.98,
+    "stale_sd": 0.0008
+  },
+  "robust_trace": [
+    {
+      "iter": 0,
+      "mask_fraction": 0.003330775669642857,
+      "mask_per_path": 1.119140625,
+      "neg_loglik_masked": -744635.1103699683,
+      "h": {
+        "open_sd": 0.00041066536894772854,
+        "ext_phi": 0.7725069314796711,
+        "ext_sd": 0.002027532387033163,
+        "stale_phi": 0.9801568653228996,
+        "stale_sd": 0.0007977616958589964
+      },
+      "converged": true
+    },
+    {
+      "iter": 1,
+      "mask_fraction": 0.003464471726190476,
+      "mask_per_path": 1.1640625,
+      "neg_loglik_masked": -744388.0263563002,
+      "h": {
+        "open_sd": 0.0004103022791998495,
+        "ext_phi": 0.7740608029707612,
+        "ext_sd": 0.002022731309870179,
+        "stale_phi": 0.980173022632962,
+        "stale_sd": 0.0007974983411930847
+      },
+      "converged": true
+    },
+    {
+      "iter": 2,
+      "mask_fraction": 0.003464471726190476,
+      "mask_per_path": 1.1640625,
+      "neg_loglik_masked": -744388.0263651535,
+      "h": {
+        "open_sd": 0.00041030144014348916,
+        "ext_phi": 0.7740608301014017,
+        "ext_sd": 0.002022731953099615,
+        "stale_phi": 0.9801730921650273,
+        "stale_sd": 0.0007975067179848264
+      },
+      "converged": true
+    }
+  ],
+  "uncertainty": {
+    "bootstrap": {
+      "open_sd": {
+        "mean": 0.00041203968480019214,
+        "se": 5.9136010752707214e-05,
+        "q05": 0.0003159170534212722,
+        "q50": 0.0004090084138124767,
+        "q95": 0.0005054104060275426
+      },
+      "ext_phi": {
+        "mean": 0.7736887847408696,
+        "se": 0.014157773627497884,
+        "q05": 0.7479550676410853,
+        "q50": 0.7726454846738438,
+        "q95": 0.7929674502610055
+      },
+      "ext_sd": {
+        "mean": 0.0020098602480570858,
+        "se": 4.5152153455708905e-05,
+        "q05": 0.0019300138499938682,
+        "q50": 0.0020115224408027163,
+        "q95": 0.0020793153412035034
+      },
+      "stale_phi": {
+        "mean": 0.9799415109529624,
+        "se": 0.0009645449221687532,
+        "q05": 0.9781906075610421,
+        "q50": 0.9800674960164559,
+        "q95": 0.9812131979744909
+      },
+      "stale_sd": {
+        "mean": 0.0007977947671143315,
+        "se": 2.095544456345702e-06,
+        "q05": 0.0007945306043527612,
+        "q50": 0.000797742994033281,
+        "q95": 0.0008009875511334826
+      }
+    },
+    "hessian_se": {
+      "open_sd": 5.5545208466537e-05,
+      "ext_phi": 0.017591062252518823,
+      "ext_sd": 4.68350622352192e-05,
+      "stale_phi": 0.0008685016557116296,
+      "stale_sd": 2.0722928381692902e-06
+    },
+    "hessian_se_unconstrained": {
+      "open_sd": 0.135376586655684,
+      "ext_phi": 0.043886609425617014,
+      "ext_sd": 0.02315435921376018,
+      "stale_phi": 0.022121394877492536,
+      "stale_sd": 0.002598464428494906
+    },
+    "hessian_space": "natural units (delta method); unconstrained space is log(sd)/atanh(phi)",
+    "hessian_ok": true
+  },
+  "diagnostics": {
+    "loglik": {
+      "truth": 750295.1862882923,
+      "g0": 750290.7703985032,
+      "robust": 750295.4718843637
+    },
+    "z_by_regime": {
+      "0": {
+        "n": 31232,
+        "observed": true,
+        "mean": -0.006741082618924533,
+        "sd": 1.0191927023720986,
+        "q01": -2.329515056057058,
+        "q99": 2.3413417923210447,
+        "mask_fraction": 0.004610655737704918
+      },
+      "1": {
+        "n": 65024,
+        "observed": true,
+        "mean": -0.005614514319299733,
+        "sd": 1.0105554199513813,
+        "q01": -2.329646729841649,
+        "q99": 2.340824694528987,
+        "mask_fraction": 0.00413693405511811
+      },
+      "2": {
+        "n": 62464,
+        "observed": true,
+        "mean": -0.005632067584774714,
+        "sd": 1.0066118975694913,
+        "q01": -2.358143961348833,
+        "q99": 2.3486948813859856,
+        "mask_fraction": 0.0023693647540983607
+      },
+      "3": {
+        "n": 12288,
+        "observed": true,
+        "mean": -0.017158490682194643,
+        "sd": 1.003319283725249,
+        "q01": -2.305936626944922,
+        "q99": 2.3318995871960895,
+        "mask_fraction": 0.0028483072916666665
+      },
+      "4": {
+        "n": 1024,
+        "observed": false,
+        "mask_fraction": 0.0
+      }
+    },
+    "mask_fraction": 0.003464471726190476,
+    "mask_per_path": 1.1640625,
+    "optimizer": {
+      "final_success": true,
+      "final_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "final_nit": 2,
+      "bootstrap_converged": 48,
+      "bootstrap_n": 48
+    }
+  },
+  "limits": [
+    "kappa/mu/jump_prob are held at the G0 plug-in values; only h is estimated here. A fully observable-only pipeline still needs observable estimators for the latent S dynamics and jump process.",
+    "The per-path sigma entering the main-spec likelihood is the simulator oracle (synthetic_env's m.sigma), not an observable; 'observable-only' refers to h, not to sigma. --sigma-mode open estimates sigma from each path's OPEN observations and is a sensitivity; its optimum is flat to optimizer tolerance (~2e-5 in ext_phi across start configurations), so report four decimals only.",
+    "jump_prob is the G0 plug-in estimate (0.003) while the simulator truth is 0.005; trimming interacts with this jump-rate misspecification, so the trimmed ext_phi estimate is not a clean function of the true jump process alone.",
+    "The estimator is a two-pass trimmed/quasi-likelihood: the mask depends on the data and the Hessian treats it as fixed. The bootstrap captures path sampling but not mask-selection uncertainty; standard errors are approximate.",
+    "The GSF is a two-component moment-matched approximation to the exact jump posterior; the oracle-jump diagnostic shows that perfect jump knowledge would move ext_phi further toward truth.",
+    "open_sd and ext_phi are weakly identified from P alone: the latent S innovation (sigma ~ 0.008) dominates the open noise (5e-4) and the extended eta innovation (2e-3). Report their uncertainty (bootstrap/Hessian), not just the point estimate.",
+    "h is estimated on the calibration seeds 2000-2127 and is used unchanged on the disjoint evaluation seeds 1000-1127; the coverage rerun uses the same calibration/test split as step 11.",
+    "Truth h is a simulator constant used only for scoring/diagnostics."
+  ]
+}

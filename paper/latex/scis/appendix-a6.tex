@@ -1,0 +1,190 @@
+% =====================================================================
+% P1 Appendix A.6 --- Theorem 4 (within-class non-identification without I5/I5$\prime$).
+%
+% Source of truth: drafts/proofs-props8-12.md v1.4, Section 6 (FS-11).
+% This file is a fragment: it is meant to be \input under
+% \appendix \section{Proofs} after A.5.
+%
+% Theorem-like environments use the explicit paper numbering
+% (Theorem 4).  Equation tags (6.1)--(6.4) follow the frozen source;
+% do not renumber without updating the main text.
+% =====================================================================
+
+\newtheorem*{aVIthm}{Theorem 4}
+
+% Fixed equation tags: keep the frozen printed numbers while giving
+% hyperref a unique destination for every display.
+\providecommand{\theHequation}{}
+\let\aVItheHequation\theHequation
+\newcounter{aVIanchor}
+\renewcommand{\theHequation}{aVI.\arabic{aVIanchor}}
+\newcommand{\aVIfixedtag}[1]{\stepcounter{aVIanchor}\tag{#1}}
+
+\subsection{Within-class non-identification without cross-event variation (Theorem~4)}\label{app:a6}
+
+This appendix gives the finite-sample two-point lower bound behind
+Theorem~4.  The population statement is the existence result summarized
+in Section~5.3; the version below strengthens it to an arbitrary sample
+size and an arbitrary observable-data estimator.
+
+\paragraph{Model class.}
+Consider the class $\mathcal M$ of models in which the freeze-period
+interior path is unobserved, only OPEN-period data and noisy endpoints
+of each freeze event are observed, and the open-period transition $T$,
+the observation kernel $h$, the endpoint noise, and the calendar are
+common.  The fixed behavioral and logging policy depends only on
+observable data, but the freeze-period bridge law may differ across
+models.  Suppose the bridge expectation of the reward $\rho$ is not
+determined by the endpoints: there are two bridge laws $Q_1,Q_2$,
+compatible with the same open transition, observation kernel, and
+endpoint law, such that
+\[
+\mathbb E_{Q_1}[\rho]\ne\mathbb E_{Q_2}[\rho].
+\]
+The construction in \eqref{eq:a6-6.2} below, with the reward
+$-\lambda\,\mathrm{QV}_{\mathrm{freeze}}$, satisfies this condition.
+
+\begin{aVIthm}
+There exist models $P,Q\in\mathcal M$, independent of $n$ and of the
+estimator, such that for every $n\ge1$ and every estimator $\hat V_n$ that
+depends only on observable data (and possibly on external randomization):
+\begin{enumerate}
+\item[(i)] the joint law of the observable data is identical under $P$
+and $Q$, for every $n$;
+\item[(ii)] $|V^\pi(P)-V^\pi(Q)|=\Delta>0$;
+\item[(iii)]
+\begin{equation}\label{eq:a6-6.1}
+\max\Bigl(
+\mathbb E_P\bigl|\hat V_n-V^\pi(P)\bigr|,\,
+\mathbb E_Q\bigl|\hat V_n-V^\pi(Q)\bigr|
+\Bigr)
+\ge\frac{\Delta}{2}.
+\aVIfixedtag{6.1}
+\end{equation}
+\end{enumerate}
+Consequently, no estimator is uniformly consistent over
+$\mathcal M$; the worst-case risk of any estimator is at least half the
+value gap.
+\end{aVIthm}
+
+\paragraph{Construction: Brownian bridge and quadratic-variation reward.}
+Fix one freeze event of duration $\tau>0$ and endpoints $s_-,s_+$.
+Take two bridge laws
+\begin{equation}\label{eq:a6-6.2}
+\begin{aligned}
+Q_\sigma:\quad & \log S \text{ is a Brownian bridge with volatility }
+\sigma \text{ given the endpoints},\\
+Q_{\sigma'}:\quad & \text{same endpoints and same open transition,
+volatility } \sigma'\ne\sigma.
+\end{aligned}
+\aVIfixedtag{6.2}
+\end{equation}
+The endpoint marginals are the same because the endpoints are fixed;
+the open transition $T$, observation kernel $h$, and endpoint noise are
+the same; and the freeze-period interior is unobserved.  Hence every
+observable has the same joint law under the two models, for every $n$.
+Let $P$ be the full law with $Q_\sigma$ and $Q$ the full law with
+$Q_{\sigma'}$, matching the notation of Theorem~4.
+
+Let the reward contain the term $-\lambda\,\mathrm{QV}_{\mathrm{freeze}}$
+with $\lambda>0$, where
+\[
+\mathrm{QV}_{\mathrm{freeze}}
+=\int_{\mathrm{freeze}}(d\log S_t)^2
+\]
+is the quadratic variation of the log price over the freeze period.  For
+a Brownian bridge with fixed endpoints,
+\begin{equation}\label{eq:a6-6.3}
+\mathbb E_{Q_\sigma}[\mathrm{QV}_{\mathrm{freeze}}]=\sigma^2\tau,
+\qquad
+\mathbb E_{Q_{\sigma'}}[\mathrm{QV}_{\mathrm{freeze}}]
+=\sigma'^2\tau.
+\aVIfixedtag{6.3}
+\end{equation}
+The linear interpolation term has zero quadratic variation and zero
+cross-variation with the Brownian bridge, and the standard bridge has
+quadratic-variation expectation $\tau$.  Therefore
+\begin{equation}\label{eq:a6-6.4}
+V^\pi(P)-V^\pi(Q)
+=-\lambda\tau(\sigma^2-\sigma'^2)
+=\lambda\tau(\sigma'^2-\sigma^2).
+\aVIfixedtag{6.4}
+\end{equation}
+Taking $\sigma'\ne\sigma$ gives
+$\Delta=\lambda\tau|\sigma'^2-\sigma^2|>0$.
+
+If the reward depends only on the endpoints and has no path term, the two
+bridge laws give the same $V^\pi$.  The path-dependence condition is
+therefore essential, not a technical detail.  Quadratic variation is
+only a convenient sufficient example: any path functional whose
+expectation differs under $Q_\sigma$ and $Q_{\sigma'}$ can replace it.
+
+\begin{proof}
+\begin{enumerate}
+\item \emph{The observable law is the same.}  By construction, $P$ and
+$Q$ differ only in the freeze-period interior bridge law.  All
+observation channels (OPEN data, endpoints, calendar, and actions) do
+not touch the interior path, and the behavioral policy depends only on
+observables.  Hence the observable data $O_n$ has the same joint law
+under $P$ and $Q$.
+
+\item \emph{The estimator has the same distribution.}  The estimator
+$\hat V_n(O_n)$ depends only on $O_n$, whose law is the same under $P$
+and $Q$; hence $\hat V_n$ has the same distribution.  If the estimator
+is randomized, couple the same random seed under the two laws.
+
+\item \emph{Two-point bound.}  Let $Z=\hat V_n$ under the common law,
+$V_P=V^\pi(P)$, and $V_Q=V^\pi(Q)$.  The pointwise triangle inequality
+gives
+\[
+|Z-V_P|+|Z-V_Q|\ge|V_P-V_Q|=\Delta.
+\]
+Taking expectations under the common law (if the expectations are
+infinite, the conclusion is trivial) yields
+\[
+\mathbb E_P|\hat V_n-V_P|+\mathbb E_Q|\hat V_n-V_Q|\ge\Delta,
+\]
+so the maximum of the two terms is at least $\Delta/2$.  For squared
+loss, the inequality
+\[
+\Delta^2\le2\bigl(|Z-V_P|^2+|Z-V_Q|^2\bigr)
+\]
+gives
+\[
+\max\Bigl(
+\mathbb E_P(\hat V_n-V_P)^2,\,
+\mathbb E_Q(\hat V_n-V_Q)^2
+\Bigr)
+\ge\frac{\Delta^2}{4}.
+\]
+\end{enumerate}
+\end{proof}
+
+\paragraph{Relation to the population statement.}
+The population proposition asserts that two observationally equivalent
+models can have different values, so the value is not identified.
+Theorem~4 strengthens this in three ways: it holds for every finite $n$,
+it gives the explicit two-point risk bound $\Delta/2$, and it isolates
+the path-dependence condition with the quadratic-variation construction.
+It does not prove that a particular estimator, such as a plug-in
+estimator, fails on the observed data; it proves that no estimator is
+uniformly consistent over the model class.  This is an
+information-theoretic statement, distinct from the empirical
+correspondence in the stress variant, which tests the unfreeze-jump
+mechanism rather than the lower bound.
+
+\paragraph{Scope.}
+\begin{itemize}
+\item The theorem does not claim that every bridge law leads to a
+different $V^\pi$; an endpoint-only reward is a counterexample.
+\item It does not claim that $\Delta$ is large in real data; only that
+$\Delta>0$.
+\item It does not claim that quadratic variation is the only mechanism.
+Occupation time, residence time, and other path functionals with
+different expectations under the two bridge laws work equally well.
+\item It does not claim that every volatility is unidentified in the
+population model.  The result is an existence statement: after removing
+I5/I5$'$, the value is not identified.
+\end{itemize}
+
+\let\theHequation\aVItheHequation

@@ -1,0 +1,10 @@
+{
+  "figure": "fig7-general-pomdp",
+  "sha256": {
+    "generator": "0e9b0212289d458fbde52bfafeabc3a7449d0ee41b04c5785cdd8a74b8200da9",
+    "pdf": "0f5163fb26f6cbffbc64cd6e4d644ade71aa3a98fb1b178867253b7861bec3b6",
+    "png": "9c6cdaeae12601401cad12c3c42893c6f03f76d4e701437ee4575aaa80a07993",
+    "input": "c7151444d9a82d093a0832c485bd047ed28d15211994d1da7384f3a88a47e06f"
+  },
+  "comparison_scope": "shared identified-belief target-action rule/filter and known B=0.35; only the autonomous rollout coefficient and residual scale differ (known A/SIGMA versus fitted AR(1)/residual scale), not the observation filter or target policy"
+}

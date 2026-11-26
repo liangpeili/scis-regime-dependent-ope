@@ -1,0 +1,22 @@
+\section{Related work}
+
+\subsection{AMM liquidity provision and LVR}
+
+Loss-versus-rebalancing benchmarks and oracle-parametrized AMMs study how liquidity providers perform under price and mechanism changes \cite{nezlobin2025,willetts2024,fukasawa2026,amini2026,cha2026}. These works motivate the observation structure but do not address off-policy identification or post-decision coverage.
+
+\subsection{Off-policy evaluation in partially observed systems}
+
+Offline POMDP OPE estimates value from partially observed trajectories \cite{shi2022,uehara2023,zhang2024,zhang2025,kwon2024,luo2026,vanderlaan2025,gan2025}. Confounded-POMDP bridge functions require bridge existence and associated moment conditions; future-dependent values require future/history proxy informativeness, overlap, and Bellman completeness for their estimation guarantee. The model-free/model-based separation for history-dependent target policies is a distinct query-access result and uses observed observation-based rewards \cite{shi2022,uehara2023,zhang2025}. Related directions include offline POMDP learning and model-based bootstrap \cite{zhu2026,su2026}. Our setting differs by making the observation kernel regime-dependent, including a latent path-functional reward, and asking which coverage statements are identifiable. Theorem 4's observationally equivalent freeze models show why proxy-based identification cannot be presumed in that class; we do not claim that model-based estimation is the only possible route.
+
+\subsection{Conformal prediction under shift and non-exchangeability}
+
+Conformal prediction assumes exchangeability \cite{vovk2005,lei2018}, while non-exchangeable analysis supports bounds under calibration shift \cite{barber2023,tibshirani2019,ai2024,xu2025,correia2025,aolaritei2025,pournaderi2026,choi2026,wang2026,gibbs2021,principato2025,lade2026,bates2021}. Our shift occurs in the observation kernel rather than only in covariates or transition dynamics. Group and Mondrian calibration uses pre-decision labels; conditional-coverage and selective-label results show why marginal guarantees need not transfer to post-decision subsets \cite{barber2021,lakkaraju2017,kleinberg2018}. Selection-conditional conformal inference constructs reference sets for permutation-invariant selection rules \cite{jin2024jomi}. That selection event is not automatically the same as our post-decision branch: applying the construction requires its selection/reference-set conditions and does not remove Theorem 3's pre-decision information limit. Branch-specific scores may reduce width, but different score functions require a separate raw-union dominance check under Proposition 2.
+
+\subsection{Partial-information market making and nonstationarity}
+
+Regime switching, partial-information control, and nonstationary reinforcement learning study related changes in dynamics and observation quality \cite{cartea2024,bergault2025,chionas2026,chevalier2024,chevalier2025,barucci2025,akgul2025}. Our contribution is not another controller: it identifies which value and coverage claims remain valid when the measurement map changes.
+
+\subsection{Positioning}
+
+The closest combinations do not jointly provide regime-indexed observation identification, a sharp post-decision branch bound, branch-wise recovery with a width price, and a non-Markov non-identification result. The comparison in the Introduction makes these additions explicit; Protocol 1 turns them into a reusable audit rather than a new estimator.
+

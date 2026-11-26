@@ -1,0 +1,66 @@
+% Table 9 --- mirrored to paper/main-draft.md "Table 9".
+% Rows 2--6 are title-level descriptions backed by P / metadata-only
+% citations; they carry no method detail, comparative conclusion, or
+% exclusivity claim.  Rows 1 and 7 are supported at the cited theorem
+% or section level (paper/citation-map-m4.md).
+\begin{table*}[!ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Positioning against related evaluation objects.}
+\label{tab:9}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.030\textwidth}
+  >{\raggedright\arraybackslash}p{0.175\textwidth}
+  >{\raggedright\arraybackslash}p{0.290\textwidth}
+  >{\raggedright\arraybackslash}p{0.455\textwidth}@{}}
+\toprule
+\textbf{\#} & \textbf{Line of work} & \textbf{Topic studied} &
+\textbf{This paper} \\
+\midrule
+1 & Mondrian / group conformal \cite{vovk2005,lei2018} &
+exchangeable units; group label known before prediction; finite-sample
+within-group coverage &
+the branch label is post-decision; for branch-blind, nondegenerate score rules
+Theorem~3 shows a pre-decision Mondrian partition cannot recover branch coverage;
+Proposition~2 prices calibration-side labels \\
+\addlinespace
+2 & Weighted conformal \cite{tibshirani2019} &
+conformal prediction under covariate shift &
+the shift is in the observation kernel, not the covariate law; the target
+includes branch coverage \\
+\addlinespace
+3 & Adaptive conformal inference \cite{gibbs2021} &
+conformal inference under distribution shift &
+offline OPE with passive logs and no online feedback; the target includes
+branch coverage \\
+\addlinespace
+4 & Conformal policy evaluation \cite{gan2025} &
+conformal inference for policy evaluation &
+the observation kernel changes with the calendar regime; the target includes
+branch-conditional coverage; we add an impossibility map \\
+\addlinespace
+5 & POMDP OPE \cite{zhang2024,zhang2025,luo2026} &
+off-policy evaluation in partially observed systems &
+the regime index changes the kernel; logging is passive; identification under
+I1$'$/I2/I3, with I5/I5$'$ only for a non-Markov bridge; the output is a
+coverage map \\
+\addlinespace
+6 & Selective labels \cite{lakkaraju2017} &
+evaluation under selective labels &
+the unavailable object is the branch label at the pre-decision
+$\sigma$-field; the target is coverage; Theorem~3 gives an impossibility \\
+\addlinespace
+7 & Limits of conditional coverage \cite{barber2021} &
+conditional coverage; marginal-to-conditional upgrade impossible without
+distributional assumptions &
+the obstruction is the timing of the branch label; branch-wise calibration is
+possible with calibration-side labels, at a width price (Proposition~2) \\
+\addlinespace
+8 & \textbf{This paper} &
+calendar-indexed observation kernels $h_r$; latent state $S$; passive logs &
+Theorem~1 (identification), Theorem~2 (drift-aware marginal coverage),
+Theorem~3 (branch impossibility), Proposition~2 (width price), Theorem~4
+(within-class non-identification), L0--L3 ladder \\
+\bottomrule
+\end{tabular}
+\end{table*}

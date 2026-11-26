@@ -1,0 +1,277 @@
+{
+  "nominal": 0.9,
+  "heldout_regime_coverage": {
+    "0": 0.9033043032786885,
+    "1": 0.9054605479002624,
+    "2": 0.9020209194214877,
+    "3": 0.9155815972222222,
+    "4": 0.9016927083333334
+  },
+  "heldout_regime_width": {
+    "0": 0.005104745152829079,
+    "1": 0.005110686045654851,
+    "2": 0.006764127429050154,
+    "3": 0.006842631642056859,
+    "4": 0.006852921694909937
+  },
+  "heldout_regime_radius": {
+    "0": 0.0025523725764145396,
+    "1": 0.0025553430228274256,
+    "2": 0.003382063714525077,
+    "3": 0.0034213158210284296,
+    "4": 0.0034264608474549687
+  },
+  "heldout_strategy_coverage": {
+    "0": {
+      "Exit_Freeze_50": 0.9624743852459017,
+      "Passive_Narrow": 0.6921106557377049,
+      "Passive_Wide": 0.9455686475409836,
+      "Periodic_24h": 0.9874487704918032,
+      "Stochastic_5pct": 0.8651383196721312,
+      "Threshold_2pct": 0.9670850409836066
+    },
+    "1": {
+      "Exit_Freeze_50": 0.9733636811023622,
+      "Passive_Narrow": 0.687746062992126,
+      "Passive_Wide": 0.9516486220472441,
+      "Periodic_24h": 0.9908956692913385,
+      "Stochastic_5pct": 0.8578371062992126,
+      "Threshold_2pct": 0.9712721456692913
+    },
+    "2": {
+      "Exit_Freeze_50": 0.9996771694214877,
+      "Passive_Narrow": 0.7624612603305785,
+      "Passive_Wide": 0.9571280991735537,
+      "Periodic_24h": 0.9781120867768595,
+      "Stochastic_5pct": 0.8733212809917356,
+      "Threshold_2pct": 0.8414256198347108
+    },
+    "3": {
+      "Exit_Freeze_50": 0.9990234375,
+      "Passive_Narrow": 0.7626953125,
+      "Passive_Wide": 0.9720052083333334,
+      "Periodic_24h": 0.9915364583333334,
+      "Stochastic_5pct": 0.892578125,
+      "Threshold_2pct": 0.8756510416666666
+    },
+    "4": {
+      "Exit_Freeze_50": 1.0,
+      "Passive_Narrow": 0.71484375,
+      "Passive_Wide": 0.96484375,
+      "Periodic_24h": 0.96875,
+      "Stochastic_5pct": 0.78125,
+      "Threshold_2pct": 0.98046875
+    }
+  },
+  "heldout_strategy_width": {
+    "0": {
+      "Exit_Freeze_50": 0.005104745152829079,
+      "Passive_Narrow": 0.005104745152829079,
+      "Passive_Wide": 0.005104745152829079,
+      "Periodic_24h": 0.005104745152829079,
+      "Stochastic_5pct": 0.005104745152829079,
+      "Threshold_2pct": 0.005104745152829079
+    },
+    "1": {
+      "Exit_Freeze_50": 0.005110686045654851,
+      "Passive_Narrow": 0.005110686045654851,
+      "Passive_Wide": 0.005110686045654851,
+      "Periodic_24h": 0.005110686045654851,
+      "Stochastic_5pct": 0.005110686045654851,
+      "Threshold_2pct": 0.005110686045654851
+    },
+    "2": {
+      "Exit_Freeze_50": 0.006764127429050154,
+      "Passive_Narrow": 0.006764127429050154,
+      "Passive_Wide": 0.006764127429050154,
+      "Periodic_24h": 0.006764127429050154,
+      "Stochastic_5pct": 0.006764127429050154,
+      "Threshold_2pct": 0.006764127429050154
+    },
+    "3": {
+      "Exit_Freeze_50": 0.006842631642056859,
+      "Passive_Narrow": 0.006842631642056859,
+      "Passive_Wide": 0.006842631642056859,
+      "Periodic_24h": 0.006842631642056859,
+      "Stochastic_5pct": 0.006842631642056859,
+      "Threshold_2pct": 0.006842631642056859
+    },
+    "4": {
+      "Exit_Freeze_50": 0.006852921694909937,
+      "Passive_Narrow": 0.006852921694909937,
+      "Passive_Wide": 0.006852921694909937,
+      "Periodic_24h": 0.006852921694909937,
+      "Stochastic_5pct": 0.006852921694909937,
+      "Threshold_2pct": 0.006852921694909937
+    }
+  },
+  "heldout_strategy_n_test": {
+    "0": {
+      "Exit_Freeze_50": 7808,
+      "Passive_Narrow": 7808,
+      "Passive_Wide": 7808,
+      "Periodic_24h": 7808,
+      "Stochastic_5pct": 7808,
+      "Threshold_2pct": 7808
+    },
+    "1": {
+      "Exit_Freeze_50": 16256,
+      "Passive_Narrow": 16256,
+      "Passive_Wide": 16256,
+      "Periodic_24h": 16256,
+      "Stochastic_5pct": 16256,
+      "Threshold_2pct": 16256
+    },
+    "2": {
+      "Exit_Freeze_50": 15488,
+      "Passive_Narrow": 15488,
+      "Passive_Wide": 15488,
+      "Periodic_24h": 15488,
+      "Stochastic_5pct": 15488,
+      "Threshold_2pct": 15488
+    },
+    "3": {
+      "Exit_Freeze_50": 3072,
+      "Passive_Narrow": 3072,
+      "Passive_Wide": 3072,
+      "Periodic_24h": 3072,
+      "Stochastic_5pct": 3072,
+      "Threshold_2pct": 3072
+    },
+    "4": {
+      "Exit_Freeze_50": 256,
+      "Passive_Narrow": 256,
+      "Passive_Wide": 256,
+      "Periodic_24h": 256,
+      "Stochastic_5pct": 256,
+      "Threshold_2pct": 256
+    }
+  },
+  "calibration_radii_per_regime": {
+    "0": {
+      "1": 0.0025523725764145396,
+      "2": 0.0034260944782662584,
+      "3": 0.0030827354274359457,
+      "4": 0.0033987933253013724
+    },
+    "1": {
+      "0": 0.0025553430228274256,
+      "2": 0.0034781318519320256,
+      "3": 0.0030777366362416446,
+      "4": 0.0034031146395093665
+    },
+    "2": {
+      "0": 0.0025576043707099183,
+      "1": 0.002521212421390812,
+      "3": 0.0030697471558256075,
+      "4": 0.003382063714525077
+    },
+    "3": {
+      "0": 0.002563312365656585,
+      "1": 0.002546622014043135,
+      "2": 0.0034213158210284296,
+      "4": 0.003385614500532885
+    },
+    "4": {
+      "0": 0.0025613971419466155,
+      "1": 0.0025324535708695457,
+      "2": 0.0034264608474549687,
+      "3": 0.003083666141821936
+    }
+  },
+  "random_split_coverage": 0.8997460613598673,
+  "random_split_width": 0.005629718785261993,
+  "random_split_strategy_coverage": {
+    "Exit_Freeze_50": 0.9832402234636871,
+    "Passive_Narrow": 0.7071019650317191,
+    "Passive_Wide": 0.9509155254654562,
+    "Periodic_24h": 0.986691717551276,
+    "Stochastic_5pct": 0.8580976064656513,
+    "Threshold_2pct": 0.9134328358208955
+  },
+  "random_split_strategy_width": {
+    "Exit_Freeze_50": 0.005614153365662822,
+    "Passive_Narrow": 0.005632952239793246,
+    "Passive_Wide": 0.005630583058073109,
+    "Periodic_24h": 0.005627424665655835,
+    "Stochastic_5pct": 0.005639686821902184,
+    "Threshold_2pct": 0.005633537643462104
+  },
+  "random_split_cal_radii": {
+    "0": 0.002443482930333372,
+    "1": 0.0024602741455355304,
+    "2": 0.00332711768657867,
+    "3": 0.0030700413980373916,
+    "4": 0.0025276339292696743
+  },
+  "trajectory_blocked_coverage": 0.8928461142563047,
+  "trajectory_blocked_width": 0.005501913339799198,
+  "trajectory_blocked_n_test": 38860,
+  "trajectory_blocked_n_groups": {
+    "train": 537,
+    "cal": 115,
+    "test": 116
+  },
+  "trajectory_blocked_group_coverage": {
+    "mean": 0.8928461142563048,
+    "std": 0.14824911964574344,
+    "se": 0.013764585203533276,
+    "min": 0.382089552238806,
+    "max": 1.0
+  },
+  "path_blocked_coverage": 0.8983333333333333,
+  "path_blocked_width": 0.005837845863518394,
+  "path_blocked_n_test": 40200,
+  "path_blocked_n_groups": {
+    "train": 89,
+    "cal": 19,
+    "test": 20
+  },
+  "path_blocked_group_coverage": {
+    "mean": 0.8983333333333332,
+    "std": 0.0657868483711205,
+    "se": 0.014710386498329675,
+    "min": 0.746268656716418,
+    "max": 0.9691542288557214
+  },
+  "fallback_exclude_regimes": [],
+  "fallback_mode": "similarity",
+  "fallback_partition": "two_class",
+  "conditional_mode": "none",
+  "coverage_gap": 0.0,
+  "strategy_coverage_gap": 0.03917521766169154,
+  "strategy_coverage_gap_definition": "n_test-weighted mean of max(0, nominal - coverage) over (regime, strategy) cells with n_test >= 50; complements coverage_gap, which pools strategies",
+  "coverage_gap_definition": "n_test-weighted mean of max(0, nominal - coverage) over non-sparse held-out regimes (n_test >= 50); sparse regimes excluded from the aggregate and reported separately",
+  "metric_direction": "lower_is_better",
+  "n_test_per_regime": {
+    "0": 46848,
+    "1": 97536,
+    "2": 92928,
+    "3": 18432,
+    "4": 1536
+  },
+  "n_test_random_split": 38592,
+  "sparse_regimes": [],
+  "sparse": false,
+  "regimes_evaluated": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "n_train_per_regime": {
+    "0": 147264,
+    "1": 111744,
+    "2": 115008,
+    "3": 167040,
+    "4": 178944
+  },
+  "n_cal_per_regime": {
+    "0": 63168,
+    "1": 48000,
+    "2": 49344,
+    "3": 71808,
+    "4": 76800
+  }
+}

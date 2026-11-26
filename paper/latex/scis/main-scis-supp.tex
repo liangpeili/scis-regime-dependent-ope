@@ -1,0 +1,70 @@
+% SCIS supplementary file. Generated content comes from main-scis.md via code/.
+\documentclass{SCIS2027}
+\usepackage{adjustbox}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{xr}
+\usepackage{placeins}   % \FloatBarrier: flush pending floats without a forced page break
+\usepackage{float}      % [H]: keep the notation table with its section
+\hypersetup{hyperfootnotes=false}
+% F-D2S-01: SCIS2027's \proof ignores the optional argument, so
+% \begin{proof}[Proof sketch] printed "Proof. [Proof sketch]".  Use a
+% dedicated environment for the sketch; the other optional labels are removed.
+\newenvironment{proofsketch}{\par\noindent{\it Proof sketch.}\quad}{\par}
+% F-D2S-02: narrow the inter-column padding so the fit-to-width tables scale
+% less and their body text reaches the 6 pt readability floor.
+\setlength{\tabcolsep}{2pt}
+\makeatletter
+\let\supp@bibcite\bibcite
+\let\bibcite\@gobbletwo
+\externaldocument{main-ref}
+\let\bibcite\supp@bibcite
+\makeatother
+
+\begin{document}
+\raggedbottom   % float pages may be short; avoid Underfull \vbox while \output is active
+% See main-scis.tex: provide the Hfootnote.1 destination referenced by the
+% SCIS \thanks footnote so hyperref reports no missing destination.
+\hypertarget{Hfootnote.1}{}
+\ArticleType{Supplementary File}
+
+\title{Supplementary Material for Identifiability and Coverage Boundaries of Off-Policy Evaluation under Regime-Dependent Observation}{Supplementary Material for Identifiability and Coverage Boundaries of Off-Policy Evaluation under Regime-Dependent Observation}
+
+\author[1,2]{Peili LIANG}{}
+\author[1]{Bin WU}{{wubin@swust.edu.cn}}
+\address[1]{School of Information and Control Engineering, Southwest University of Science and Technology, Mianyang 621010, Sichuan, China}
+\address[2]{College of Blockchain Industry, Chengdu University of Information Technology, Chengdu 610225, Sichuan, China}
+
+\maketitle
+
+This supplement contains the proofs (Appendix A), additional protocol and table details (Appendix B), reproduction commands (Appendix C), notation (Appendix D), the L2/L3 result tables moved from the main text (Appendix E), and related work (Appendix F). References in this supplement are numbered independently of the main text; the two reference lists are not interchangeable.
+
+\begin{appendix}
+\section{Proofs}\label{app:a}
+\input{appendix-a1}
+\input{appendix-a2}
+\setcounter{subsection}{2}
+\input{appendix-a3}
+\setcounter{subsection}{3}
+\input{appendix-a4}
+\input{appendix-a5}
+\input{appendix-a6}
+\input{appendix-b}
+\FloatBarrier   % B1--B9 must be typeset inside Appendix B (V07-I01)
+\input{tables/table6}
+\input{appendix-c}
+\FloatBarrier   % B10/B11 must not drift past the Appendix D/E headings
+\input{appendix-d}
+\input{appendix-e}
+\FloatBarrier   % flush B12/B13 without forcing a sparse float-only page (V07-M01)
+\input{sec9}
+\end{appendix}
+
+\clearpage
+\bibliographystyle{scis}
+\bibliography{refs}
+
+\end{document}

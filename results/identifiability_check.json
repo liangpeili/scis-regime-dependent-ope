@@ -1,0 +1,733 @@
+{
+  "meta": {
+    "description": "P1 G0 identification check (identifiability note §6.2)",
+    "dataset_rows": 258048,
+    "diagnostic_rows": 43008,
+    "n_paths": 128,
+    "regime_match_dataset_vs_diagnostics": true,
+    "truth_paths_usage": "diagnostic/scoring only; never a feature"
+  },
+  "step1_h_open": {
+    "n_open_rows": 7808,
+    "residual": {
+      "n": 7808,
+      "mean": 2.7152275606953704e-07,
+      "sd": 0.0004963508741068231,
+      "q05": -0.0008179712095964132,
+      "q50": 2.909813201501521e-06,
+      "q95": 0.0008172758965615309,
+      "min": -0.0016303725116131318,
+      "max": 0.0016764193327123422
+    },
+    "sd_vs_sigma_o": 0.9927017482136461,
+    "lag1_corr_within_open": -0.0019458735002824252,
+    "corr_with_log_true_price": -0.00985253622755216,
+    "by_window": {
+      "W1": {
+        "eps": {
+          "n": 1952,
+          "mean": -5.250198616710414e-06,
+          "sd": 0.0005010465578449432,
+          "q05": -0.0008447166770606528,
+          "q50": -1.0265313052926217e-06,
+          "q95": 0.0008086195564701802,
+          "min": -0.0016303725116131318,
+          "max": 0.0016764193327123422
+        }
+      },
+      "W2": {
+        "eps": {
+          "n": 1952,
+          "mean": 7.170952598419422e-06,
+          "sd": 0.0004896498747625868,
+          "q05": -0.0007855906661655698,
+          "q50": -6.289364362643823e-08,
+          "q95": 0.0008315637514968864,
+          "min": -0.0015907683642018,
+          "max": 0.0016106365152586122
+        }
+      },
+      "W3": {
+        "eps": {
+          "n": 1952,
+          "mean": -1.0984221142926688e-05,
+          "sd": 0.0005038701543602361,
+          "q05": -0.0008380039290351692,
+          "q50": -4.007074454914772e-06,
+          "q95": 0.0008252473175422547,
+          "min": -0.0015669031654779175,
+          "max": 0.0016025843277107654
+        }
+      },
+      "W4": {
+        "eps": {
+          "n": 1952,
+          "mean": 1.0149558185495828e-05,
+          "sd": 0.0004907578722329491,
+          "q05": -0.0008081907658877175,
+          "q50": 1.5737489117650938e-05,
+          "q95": 0.0008003062318026275,
+          "min": -0.0015568687175449014,
+          "max": 0.0016492457182861742
+        }
+      }
+    },
+    "note": "sigma_o is identified from OPEN rows with true S as a diagnostic; the estimating target is the residual sd, not a blind deconvolution."
+  },
+  "step2_short_range_T": {
+    "n_pairs_informative": 23680,
+    "true_S_fit": {
+      "slope": 0.9971500554260488,
+      "slope_se": 0.0007407485233221312,
+      "slope_se_cluster": 0.0010233000110732983,
+      "intercept": 0.013149640215345926,
+      "kappa_hat": 0.0028499445739511575,
+      "mu_hat_log": 4.613998579318085,
+      "residual_sd": 0.00842310139946732,
+      "residual_sd_robust": 0.007241560601831925,
+      "mean_abs_res_over_sigma": 0.8063518257185569,
+      "sd_res_over_sigma": 1.018853013621341,
+      "r2": 0.9871018467135272,
+      "jump_rate_hat_threshold": 0.002564156389399108,
+      "jump_rate_hat_kurtosis": 0.0025952146245106886,
+      "excess_kurtosis_normalized": 0.6306371537560973,
+      "p_abs_res_gt_3sd_normalized": 0.003631756756756757,
+      "p_abs_res_gt_4sd_normalized": 0.0005912162162162162
+    },
+    "within_path_fit": {
+      "slope_within": 0.9857671580325801,
+      "kappa_within": 0.014232841967419918,
+      "t_bar": 185.0,
+      "nickell_bias_approx": -0.010792212815394456,
+      "slope_nickell_corrected": 0.9965593708479745,
+      "kappa_nickell_corrected": 0.003440629152025476
+    },
+    "observed_OPEN_fit": {
+      "n_pairs": 6528,
+      "slope_observed": 0.9982871591416839,
+      "slope_se": 0.0014340184432188995,
+      "slope_se_cluster": 0.0012915726997346703,
+      "slope_eiv_corrected": 0.9983333040853934,
+      "kappa_hat_corrected": 0.001666695914606553,
+      "reliability": 0.9999537780183023,
+      "residual_sd_observed": 0.008519693975812925,
+      "same_subset_true_S_slope": 0.9983477018274514,
+      "same_subset_true_S_slope_se": 0.0014270649067980056
+    },
+    "generator_values": {
+      "kappa": 0.003,
+      "sigma_base": 0.008,
+      "jump_prob": 0.005
+    },
+    "note": "The observed EXTENDED->EXTENDED fit is omitted because eta is serially correlated; the OPEN-only EIV correction is the clean check."
+  },
+  "step3_freeze_conditional": {
+    "n_events_total": 512,
+    "n_double_endpoint": 256,
+    "tau_counts": {
+      "2": 128,
+      "9": 128,
+      "56": 128,
+      "81": 128
+    },
+    "by_tau": {
+      "2": {
+        "n": 128,
+        "freeze_steps": 2,
+        "anchor_gap_steps": 3,
+        "pre_regime": "OPEN",
+        "post_regime": "OPEN",
+        "endpoint_noise_sd": {
+          "pre": 0.0005,
+          "post": 0.0005
+        },
+        "true_S_fit": {
+          "slope": 0.9770343053779565,
+          "slope_se": 0.015110244642584408,
+          "intercept": 0.10851254771064411,
+          "residual_sd": 0.014180339292249962,
+          "r2": 0.9707450672859818
+        },
+        "observed_fit": {
+          "slope_observed": 0.9763182656592417,
+          "slope_se": 0.015149310679098676,
+          "slope_eiv_corrected": 0.9763531304898044,
+          "intercept_eiv_corrected": 0.11170904989628028,
+          "reliability_pre": 0.9999642907576429,
+          "residual_sd_observed": 0.014228457830312659,
+          "residual_sd_eiv_corrected": 0.014211276217936566
+        },
+        "theory_gaussian_no_jumps": {
+          "slope": 0.991026973,
+          "residual_sd": 0.014248758107030156
+        },
+        "empirical_residual_quantiles": {
+          "q05": -0.023392189529510565,
+          "q50": 0.0003685617467925617,
+          "q95": 0.02466145015843528
+        },
+        "belief_90pct": {
+          "oracle": {
+            "coverage": 0.875,
+            "mean_width": 0.04664916503251959,
+            "n": 128
+          },
+          "eiv_corrected": {
+            "coverage": 0.875,
+            "mean_width": 0.04677851275937783,
+            "n": 128
+          },
+          "naive_observed": {
+            "coverage": 0.875,
+            "mean_width": 0.04680746093623256,
+            "n": 128
+          },
+          "true_residual_sd_over_theory": 0.9951982611911675
+        }
+      },
+      "81": {
+        "n": 128,
+        "freeze_steps": 81,
+        "anchor_gap_steps": 82,
+        "pre_regime": "EXTENDED",
+        "post_regime": "OPEN",
+        "endpoint_noise_sd": {
+          "pre": 0.003333333333333334,
+          "post": 0.0005
+        },
+        "true_S_fit": {
+          "slope": 0.7410403568924159,
+          "slope_se": 0.079502246939072,
+          "intercept": 1.188252831161695,
+          "residual_sd": 0.06452733940299879,
+          "r2": 0.40812008688761003
+        },
+        "observed_fit": {
+          "slope_observed": 0.7449078638992535,
+          "slope_se": 0.07922172579709628,
+          "slope_eiv_corrected": 0.7464952421274659,
+          "intercept_eiv_corrected": 1.1631320754345942,
+          "reliability_pre": 0.9978735588137326,
+          "residual_sd_observed": 0.06428085270320469,
+          "residual_sd_eiv_corrected": 0.06423152990788628
+        },
+        "theory_gaussian_no_jumps": {
+          "slope": 0.7816331707050701,
+          "residual_sd": 0.0664923119487731
+        },
+        "empirical_residual_quantiles": {
+          "q05": -0.10223905924460301,
+          "q50": -0.0016917952918915624,
+          "q95": 0.09946371088828247
+        },
+        "belief_90pct": {
+          "oracle": {
+            "coverage": 0.921875,
+            "mean_width": 0.21227605650910242,
+            "n": 128
+          },
+          "eiv_corrected": {
+            "coverage": 0.9140625,
+            "mean_width": 0.21146109238778088,
+            "n": 128
+          },
+          "naive_observed": {
+            "coverage": 0.9140625,
+            "mean_width": 0.2114651874247997,
+            "n": 128
+          },
+          "true_residual_sd_over_theory": 0.9704481241788049
+        }
+      }
+    }
+  },
+  "step3_eiv_stress": {
+    "sigma_added": [
+      0.005,
+      0.02,
+      0.05,
+      0.1
+    ],
+    "n_rep": 200,
+    "note": "Artificial endpoint noise on top of the frozen observations; the latent s_plus is unchanged. Diagnostic only. Reported values are means over n_rep independent noise draws; sd/se are across replicates.",
+    "by_tau": {
+      "2": {
+        "n": 128,
+        "pre_regime": "OPEN",
+        "post_regime": "OPEN",
+        "rows": [
+          {
+            "sigma_added": 0.005,
+            "sd_minus_effective": 0.005024937810560445,
+            "sd_plus_effective": 0.005024937810560445,
+            "true_slope": 0.9770343053779565,
+            "reliability": {
+              "mean": 0.9964054948719838,
+              "sd": 3.930660210051908e-05,
+              "mc_se": 2.7793964890678434e-06
+            },
+            "slope_naive": {
+              "mean": 0.9724369397377965,
+              "sd": 0.007212781560293841,
+              "mc_se": 0.0005100206752501062
+            },
+            "slope_eiv_corrected": {
+              "mean": 0.975945159837556,
+              "sd": 0.007263185930245763,
+              "mc_se": 0.0005135848024295502
+            },
+            "slope_attenuation_prediction": {
+              "mean": 0.9735223505570277,
+              "sd": 3.840389868004714e-05,
+              "mc_se": 2.7155657180662433e-06
+            },
+            "naive_slope_bias": {
+              "mean": -0.004597365640160079,
+              "sd": 0.007212781560293841,
+              "mc_se": 0.0005100206752501062
+            },
+            "eiv_slope_bias": {
+              "mean": -0.0010891455404006072,
+              "sd": 0.007263185930245763,
+              "mc_se": 0.0005135848024295502
+            },
+            "naive_belief_90pct": {
+              "mean": 0.9090234375,
+              "sd": 0.01686900651695854,
+              "mc_se": 0.0011928188900021447,
+              "width": {
+                "mean": 0.0519360093714608,
+                "sd": 0.001880204273885278,
+                "mc_se": 0.00013295051920802088
+              }
+            },
+            "eiv_belief_90pct": {
+              "mean": 0.89140625,
+              "sd": 0.018200166870680143,
+              "mc_se": 0.0012869461412984675,
+              "width": {
+                "mean": 0.04922545318499461,
+                "sd": 0.001978901588972109,
+                "mc_se": 0.00013992947328630122
+              }
+            },
+            "frac_eiv_bias_smaller": 0.65
+          },
+          {
+            "sigma_added": 0.02,
+            "sd_minus_effective": 0.020006249023742557,
+            "sd_plus_effective": 0.020006249023742557,
+            "true_slope": 0.9770343053779565,
+            "reliability": {
+              "mean": 0.9457136559777013,
+              "sd": 0.002270170236520838,
+              "mc_se": 0.00016052527686917528
+            },
+            "slope_naive": {
+              "mean": 0.9264932971514865,
+              "sd": 0.02990154260238905,
+              "mc_se": 0.0021143583542087745
+            },
+            "slope_eiv_corrected": {
+              "mean": 0.9797363374569928,
+              "sd": 0.03335474488347296,
+              "mc_se": 0.002358536629185103
+            },
+            "slope_attenuation_prediction": {
+              "mean": 0.923994684954621,
+              "sd": 0.00221803420012885,
+              "mc_se": 0.00015683870238147895
+            },
+            "naive_slope_bias": {
+              "mean": -0.05054100822647,
+              "sd": 0.029901542602389048,
+              "mc_se": 0.002114358354208774
+            },
+            "eiv_slope_bias": {
+              "mean": 0.0027020320790364107,
+              "sd": 0.03335474488347296,
+              "mc_se": 0.002358536629185103
+            },
+            "naive_belief_90pct": {
+              "mean": 0.9641796875,
+              "sd": 0.015413086759744487,
+              "mc_se": 0.0010898698166831918,
+              "width": {
+                "mean": 0.10019210054021328,
+                "sd": 0.006113326465785531,
+                "mc_se": 0.00043227745995641395
+              }
+            },
+            "eiv_belief_90pct": {
+              "mean": 0.8892578125,
+              "sd": 0.03223020562912331,
+              "mc_se": 0.0022790196959389924,
+              "width": {
+                "mean": 0.07572659051312275,
+                "sd": 0.007745055357101111,
+                "mc_se": 0.0005476581163671393
+              }
+            },
+            "frac_eiv_bias_smaller": 0.775
+          },
+          {
+            "sigma_added": 0.05,
+            "sd_minus_effective": 0.05000249993750313,
+            "sd_plus_effective": 0.05000249993750313,
+            "true_slope": 0.9770343053779565,
+            "reliability": {
+              "mean": 0.7352447384218658,
+              "sd": 0.02449630582179217,
+              "mc_se": 0.0017321503960608744
+            },
+            "slope_naive": {
+              "mean": 0.722450613511551,
+              "sd": 0.056457574936077476,
+              "mc_se": 0.003992153408664804
+            },
+            "slope_eiv_corrected": {
+              "mean": 0.9849235098489459,
+              "sd": 0.09770702379125358,
+              "mc_se": 0.006908929909235074
+            },
+            "slope_attenuation_prediction": {
+              "mean": 0.7183593322868052,
+              "sd": 0.023933731142920703,
+              "mc_se": 0.0016923703590254887
+            },
+            "naive_slope_bias": {
+              "mean": -0.25458369186640545,
+              "sd": 0.056457574936077476,
+              "mc_se": 0.003992153408664804
+            },
+            "eiv_slope_bias": {
+              "mean": 0.007889204470989432,
+              "sd": 0.09770702379125358,
+              "mc_se": 0.006908929909235074
+            },
+            "naive_belief_90pct": {
+              "mean": 0.9831640625,
+              "sd": 0.011459991302598003,
+              "mc_se": 0.0008103437562405904,
+              "width": {
+                "mean": 0.21854343726989925,
+                "sd": 0.013650710767045503,
+                "mc_se": 0.0009652510151394092
+              }
+            },
+            "eiv_belief_90pct": {
+              "mean": 0.9072265625,
+              "sd": 0.03799933127092543,
+              "mc_se": 0.0026869584822225403,
+              "width": {
+                "mean": 0.15034182003985905,
+                "sd": 0.01744882891066943,
+                "mc_se": 0.0012338185246498232
+              }
+            },
+            "frac_eiv_bias_smaller": 0.95
+          },
+          {
+            "sigma_added": 0.1,
+            "sd_minus_effective": 0.10000124999218761,
+            "sd_plus_effective": 0.10000124999218761,
+            "true_slope": 0.9770343053779565,
+            "reliability": {
+              "mean": 0.4043968797063019,
+              "sd": 0.07007089619749607,
+              "mc_se": 0.0049547605865068135
+            },
+            "slope_naive": {
+              "mean": 0.40570733486612054,
+              "sd": 0.0768325582730353,
+              "mc_se": 0.005432882297077383
+            },
+            "slope_eiv_corrected": {
+              "mean": 1.0583832608904968,
+              "sd": 0.4085688959023237,
+              "mc_se": 0.02889018368744337
+            },
+            "slope_attenuation_prediction": {
+              "mean": 0.3951096244608597,
+              "sd": 0.06846166939353146,
+              "mc_se": 0.004840971067951761
+            },
+            "naive_slope_bias": {
+              "mean": -0.571326970511836,
+              "sd": 0.0768325582730353,
+              "mc_se": 0.005432882297077383
+            },
+            "eiv_slope_bias": {
+              "mean": 0.08134895551254007,
+              "sd": 0.4085688959023237,
+              "mc_se": 0.02889018368744337
+            },
+            "naive_belief_90pct": {
+              "mean": 0.99265625,
+              "sd": 0.006856559325120325,
+              "mc_se": 0.0004848319594400439,
+              "width": {
+                "mean": 0.3872081601999622,
+                "sd": 0.024389150001763345,
+                "mc_se": 0.0017245733353622758
+              }
+            },
+            "eiv_belief_90pct": {
+              "mean": 0.9003125,
+              "sd": 0.07291113283619509,
+              "mc_se": 0.00515559564524667,
+              "width": {
+                "mean": 0.23189460843596849,
+                "sd": 0.06269083060476517,
+                "mc_se": 0.00443291114388466
+              }
+            },
+            "frac_eiv_bias_smaller": 0.905
+          }
+        ]
+      },
+      "81": {
+        "n": 128,
+        "pre_regime": "EXTENDED",
+        "post_regime": "OPEN",
+        "rows": [
+          {
+            "sigma_added": 0.005,
+            "sd_minus_effective": 0.006009252125773316,
+            "sd_plus_effective": 0.005024937810560445,
+            "true_slope": 0.7410403568924159,
+            "reliability": {
+              "mean": 0.9931205645630038,
+              "sd": 8.100013011379859e-05,
+              "mc_se": 5.727574128045966e-06
+            },
+            "slope_naive": {
+              "mean": 0.7402523607933168,
+              "sd": 0.009169329451484312,
+              "mc_se": 0.0006483695034078083
+            },
+            "slope_eiv_corrected": {
+              "mean": 0.7453805455095881,
+              "sd": 0.009264082560854736,
+              "mc_se": 0.000655069560025242
+            },
+            "slope_attenuation_prediction": {
+              "mean": 0.7359424176009658,
+              "sd": 6.002436532785974e-05,
+              "mc_se": 4.244363575974831e-06
+            },
+            "naive_slope_bias": {
+              "mean": -0.0007879960990991031,
+              "sd": 0.009169329451484312,
+              "mc_se": 0.0006483695034078083
+            },
+            "eiv_slope_bias": {
+              "mean": 0.004340188617172155,
+              "sd": 0.009264082560854734,
+              "mc_se": 0.0006550695600252419
+            },
+            "naive_belief_90pct": {
+              "mean": 0.9096484375,
+              "sd": 0.008741748257087664,
+              "mc_se": 0.000618134947201237,
+              "width": {
+                "mean": 0.2125006627766799,
+                "sd": 0.0017506499453827996,
+                "mc_se": 0.00012378964478640365
+              }
+            },
+            "eiv_belief_90pct": {
+              "mean": 0.908046875,
+              "sd": 0.00860498494705658,
+              "mc_se": 0.0006084643208071872,
+              "width": {
+                "mean": 0.21186269834395005,
+                "sd": 0.0017522584274300647,
+                "mc_se": 0.00012390338164270745
+              }
+            },
+            "frac_eiv_bias_smaller": 0.435
+          },
+          {
+            "sigma_added": 0.02,
+            "sd_minus_effective": 0.020275875100994066,
+            "sd_plus_effective": 0.020006249023742557,
+            "true_slope": 0.7410403568924159,
+            "reliability": {
+              "mean": 0.9265170159703828,
+              "sd": 0.0032927792342496674,
+              "mc_se": 0.0002328346525488187
+            },
+            "slope_naive": {
+              "mean": 0.6933399711356837,
+              "sd": 0.03185324622717758,
+              "mc_se": 0.0022523646410042074
+            },
+            "slope_eiv_corrected": {
+              "mean": 0.7483827895396163,
+              "sd": 0.03542902633391466,
+              "mc_se": 0.0025052104771547826
+            },
+            "slope_attenuation_prediction": {
+              "mean": 0.6865865001815888,
+              "sd": 0.00244008229891631,
+              "mc_se": 0.00017253987402169831
+            },
+            "naive_slope_bias": {
+              "mean": -0.04770038575673213,
+              "sd": 0.03185324622717758,
+              "mc_se": 0.0022523646410042074
+            },
+            "eiv_slope_bias": {
+              "mean": 0.007342432647200521,
+              "sd": 0.03542902633391466,
+              "mc_se": 0.0025052104771547826
+            },
+            "naive_belief_90pct": {
+              "mean": 0.9165625,
+              "sd": 0.01271987832678604,
+              "mc_se": 0.0008994312220738204,
+              "width": {
+                "mean": 0.22565499897562588,
+                "sd": 0.006306564802839638,
+                "mc_se": 0.000445941473808031
+              }
+            },
+            "eiv_belief_90pct": {
+              "mean": 0.903671875,
+              "sd": 0.014444023643602906,
+              "mc_se": 0.0010213467066010438,
+              "width": {
+                "mean": 0.21595539539005856,
+                "sd": 0.006446035337909206,
+                "mc_se": 0.00045580352992037176
+              }
+            },
+            "frac_eiv_bias_smaller": 0.7
+          },
+          {
+            "sigma_added": 0.05,
+            "sd_minus_effective": 0.050110987927909696,
+            "sd_plus_effective": 0.05000249993750313,
+            "true_slope": 0.7410403568924159,
+            "reliability": {
+              "mean": 0.6728857800208763,
+              "sd": 0.0307527598295911,
+              "mc_se": 0.0021745485015705122
+            },
+            "slope_naive": {
+              "mean": 0.5054899021895923,
+              "sd": 0.06987665375182923,
+              "mc_se": 0.004941025571454286
+            },
+            "slope_eiv_corrected": {
+              "mean": 0.7548272948514614,
+              "sd": 0.12284418653511475,
+              "mc_se": 0.008686395732832482
+            },
+            "slope_attenuation_prediction": {
+              "mean": 0.4986355185745019,
+              "sd": 0.02278903611954694,
+              "mc_se": 0.0016114281976836807
+            },
+            "naive_slope_bias": {
+              "mean": -0.2355504547028236,
+              "sd": 0.06987665375182922,
+              "mc_se": 0.004941025571454285
+            },
+            "eiv_slope_bias": {
+              "mean": 0.013786937959045585,
+              "sd": 0.12284418653511475,
+              "mc_se": 0.008686395732832482
+            },
+            "naive_belief_90pct": {
+              "mean": 0.9512109375,
+              "sd": 0.014367109804096247,
+              "mc_se": 0.0010159080768528186,
+              "width": {
+                "mean": 0.2849929656439712,
+                "sd": 0.015302067083485632,
+                "mc_se": 0.0010820195400904147
+              }
+            },
+            "eiv_belief_90pct": {
+              "mean": 0.896640625,
+              "sd": 0.027930102734157244,
+              "mc_se": 0.001974956504255952,
+              "width": {
+                "mean": 0.23359841024844194,
+                "sd": 0.019504795720035967,
+                "mc_se": 0.001379197331929578
+              }
+            },
+            "frac_eiv_bias_smaller": 0.88
+          },
+          {
+            "sigma_added": 0.1,
+            "sd_minus_effective": 0.10005554013202424,
+            "sd_plus_effective": 0.10000124999218761,
+            "true_slope": 0.7410403568924159,
+            "reliability": {
+              "mean": 0.3292123609167176,
+              "sd": 0.08310707611646372,
+              "mc_se": 0.005876557708653806
+            },
+            "slope_naive": {
+              "mean": 0.2624901059544089,
+              "sd": 0.08694227984670246,
+              "mc_se": 0.006147747565142181
+            },
+            "slope_eiv_corrected": {
+              "mean": 0.8903319398923021,
+              "sd": 0.5502736064696166,
+              "mc_se": 0.03891021986426436
+            },
+            "slope_attenuation_prediction": {
+              "mean": 0.24395964542711923,
+              "sd": 0.06158569734562944,
+              "mc_se": 0.004354766421719693
+            },
+            "naive_slope_bias": {
+              "mean": -0.47855025093800696,
+              "sd": 0.08694227984670246,
+              "mc_se": 0.006147747565142181
+            },
+            "eiv_slope_bias": {
+              "mean": 0.1492915829998863,
+              "sd": 0.5502736064696166,
+              "mc_se": 0.03891021986426436
+            },
+            "naive_belief_90pct": {
+              "mean": 0.981875,
+              "sd": 0.008571057006932134,
+              "mc_se": 0.0006060652531538185,
+              "width": {
+                "mean": 0.414379907302175,
+                "sd": 0.023753573488669,
+                "mc_se": 0.0016796312891250848
+              }
+            },
+            "eiv_belief_90pct": {
+              "mean": 0.8895703125,
+              "sd": 0.0793739578576534,
+              "mc_se": 0.005612586385076197,
+              "width": {
+                "mean": 0.2632332600093789,
+                "sd": 0.05995995054460341,
+                "mc_se": 0.004239808762969909
+              }
+            },
+            "frac_eiv_bias_smaller": 0.8
+          }
+        ]
+      }
+    }
+  },
+  "limits": [
+    "Population identification, not a finite-sample nonparametric deconvolution.",
+    "sigma_o and the latent S are used as diagnostics; the observed-only EIV check uses p_minus and the known endpoint noise, not the latent s_minus.",
+    "tau=9 and tau=56 have only one anchor; they are excluded from step 3.",
+    "The Gaussian belief is a model-based approximation; jumps can widen the true conditional law.",
+    "The endpoint-noise stress is artificial and does not modify the frozen dataset."
+  ]
+}
